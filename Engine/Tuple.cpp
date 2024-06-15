@@ -1,10 +1,11 @@
 #include "Tuple.h"
 
+//Constructors
 Tuple::Tuple()
-{
-	x, y = 0;
-}
-
+	:
+	x(0),
+	y(0)
+{}
 Tuple::Tuple(int x, int y)
 	:
 	x(x),

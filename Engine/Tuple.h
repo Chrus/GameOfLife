@@ -2,9 +2,12 @@
 struct Tuple
 {
 public:
+
+	//Constructors
 	Tuple();
 	Tuple(int x, int y);
 
+	//Operators
 	bool Tuple::operator==(const Tuple& other)
 	{
 		return other.x == x && other.y == y;
@@ -27,6 +30,7 @@ public:
 		return Tuple(x * right, y * right);
 	}
 
+	//Variables
 	int x;
 	int y;
 };
