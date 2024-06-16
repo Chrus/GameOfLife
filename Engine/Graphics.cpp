@@ -320,9 +320,6 @@ void Graphics::drawRect(const Rect& area, Color c)
 {
 	for (int x = area.x(); x <= area.right(); x++)
 	{
-		int right = area.right();
-		int bottom = area.bottom();
-
 		for (int y = area.y(); y <= area.bottom(); y++)
 		{
 			PutPixel(x, y, c);
@@ -349,7 +346,7 @@ void Graphics::drawRect(const Rect& area, Color c, Color borderColor, int border
 		for (int x = 0; x < borderSize; x++)
 		{
 			PutPixel(area.left() + x, y, borderColor);
-			PutPixel(area.right() + x, y, borderColor);
+			PutPixel(area.right() - x, y, borderColor);
 		}
 	}
 }
