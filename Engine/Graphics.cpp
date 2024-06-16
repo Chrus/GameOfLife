@@ -316,6 +316,44 @@ void Graphics::PutPixel( int x,int y,Color c )
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
 
+void Graphics::drawRect(const Rect& area, Color c)
+{
+	for (int x = area.x(); x <= area.right(); x++)
+	{
+		int right = area.right();
+		int bottom = area.bottom();
+
+		for (int y = area.y(); y <= area.bottom(); y++)
+		{
+			PutPixel(x, y, c);
+		}
+	}
+}
+void Graphics::drawRect(const Rect& area, Color c, Color borderColor, int borderSize)
+{
+	//draw the area that isnt a border
+	drawRect(area.getExpanded(-1), c);
+
+	//draw top and bottom border
+	for (int x = area.x(); x <= area.right(); x++)
+	{
+		for (int y = 0; y < borderSize; y++)
+		{
+			PutPixel(x, area.top() + y, borderColor);
+			PutPixel(x, area.bottom() - y, borderColor);
+		}
+	}
+	//draw left and right border
+	for(int y = area.y(); y <= area.bottom(); y++)
+	{ 
+		for (int x = 0; x < borderSize; x++)
+		{
+			PutPixel(area.left() + x, y, borderColor);
+			PutPixel(area.right() + x, y, borderColor);
+		}
+	}
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception
