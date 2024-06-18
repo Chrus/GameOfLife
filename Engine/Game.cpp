@@ -26,6 +26,11 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
+	std::string test1 = p1.getDebugInfo();
+	std::string test2 = a1.getDebugInfo();
+	std::string test3 = a2.getDebugInfo();
+
+	test2 += "!";
 }
 
 void Game::Go()
@@ -45,4 +50,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	//p1.draw(gfx);
 }
