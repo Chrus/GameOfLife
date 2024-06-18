@@ -4,6 +4,7 @@
 #include "Colors.h"
 #include "Graphics.h"
 #include "assert.h"
+#include <string>
 
 class Panel
 {
@@ -40,14 +41,19 @@ public:
 
 	//Variables
 	bool drawBorder = true;
+	bool drawPanel = true;
 	Color color = DEFAULT_COLOR;
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
+	//Functions
 	void Panel::update();
 	void Panel::draw(Graphics& gfx) const;
+	virtual std::string Panel::getDebugInfo() const;
 
-private:
+protected:
+	//Variables
 	int borderSize = DEFAULT_BORDER_SIZE;
+	//the entire space this panel takes up.
 	Rect visualRect;
 };
 

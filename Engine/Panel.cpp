@@ -2,7 +2,7 @@
 
 Panel::Panel()
 	:
-	visualRect(Rect(0,0, DEFAULT_BORDER_SIZE, DEFAULT_BORDER_SIZE))
+	visualRect(Rect(0,0, DEFAULT_SIZE, DEFAULT_SIZE))
 {}
 Panel::Panel(Rect& rect)
 {
@@ -25,8 +25,19 @@ void Panel::update()
 
 void Panel::draw(Graphics& gfx) const
 {
+	if (!drawPanel)
+		return;
+
 	if (drawBorder)
 		gfx.drawRect(visualRect, color, borderColor, borderSize);
 	else
 		gfx.drawRect(visualRect, color);
+}
+
+std::string Panel::getDebugInfo() const
+{
+	std::string s = "Panel: \n -";
+	s.append(visualRect.toString());
+
+	return s;
 }
