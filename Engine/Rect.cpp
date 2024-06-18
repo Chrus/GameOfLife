@@ -65,3 +65,9 @@ bool Rect::contains(const Tuple& point) const
 		point.y >= top() &&
 		point.y <= bottom();
 }
+
+std::string Rect::toString() const
+{
+	return "Position:" + position.toString()
+		+ " | Size:" + size.toString();
+}

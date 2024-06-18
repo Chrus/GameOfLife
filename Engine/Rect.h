@@ -11,6 +11,13 @@ public:
 	Rect(int x, int y, int width, int height);
 	Rect(Tuple position, Tuple size);
 
+	//Operators
+	bool Rect::operator==(const Rect& other) const
+	{
+		return other.position == position &&
+			other.size == size;
+	}
+
 	//Qol Getters
 	int Rect::x() const { return position.x; }
 	int Rect::y() const { return position.y; }
@@ -21,17 +28,16 @@ public:
 	int Rect::top() const { return position.y; }
 	int Rect::bottom() const { return position.y + size.y; }
 
+	//Functions
 	void Rect::moveBy(const Tuple& amount);
 	void Rect::moveBy(const int xAmount, const int yAmount);
 	void Rect::reSize(const Tuple& amount);
 	void Rect::reSize(const int widthAmount, const int heightAmount);
-
 	Rect getExpanded(const int offset) const;
-
-	//Comparisions
 	bool Rect::overlaps(const Rect& other) const;
 	bool Rect::contains(const Rect& other) const;
 	bool Rect::contains(const Tuple& point) const;
+	std::string toString() const;
 
 	//Variables
 	Tuple position;

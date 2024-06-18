@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 struct Tuple
 {
 public:
@@ -8,7 +10,7 @@ public:
 	Tuple(int x, int y);
 
 	//Operators
-	bool Tuple::operator==(const Tuple& other)
+	bool Tuple::operator==(const Tuple& other) const
 	{
 		return other.x == x && other.y == y;
 	}
@@ -29,6 +31,9 @@ public:
 	{
 		return Tuple(x * right, y * right);
 	}
+
+	//Getters
+	std::string toString() const;
 
 	//Variables
 	int x;
