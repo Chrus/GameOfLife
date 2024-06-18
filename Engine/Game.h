@@ -23,10 +23,6 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Panel.h"
-#include "Container.h"
-#include <iostream>
-#include <string>
 
 class Game
 {
@@ -47,8 +43,4 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-	Panel p1 = Panel(50, 50, 10, 10);
-	ActionPanel a1 = ActionPanel(Rect(150, 150, 20, 20));
-	ActionPanel a2 = ActionPanel(Rect(100, 50, 20, 20), Rect(101, 51, 15, 15));
-
 };
