@@ -22,6 +22,12 @@
     <Filter Include="Header Files\ChiliStuff">
       <UniqueIdentifier>{0f4353ce-99ad-44e8-b576-05d361c0655d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UI Base Classes">
+      <UniqueIdentifier>{67964a3e-5c00-46f4-95f3-e81896bdecaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI Base Classes">
+      <UniqueIdentifier>{6012153c-40d3-4e46-9edb-a3c5337caa76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -69,13 +75,22 @@
     <ClInclude Include="Rect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Panel.h">
+    <ClInclude Include="InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Container.h">
+    <ClInclude Include="InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ActionPanel.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterUIPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,13 +128,22 @@
     <ClCompile Include="Rect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Panel.cpp">
+    <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Container.cpp">
+    <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
     </ClCompile>
     <ClCompile Include="ActionPanel.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterUIPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

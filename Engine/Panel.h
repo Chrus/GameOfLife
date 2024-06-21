@@ -48,7 +48,7 @@ public:
 	//Functions
 	void Panel::update();
 	void Panel::draw(Graphics& gfx) const;
-	virtual std::string Panel::getDebugInfo() const;
+	virtual std::string Panel::getDebugInfo() const = 0;
 
 protected:
 	//Variables

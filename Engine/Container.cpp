@@ -4,9 +4,7 @@ Container::Container(Rect rect, Container* parent)
 	:
 	ActionPanel(rect),
 	parent(parent)
-{
-	setContents();
-}
+{}
 
 //checks to see if point is in a clickable area of the container.
 bool Container::interactsWith(const Tuple point) const
@@ -35,4 +33,6 @@ std::string Container::getDebugInfo() const
 	{
 		s.append(e->getDebugInfo());
 	}
+
+	return s;
 }
