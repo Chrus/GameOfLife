@@ -36,3 +36,14 @@ std::string Container::getDebugInfo() const
 
 	return s;
 }
+
+void Container::update()
+{
+	for (auto* e : contents)
+		e->update();
+}
+void Container::draw(Graphics& gfx) const
+{
+	for (auto* e : contents)
+		e->draw(gfx);
+}

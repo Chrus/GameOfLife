@@ -93,6 +93,12 @@
     <ClInclude Include="MasterUIPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpandablePanel.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -145,6 +151,12 @@
     </ClCompile>
     <ClCompile Include="MasterUIPanel.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpandablePanel.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

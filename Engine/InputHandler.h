@@ -28,8 +28,8 @@ public:
 		const Type type;
 	};
 
-	virtual ActionPanel* handleEvent() = 0;
-	virtual bool checkFocus() const = 0;
+	virtual ActionPanel* handleEvent(InputHandler::Event event) = 0;
+	virtual bool checkFocus(InputHandler::Event event) const = 0;
 	virtual void loseFocus() = 0;
 };
 

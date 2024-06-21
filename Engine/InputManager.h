@@ -11,7 +11,7 @@ public:
 
 	//Functions
 	void update();
-
+	
 private:
 	//Variables
 	Mouse& mouse;

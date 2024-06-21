@@ -10,7 +10,7 @@ class Panel
 {
 public:
 	//Default Values
-	static constexpr int DEFAULT_BORDER_SIZE = 5;
+	static constexpr int DEFAULT_BORDER_SIZE = 2;
 	static constexpr Color DEFAULT_COLOR = Colors::LightGray;
 	static constexpr Color DEFAULT_BORDER_COLOR = Colors::Gray;
 	static constexpr int DEFAULT_SIZE = 15;
@@ -46,8 +46,8 @@ public:
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
 	//Functions
-	void Panel::update();
-	void Panel::draw(Graphics& gfx) const;
+	virtual void Panel::update();
+	virtual void Panel::draw(Graphics& gfx) const;
 	virtual std::string Panel::getDebugInfo() const = 0;
 
 protected:

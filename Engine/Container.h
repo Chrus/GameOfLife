@@ -12,7 +12,11 @@ public:
 	bool interactsWith(const Tuple point) const override;
 	std::string getDebugInfo() const override;
 
-private:
+	//Inherited from Panel
+	virtual void update() override;
+	virtual void draw(Graphics& gfx) const override;
+
+protected:
 	virtual void setContents() = 0;
 
 	Container* parent = nullptr;

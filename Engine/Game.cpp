@@ -24,19 +24,13 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	inputManager(wnd.mouse,wnd.kbd,basePanel)
 {
-	std::string test1 = p1.getDebugInfo();
-	std::string test2 = a1.getDebugInfo();
-	std::string test3 = a2.getDebugInfo();
-
-	test2 += "!";
 }
 
 void Game::Go()
 {
-	//test
-
 	gfx.BeginFrame();	
 	UpdateModel();
 	ComposeFrame();
@@ -45,10 +39,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	//Had to leave this till so late
+	inputManager.update();
 }
 
 void Game::ComposeFrame()
 {
-	//p1.draw(gfx);
+	basePanel.draw(gfx);
 }
