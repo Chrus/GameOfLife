@@ -37,6 +37,10 @@ std::string Container::getDebugInfo() const
 	return s;
 }
 
+void Container::setContents()
+{
+}
+
 void Container::update()
 {
 	for (auto* e : contents)
