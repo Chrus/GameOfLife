@@ -61,6 +61,7 @@ public:
 	void drawRect(const Rect& area, Color c);
 	void drawRect(const Rect& area, Color c, Color borderColor, int borderSize);
 	void drawSprite(const Rect& rect, const Color* pixels);
+	void drawSprite(const Rect& rect, const Color* pixels, Color chroma);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

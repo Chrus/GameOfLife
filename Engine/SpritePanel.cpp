@@ -74,7 +74,7 @@ std::string SpritePanel::getDebugInfo() const
 
 void SpritePanel::draw(Graphics& gfx) const
 {
-	gfx.drawSprite(visualRect, pixels.data());
+	gfx.drawSprite(visualRect, pixels.data(), chroma);
 }
 
 void SpritePanel::PutPixel(int x, int y, Color c)

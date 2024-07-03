@@ -358,6 +358,18 @@ void Graphics::drawSprite(const Rect& rect, const Color* pixels)
 			PutPixel(x + rect.x(), y + rect.y(), pixels[y * rect.width() + x]);
 	}
 }
+void Graphics::drawSprite(const Rect& rect, const Color* pixels, Color chroma)
+{
+	for (int y = 0; y < rect.height(); y++)
+	{
+		for (int x = 0; x < rect.width(); x++)
+		{
+			Color color = pixels[y * rect.width() + x];
+			if (color != chroma)
+				PutPixel(x + rect.x(), y + rect.y(), color);
+		}
+	}
+}
 
 
 //////////////////////////////////////////////////
