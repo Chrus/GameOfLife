@@ -84,9 +84,6 @@
     <ClInclude Include="ActionPanel.h">
       <Filter>Header Files\UI Base Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Header Files\UI Base Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Panel.h">
       <Filter>Header Files\UI Base Classes</Filter>
     </ClInclude>
@@ -98,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="ExpandablePanel.h">
       <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SpritePanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +149,6 @@
     <ClCompile Include="ActionPanel.cpp">
       <Filter>Source Files\UI Base Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Container.cpp">
-      <Filter>Source Files\UI Base Classes</Filter>
-    </ClCompile>
     <ClCompile Include="MasterUIPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="ExpandablePanel.cpp">
       <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SpritePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

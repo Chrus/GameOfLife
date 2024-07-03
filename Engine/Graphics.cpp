@@ -350,6 +350,14 @@ void Graphics::drawRect(const Rect& area, Color c, Color borderColor, int border
 		}
 	}
 }
+void Graphics::drawSprite(const Rect& rect, const Color* pixels)
+{
+	for (int y = 0; y < rect.height(); y++)
+	{
+		for (int x = 0; x < rect.width(); x++)
+			PutPixel(x + rect.x(), y + rect.y(), pixels[y * rect.width() + x]);
+	}
+}
 
 
 //////////////////////////////////////////////////
