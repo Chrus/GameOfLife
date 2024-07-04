@@ -4,9 +4,15 @@
 #include <fstream>
 #include <algorithm>
 
-SpritePanel::SpritePanel(const std::string& filename, const Tuple location)
+SpritePanel::SpritePanel(const std::string& filename, Rect& panelRect)
+	:
+	Panel(panelRect)
 {
-	visualRect.position = location;
+	spriteRect.position = { 0,0 };
+
+	//just draw the sprite by default
+	drawBorder = false;
+	drawBackground = false;
 
 	std::ifstream file(filename, std::ios::binary);
 	assert(file);
@@ -22,7 +28,7 @@ SpritePanel::SpritePanel(const std::string& filename, const Tuple location)
 
 	const bool is32b = bmInfoHeader.biBitCount == 32;
 
-	visualRect.size.x = bmInfoHeader.biWidth;
+	spriteRect.size.x = bmInfoHeader.biWidth;
 
 	// test for reverse row order and control
 	// y loop accordingly
@@ -31,28 +37,28 @@ SpritePanel::SpritePanel(const std::string& filename, const Tuple location)
 	int dy;
 	if (bmInfoHeader.biHeight < 0)
 	{
-		visualRect.size.y = -bmInfoHeader.biHeight;
+		spriteRect.size.y = -bmInfoHeader.biHeight;
 		yStart = 0;
-		yEnd = visualRect.height();
+		yEnd = spriteRect.height();
 		dy = 1;
 	}
 	else
 	{
-		visualRect.size.y = bmInfoHeader.biHeight;
-		yStart = visualRect.height() - 1;
+		spriteRect.size.y = bmInfoHeader.biHeight;
+		yStart = spriteRect.height() - 1;
 		yEnd = -1;
 		dy = -1;
 	}
 
-	pixels.resize(visualRect.width() * visualRect.height());
+	pixels.resize(spriteRect.width() * spriteRect.height());
 
 	file.seekg(bmFileHeader.bfOffBits);
 	// padding is for the case of of 24 bit depth only
-	const int padding = (4 - (visualRect.width() * 3) % 4) % 4;
+	const int padding = (4 - (spriteRect.width() * 3) % 4) % 4;
 
 	for (int y = yStart; y != yEnd; y += dy)
 	{
-		for (int x = 0; x < visualRect.width(); x++)
+		for (int x = 0; x < spriteRect.width(); x++)
 		{
 			PutPixel(x, y, Color(file.get(), file.get(), file.get()));
 			if (is32b)
@@ -74,14 +80,18 @@ std::string SpritePanel::getDebugInfo() const
 
 void SpritePanel::draw(Graphics& gfx) const
 {
-	gfx.drawSprite(visualRect, pixels.data(), chroma);
+	if (!drawPanel)
+		return;
+	Panel::draw(gfx);
+
+	gfx.drawSprite(visualRect.centerInside(spriteRect), pixels.data(), chroma);
 }
 
 void SpritePanel::PutPixel(int x, int y, Color c)
 {
 	assert(x >= 0);
-	assert(x < visualRect.width());
+	assert(x < spriteRect.width());
 	assert(y >= 0);
-	assert(y < visualRect.height());
-	pixels.data()[y * visualRect.width() + x] = c;
+	assert(y < spriteRect.height());
+	pixels.data()[y * spriteRect.width() + x] = c;
 }

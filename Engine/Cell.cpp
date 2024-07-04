@@ -34,7 +34,7 @@ std::string Cell::getDebugInfo() const
 void Cell::draw(Graphics& gfx) const
 {
 	if (alive)
-		gfx.drawRect(visualRect, Colors::Red, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_SIZE);
+		gfx.drawRect(visualRect, Colors::Red);
 	else
-		gfx.drawRect(visualRect, DEFAULT_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_SIZE);
+		gfx.drawRect(visualRect, DEFAULT_COLOR);
 }

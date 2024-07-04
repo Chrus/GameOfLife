@@ -1,4 +1,5 @@
 #include "Rect.h"
+#include <assert.h>
 
 //Constructors
 Rect::Rect()
@@ -39,6 +40,29 @@ void Rect::reSize(const int widthAmount, const int heightAmount)
 Rect Rect::getExpanded(const int offset) const
 {
 	return Rect(left() - offset, top() - offset, width() + (offset * 2), height() + (offset * 2));
+}
+
+Rect Rect::centerInside(const Rect& smallerRect) const
+{
+	Rect drawRect = Rect(position.x,position.y,width(),height());
+
+	//currnetly not handling clipping, throw an error if we are
+	assert(smallerRect.width() < width());
+	assert(smallerRect.height() < height());
+
+	//Center the spritesheet if it is smaller than the Panel rect
+	if (smallerRect.width() < width())
+	{
+		drawRect.size.x = smallerRect.width();
+		drawRect.position.x += (width() / 2) - (smallerRect.width() / 2);
+	}
+	if (smallerRect.height() < height())
+	{
+		drawRect.size.y = smallerRect.height();
+		drawRect.position.y += (height() / 2) - (smallerRect.height() / 2);
+	}
+
+	return drawRect;
 }
 
 bool Rect::overlaps(const Rect& other) const

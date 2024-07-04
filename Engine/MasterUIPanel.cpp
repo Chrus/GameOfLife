@@ -38,5 +38,9 @@ void MasterUIPanel::setContents()
 	contents.push_back(&c3);
 	contents.push_back(&c4);
 	contents.push_back(&c5);
+	//contents.push_back(&sprite1);
+	//contents.push_back(&sprite2);
+	contents.push_back(&text1);
+	text1.drawBorder = true;
+	text1.drawBackground = true;
 }
-

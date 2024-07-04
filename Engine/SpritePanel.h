@@ -9,7 +9,7 @@ class SpritePanel : public Panel
 {
 public:
 	//Constructors
-	SpritePanel(const std::string& filename, const Tuple location);
+	SpritePanel(const std::string& filename, Rect& panelRect);
 	SpritePanel(const SpritePanel&) = default;
 	SpritePanel() = default;
 
@@ -23,6 +23,7 @@ public:
 protected:
 	std::vector<Color> pixels;
 	Color chroma = Colors::Magenta;
+	Rect spriteRect = Rect();
 
 	//Functions
 	void PutPixel(int x, int y, Color c);

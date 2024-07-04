@@ -34,6 +34,7 @@ public:
 	void Rect::reSize(const Tuple& amount);
 	void Rect::reSize(const int widthAmount, const int heightAmount);
 	Rect getExpanded(const int offset) const;
+	Rect centerInside(const Rect& smallerRect) const;
 	bool Rect::overlaps(const Rect& other) const;
 	bool Rect::contains(const Rect& other) const;
 	bool Rect::contains(const Tuple& point) const;

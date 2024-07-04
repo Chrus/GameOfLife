@@ -326,11 +326,8 @@ void Graphics::drawRect(const Rect& area, Color c)
 		}
 	}
 }
-void Graphics::drawRect(const Rect& area, Color c, Color borderColor, int borderSize)
+void Graphics::drawBorder(const Rect& area, Color c, Color borderColor, int borderSize)
 {
-	//draw the area that isnt a border
-	drawRect(area.getExpanded(-1), c);
-
 	//draw top and bottom border
 	for (int x = area.x(); x <= area.right(); x++)
 	{
@@ -370,7 +367,18 @@ void Graphics::drawSprite(const Rect& rect, const Color* pixels, Color chroma)
 		}
 	}
 }
-
+void Graphics::drawChar(const Tuple& pos, const Rect& drawRect,
+	const Rect& textSpriteSheetRect, const Color* textSpriteSheet, Color chroma)
+{
+	for (int y = drawRect.top(); y < drawRect.bottom(); y++)
+	{
+		for (int x = drawRect.left(); x < drawRect.right(); x++)
+		{
+			PutPixel(pos.x + x - drawRect.left(), pos.y + y - drawRect.top(),
+				textSpriteSheet[y * textSpriteSheetRect.width() + x]);
+		}
+	}
+}
 
 //////////////////////////////////////////////////
 //           Graphics Exception

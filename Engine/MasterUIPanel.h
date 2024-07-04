@@ -1,5 +1,6 @@
 #pragma once
 #include "Container.h"
+#include "TextPanel.h"
 
 //TODO remove?
 #include "Cell.h"
@@ -23,5 +24,8 @@ private:
 	Cell c3 = Cell(Tuple(80, 50));
 	Cell c4 = Cell(Tuple(95, 50));
 	Cell c5 = Cell(Tuple(110, 50));
+	//SpritePanel sprite1 = SpritePanel("Images\\Fixedsys16x28.bmp", Rect(0,0,600,250));
+	//SpritePanel sprite2 = SpritePanel("Images\\TestSprite.bmp", Tuple(212, 350));
+	TextPanel text1 = TextPanel("Images\\Fixedsys16x28.bmp", Rect(10, 10, 600, 200), Tuple(16, 28), "t\ne\ns\nt");
 };
 
