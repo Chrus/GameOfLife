@@ -28,10 +28,10 @@ void Panel::draw(Graphics& gfx) const
 	if (!drawPanel)
 		return;
 
-	if (drawBorder)
-		gfx.drawRect(visualRect, color, borderColor, borderSize);
-	else
+	if (drawBackground)
 		gfx.drawRect(visualRect, color);
+	if (drawBorder)
+		gfx.drawBorder(visualRect, color, borderColor, borderSize);
 }
 
 std::string Panel::getDebugInfo() const

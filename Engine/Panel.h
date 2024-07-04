@@ -10,9 +10,9 @@ class Panel
 {
 public:
 	//Default Values
-	static constexpr int DEFAULT_BORDER_SIZE = 2;
+	static constexpr int DEFAULT_BORDER_SIZE = 3;
 	static constexpr Color DEFAULT_COLOR = Colors::LightGray;
-	static constexpr Color DEFAULT_BORDER_COLOR = Colors::Gray;
+	static constexpr Color DEFAULT_BORDER_COLOR = Colors::Red;
 	static constexpr int DEFAULT_SIZE = 15;
 
 	//Constructors
@@ -42,6 +42,7 @@ public:
 	//Variables
 	bool drawBorder = true;
 	bool drawPanel = true;
+	bool drawBackground = true;
 	Color color = DEFAULT_COLOR;
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
