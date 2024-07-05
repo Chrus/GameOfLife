@@ -24,20 +24,34 @@ bool Container::interactsWith(const Tuple point) const
 	return false;
 }
 
-std::string Container::getDebugInfo() const
+void Container::getDebugInfo(std::vector<DebugInfo>* info) const
 {
-	std::string s = "Container: " + ActionPanel::getDebugInfo();
-	s.append("\n  ");
-
-	for(const Panel* e : contents)
-	{
-		s.append(e->getDebugInfo());
-	}
-
-	return s;
+	info->push_back(std::make_pair("Container", "# of Contents: " + contents.size()));
 }
 
-void Container::setContents()
+ActionPanel* Container::handleEvent(InputHandler::Event event)
+{
+	for (const auto& element : contents)
+	{
+		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
+		{
+			if (p->interactsWith(event.mousePos))
+			{
+				p->handleEvent(event);
+				break;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+bool Container::checkFocus(InputHandler::Event event) const
+{
+	return false;
+}
+
+void Container::loseFocus()
 {
 }
 

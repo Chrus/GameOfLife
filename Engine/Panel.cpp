@@ -18,11 +18,6 @@ Panel::Panel(int x, int y, int width, int height)
 	visualRect(Rect(x, y, width, height))
 {}
 
-void Panel::update()
-{
-	
-}
-
 void Panel::draw(Graphics& gfx) const
 {
 	if (!drawPanel)
@@ -32,12 +27,4 @@ void Panel::draw(Graphics& gfx) const
 		gfx.drawRect(visualRect, color);
 	if (drawBorder)
 		gfx.drawBorder(visualRect, color, borderColor, borderSize);
-}
-
-std::string Panel::getDebugInfo() const
-{
-	std::string s = "Panel: \n -";
-	s.append(visualRect.toString());
-
-	return s;
 }

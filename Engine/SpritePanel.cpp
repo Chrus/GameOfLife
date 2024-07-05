@@ -73,9 +73,9 @@ SpritePanel::SpritePanel(const std::string& filename, Rect& panelRect)
 	}
 }
 
-std::string SpritePanel::getDebugInfo() const
+void SpritePanel::getDebugInfo(std::vector<DebugInfo>* info) const
 {
-	return std::string();
+	info->push_back(std::make_pair("SpritePanel", ""));
 }
 
 void SpritePanel::draw(Graphics& gfx) const

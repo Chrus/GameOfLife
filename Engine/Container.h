@@ -13,12 +13,16 @@ public:
 	//Inherited from Panel
 	virtual void update() override;
 	virtual void draw(Graphics& gfx) const override;
-	std::string getDebugInfo() const override;
+	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+	// Inherited via InputHandler
+	ActionPanel* handleEvent(InputHandler::Event event) override;
+	bool checkFocus(InputHandler::Event event) const override;
+	void loseFocus() override;
 
 	//Functions
 
 protected:
-	virtual void setContents();
+	virtual void setContents() {}
 
 	Container* parent = nullptr;
 	std::vector<Panel*> contents;

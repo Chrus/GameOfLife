@@ -4,7 +4,9 @@
 #include "Colors.h"
 #include "Graphics.h"
 #include "assert.h"
-#include <string>
+#include <vector>
+
+using DebugInfo = std::pair<std::string, std::string>;
 
 class Panel
 {
@@ -47,9 +49,9 @@ public:
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
 	//Functions
-	virtual void Panel::update();
+	virtual void Panel::update() {}
 	virtual void Panel::draw(Graphics& gfx) const;
-	virtual std::string Panel::getDebugInfo() const = 0;
+	virtual void Panel::getDebugInfo(std::vector<DebugInfo>* info) const = 0;
 
 protected:
 	//Variables

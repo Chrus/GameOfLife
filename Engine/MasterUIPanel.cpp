@@ -31,6 +31,11 @@ void MasterUIPanel::loseFocus()
 {
 }
 
+void MasterUIPanel::getDebugInfo(std::vector<DebugInfo>* info) const
+{
+	info->push_back(std::make_pair("MasterUIPanel", "# of Contents: " + contents.size()));
+}
+
 void MasterUIPanel::setContents()
 {
 	contents.push_back(&c1);

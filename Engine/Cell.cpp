@@ -26,9 +26,9 @@ void Cell::loseFocus()
 {
 }
 
-std::string Cell::getDebugInfo() const
+void Cell::getDebugInfo(std::vector<DebugInfo>* info) const
 {
-	return std::string();
+	info->push_back(std::make_pair("Cell", "TODO"));
 }
 
 void Cell::draw(Graphics& gfx) const

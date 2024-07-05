@@ -15,6 +15,9 @@ public:
 	bool checkFocus(InputHandler::Event event) const override;
 	void loseFocus() override;
 
+	//inherited via Panel
+	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+
 	//Inherited via Container
 	void setContents() override;
 

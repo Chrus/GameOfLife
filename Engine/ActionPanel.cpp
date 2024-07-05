@@ -27,18 +27,3 @@ bool ActionPanel::interactsWith(const Tuple point) const
 {
 	return iRect.contains(point);
 }
-
-//std::string ActionPanel::getDebugInfo() const
-//{
-//	std::string s = "ActionPanel: \n -";
-//
-//	if (visualRect == iRect)
-//		s.append("Visual/Interactive Rect: " + visualRect.toString());
-//	else
-//	{
-//		s.append("Visual Rect: " + visualRect.toString() + "\n -");
-//		s.append("Interactive Rect: " + iRect.toString());
-//	}	
-//
-//	return s;
-//}

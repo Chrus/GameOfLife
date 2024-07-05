@@ -33,6 +33,11 @@ void TextPanel::draw(Graphics& gfx) const
 	}
 }
 
+void TextPanel::getDebugInfo(std::vector<DebugInfo>* info) const
+{
+	info->push_back(std::make_pair("TextPanel", ""));
+}
+
 void TextPanel::setText(const std::string newText)
 {
 	text = newText;
