@@ -1,4 +1,5 @@
 #include "ActionPanel.h"
+#include "InputManager.h"
 
 ActionPanel::ActionPanel()
 	:
@@ -26,4 +27,10 @@ ActionPanel::ActionPanel(Rect visualRect, Rect interactionRect)
 bool ActionPanel::interactsWith(const Tuple point) const
 {
 	return iRect.contains(point);
+}
+
+void ActionPanel::handleEvent(const InputHandler::Event event, InputManager* manager)
+{
+	if (event.type == InputHandler::Event::Type::MWheel)
+		manager->addDebugText(getDebugInfo());
 }

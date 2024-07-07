@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Rect.h"
 #include "Colors.h"
 #include "Graphics.h"
@@ -51,7 +50,7 @@ public:
 	//Functions
 	virtual void Panel::update() {}
 	virtual void Panel::draw(Graphics& gfx) const;
-	virtual void Panel::getDebugInfo(std::vector<DebugInfo>* info) const = 0;
+	virtual DebugInfo Panel::getDebugInfo() const = 0;
 
 protected:
 	//Variables

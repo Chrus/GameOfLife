@@ -13,7 +13,11 @@ void TextPanel::draw(Graphics& gfx) const
 {
 	if (!drawPanel)
 		return;
-	Panel::draw(gfx);
+
+	if (drawBackground)
+		gfx.drawRect(textRect, color);
+	if (drawBorder)
+		gfx.drawBorder(textRect, color, borderColor, borderSize);
 
 	Tuple curPos = textRect.position;
 	for (char c : text)
@@ -33,9 +37,9 @@ void TextPanel::draw(Graphics& gfx) const
 	}
 }
 
-void TextPanel::getDebugInfo(std::vector<DebugInfo>* info) const
+DebugInfo TextPanel::getDebugInfo() const
 {
-	info->push_back(std::make_pair("TextPanel", ""));
+	return std::make_pair("TextPanel", "");
 }
 
 void TextPanel::setText(const std::string newText)
@@ -59,10 +63,8 @@ Rect TextPanel::mapGlyphRect(char c) const
 
 Rect TextPanel::calcTextRect() const
 {
-	assert(!text.empty());
-
 	int maxWidth = 1;
-	int maxHeight = 1;
+	int maxHeight = 0;
 	int currentWidth = 1;
 
 	for (auto c : text)

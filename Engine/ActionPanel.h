@@ -10,6 +10,11 @@ public:
 	ActionPanel(Rect rect);
 	ActionPanel(Rect visualRect, Rect interactionRect);
 
+	// Inherited via InputHandler
+	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
+	bool checkFocus(InputHandler::Event event) const = 0;
+	void loseFocus() = 0;
+
 	//Functions
 	virtual bool interactsWith(const Tuple point) const;
 

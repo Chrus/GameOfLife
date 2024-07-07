@@ -5,8 +5,10 @@ Cell::Cell(Tuple position)
 	ActionPanel(Rect(position.x, position.y, DEFAULT_SIZE, DEFAULT_SIZE))
 {}
 
-ActionPanel* Cell::handleEvent(InputHandler::Event event)
+void Cell::handleEvent(const InputHandler::Event event, InputManager* manager)
 {
+	ActionPanel::handleEvent(event, manager);
+
 	if (event.type == InputHandler::Event::Type::LPress)
 	{
 		alive = true;
@@ -15,8 +17,6 @@ ActionPanel* Cell::handleEvent(InputHandler::Event event)
 	{
 		alive = false;
 	}
-
-	return nullptr;
 }
 bool Cell::checkFocus(InputHandler::Event event) const
 {
@@ -26,9 +26,9 @@ void Cell::loseFocus()
 {
 }
 
-void Cell::getDebugInfo(std::vector<DebugInfo>* info) const
+DebugInfo Cell::getDebugInfo() const
 {
-	info->push_back(std::make_pair("Cell", "TODO"));
+	return std::make_pair("Cell", "TODO");
 }
 
 void Cell::draw(Graphics& gfx) const

@@ -13,9 +13,9 @@ public:
 	//Inherited from Panel
 	virtual void update() override;
 	virtual void draw(Graphics& gfx) const override;
-	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+	DebugInfo getDebugInfo() const override;
 	// Inherited via InputHandler
-	ActionPanel* handleEvent(InputHandler::Event event) override;
+	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
 	bool checkFocus(InputHandler::Event event) const override;
 	void loseFocus() override;
 

@@ -1,6 +1,6 @@
 #pragma once
-class ActionPanel;
 #include "Tuple.h"
+class InputManager;
 
 class InputHandler
 {
@@ -13,6 +13,7 @@ public:
 			LPress,
 			RPress,
 			LoseFocus,
+			MWheel,
 			Invalid
 		};
 
@@ -28,8 +29,7 @@ public:
 		const Type type;
 	};
 
-	virtual ActionPanel* handleEvent(InputHandler::Event event) = 0;
+	virtual void handleEvent(const InputHandler::Event event, InputManager* manager) = 0;
 	virtual bool checkFocus(InputHandler::Event event) const = 0;
 	virtual void loseFocus() = 0;
 };
-

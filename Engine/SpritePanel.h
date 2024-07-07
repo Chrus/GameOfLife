@@ -17,7 +17,7 @@ public:
 	void setChroma(Color color) { chroma = color; }
 
 	// Inherited via Panel
-	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+	DebugInfo getDebugInfo() const override;
 	void draw(Graphics& gfx) const override;
 
 protected:

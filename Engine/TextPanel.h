@@ -10,7 +10,7 @@ public:
 
 	//Inherited from Panel
 	void draw(Graphics& gfx) const override;
-	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+	DebugInfo getDebugInfo() const override;
 
 	//Variables
 

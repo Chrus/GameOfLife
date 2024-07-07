@@ -1,4 +1,5 @@
 #include "Container.h"
+#include "InputManager.h"
 
 Container::Container(Rect rect, Container* parent)
 	:
@@ -24,37 +25,6 @@ bool Container::interactsWith(const Tuple point) const
 	return false;
 }
 
-void Container::getDebugInfo(std::vector<DebugInfo>* info) const
-{
-	info->push_back(std::make_pair("Container", "# of Contents: " + contents.size()));
-}
-
-ActionPanel* Container::handleEvent(InputHandler::Event event)
-{
-	for (const auto& element : contents)
-	{
-		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
-		{
-			if (p->interactsWith(event.mousePos))
-			{
-				p->handleEvent(event);
-				break;
-			}
-		}
-	}
-
-	return nullptr;
-}
-
-bool Container::checkFocus(InputHandler::Event event) const
-{
-	return false;
-}
-
-void Container::loseFocus()
-{
-}
-
 void Container::update()
 {
 	for (auto* e : contents)
@@ -64,4 +34,34 @@ void Container::draw(Graphics& gfx) const
 {
 	for (auto* e : contents)
 		e->draw(gfx);
+}
+DebugInfo Container::getDebugInfo() const
+{
+	return std::make_pair("Container", "# of Contents: " + contents.size());
+}
+
+void Container::handleEvent(const InputHandler::Event event, InputManager* manager)
+{
+	ActionPanel::handleEvent(event, manager);
+	//if (event.type == InputHandler::Event::Type::MWheel)
+	//	manager->addDebugText(getDebugInfo());
+
+	for (const auto& element : contents)
+	{
+		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
+		{
+			if (p->interactsWith(event.mousePos))
+			{
+				p->handleEvent(event, manager);
+				break;
+			}
+		}
+	}
+}
+bool Container::checkFocus(InputHandler::Event event) const
+{
+	return false;
+}
+void Container::loseFocus()
+{
 }

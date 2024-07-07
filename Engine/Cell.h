@@ -9,7 +9,7 @@ public:
 	Cell(Tuple position);
 	
 	//Inherited via ActionPanel
-	ActionPanel* handleEvent(InputHandler::Event event) override;
+	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
 	bool checkFocus(InputHandler::Event event) const override;
 	void loseFocus() override;
 
@@ -17,6 +17,6 @@ private:
 	bool alive = false;
 
 	// Inherited via Panel
-	void getDebugInfo(std::vector<DebugInfo>* info) const override;
+	DebugInfo getDebugInfo() const override;
 	void draw(Graphics& gfx) const override;
 };
