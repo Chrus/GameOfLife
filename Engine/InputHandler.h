@@ -12,7 +12,6 @@ public:
 		{
 			LPress,
 			RPress,
-			LoseFocus,
 			MWheel,
 			Invalid
 		};
@@ -30,6 +29,8 @@ public:
 	};
 
 	virtual void handleEvent(const InputHandler::Event event, InputManager* manager) = 0;
-	virtual bool checkFocus(InputHandler::Event event) const = 0;
-	virtual void loseFocus() = 0;
+	//return true if the event is part of a multistep action.  The event can be passed directly to this focused panel to proccess
+	//return false if the event causes the currently focused panel to lose it's focus
+	virtual bool checkFocus(InputHandler::Event event) const { return false; }
+	virtual void loseFocus() {}
 };

@@ -4,7 +4,7 @@ Panel::Panel()
 	:
 	visualRect(Rect(0,0, DEFAULT_SIZE, DEFAULT_SIZE))
 {}
-Panel::Panel(Rect& rect)
+Panel::Panel(Rect rect)
 {
 	assert(rect.x() >= 0 && rect.x() < Graphics::ScreenWidth);
 	assert(rect.y() >= 0 && rect.y() < Graphics::ScreenHeight);

@@ -3,8 +3,10 @@
 
 MasterUIPanel::MasterUIPanel()
 	:
-	Container(Rect(0,0, Graphics::ScreenWidth, Graphics::ScreenHeight), nullptr)
+	Container(Rect(0,0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1), nullptr)
 {
+	drawBorder = false;
+
 	setContents();
 	debugPanel.drawPanel = false;
 	debugPanel.drawBackground = true;
@@ -18,18 +20,16 @@ DebugInfo MasterUIPanel::getDebugInfo() const
 
 void MasterUIPanel::setContents()
 {
-	//testing/debugging code, to remove
-	contents.push_back(&c1);
-	contents.push_back(&c2);
-	contents.push_back(&c3);
-	contents.push_back(&c4);
-	contents.push_back(&c5);
-	//contents.push_back(&sprite1);
-	//contents.push_back(&text1);
-	//text1.drawBorder = true;
-	//text1.drawBackground = true;
-
 	contents.push_back(&debugPanel);
+
+	//testing/debugging code, to remove
+	//contents.push_back(&c1);
+	//contents.push_back(&c2);
+	//contents.push_back(&c3);
+	//contents.push_back(&c4);
+	//contents.push_back(&c5);
+
+	contents.push_back(&eP);
 }
 
 void MasterUIPanel::updateDebugPanel(std::string text, bool display)

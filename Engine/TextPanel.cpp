@@ -1,10 +1,9 @@
 #include "TextPanel.h"
 
-TextPanel::TextPanel(const std::string& filename, Rect& panelRect,
-	Tuple glyphSize, std::string text)
+TextPanel::TextPanel(Rect& panelRect, std::string text)
 	:
-	SpritePanel(filename, panelRect),
-	glyphSize(glyphSize)
+	SpritePanel(TEXT_SPRITE, panelRect),
+	glyphSize(Tuple(GLYPH_WIDTH, GLYPH_HEIGHT))
 {
 	setText(text);
 }

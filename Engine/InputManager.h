@@ -9,9 +9,13 @@ public:
 	//Constructors
 	InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& basePanel);
 
-	//Functions
+	//Inherited via Panel
 	void update();
 	void addDebugText(DebugInfo info);
+
+	//Functions
+	void takeFocus(ActionPanel* panel);
+	void removeFocus(ActionPanel* panel);
 	
 private:
 	//Variables
@@ -21,7 +25,11 @@ private:
 	ActionPanel* focusedPanel = nullptr;
 	std::vector<DebugInfo> debugInfo;
 
-	void handleLeftClick(const Mouse::Event e, const Tuple mousePos);
-	void handleRightClick(const Mouse::Event e, const Tuple mousePos);
-	void handleMouseWheel(const Mouse::Event e, const Tuple mousePos);
+private:
+	InputHandler::Event translateEvent(const Mouse::Event e);
+	bool handleFocus(const InputHandler::Event e);
+
+	void handleLeftClick(const InputHandler::Event e);
+	void handleRightClick(const InputHandler::Event e);
+	void handleMouseWheel(const InputHandler::Event e, const Mouse::Event wheelE);
 };

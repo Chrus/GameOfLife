@@ -32,6 +32,8 @@ void Container::update()
 }
 void Container::draw(Graphics& gfx) const
 {
+	ActionPanel::draw(gfx);
+
 	for (auto* e : contents)
 		e->draw(gfx);
 }
@@ -43,8 +45,6 @@ DebugInfo Container::getDebugInfo() const
 void Container::handleEvent(const InputHandler::Event event, InputManager* manager)
 {
 	ActionPanel::handleEvent(event, manager);
-	//if (event.type == InputHandler::Event::Type::MWheel)
-	//	manager->addDebugText(getDebugInfo());
 
 	for (const auto& element : contents)
 	{

@@ -5,8 +5,13 @@
 class TextPanel : public SpritePanel
 {
 public:
-	TextPanel(const std::string& filename, Rect& panelRect,
-		Tuple glyphSize, std::string text);
+	//Statics
+	static constexpr char TEXT_SPRITE[] = "Images\\Fixedsys16x28.bmp";
+	static constexpr int GLYPH_WIDTH = 16;
+	static constexpr int GLYPH_HEIGHT = 28;
+
+
+	TextPanel(Rect& panelRect, std::string text);
 
 	//Inherited from Panel
 	void draw(Graphics& gfx) const override;
@@ -17,6 +22,7 @@ public:
 	//Functions
 	Rect mapGlyphRect(char c) const;
 	void setText(const std::string newText);
+	std::string getText() const { return text; }
 
 private:
 	//Statics

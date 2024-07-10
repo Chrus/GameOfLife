@@ -18,7 +18,7 @@ public:
 
 	//Constructors
 	Panel();
-	Panel(Rect& rect);
+	Panel(Rect rect);
 	Panel(int x, int y, int width, int height);
 
 	//Getter/Setters

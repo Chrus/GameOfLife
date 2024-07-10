@@ -11,31 +11,40 @@ void InputManager::update()
 {
 	if (!mouse.IsEmpty())
 	{
-		Mouse::Event e = mouse.Read();
-		Tuple mousePos = Tuple(e.GetPosX(), e.GetPosY());
+		Mouse::Event chiliEvent = mouse.Read();
+		if (!chiliEvent.IsValid() || chiliEvent.GetType() == Mouse::Event::Type::Move
+			|| chiliEvent.GetType() == Mouse::Event::Type::LRelease)
+			return;
 
-		switch (e.GetType())
+		InputHandler::Event e = translateEvent(chiliEvent);
+
+		//if true the focused panel is claiming the event and will handle it directly
+		//if false then process the event from the start
+		if (handleFocus(e))
+			return;
+
+		switch (chiliEvent.GetType())
 		{
 			case Mouse::Event::Type::LPress:
 			{
-				handleLeftClick(e, mousePos);
+				handleLeftClick(e);
 				break;
 			}
 			case Mouse::Event::Type::RPress:
 			{
-				handleRightClick(e, mousePos);
+				handleRightClick(e);
 				break;
 			}
 			//display debug panel
 			case Mouse::Event::Type::WheelUp:
 			{
-				handleMouseWheel(e, mousePos);
+				handleMouseWheel(e, chiliEvent);
 				break;
 			}
 			//hide debug panel
 			case Mouse::Event::Type::WheelDown:
 			{
-				handleMouseWheel(e, mousePos);
+				handleMouseWheel(e, chiliEvent);
 				break;
 			}
 		}
@@ -47,26 +56,68 @@ void InputManager::addDebugText(DebugInfo info)
 	debugInfo.push_back(info);
 }
 
-void InputManager::handleLeftClick(const Mouse::Event e, const Tuple mousePos)
+void InputManager::takeFocus(ActionPanel* panel)
 {
-	if (basePanel.interactsWith(mousePos))
-		basePanel.handleEvent(InputHandler::Event(mousePos, ' ', InputHandler::Event::Type::LPress), this);
+	focusedPanel = panel;
+}
+void InputManager::removeFocus(ActionPanel* panel)
+{
+	assert(panel == focusedPanel);
+
+	panel->loseFocus();
+	focusedPanel = nullptr;
 }
 
-void InputManager::handleRightClick(const Mouse::Event e, const Tuple mousePos)
+InputHandler::Event InputManager::translateEvent(const Mouse::Event e)
 {
-	if (basePanel.interactsWith(mousePos))
-		basePanel.handleEvent(InputHandler::Event(mousePos, ' ', InputHandler::Event::Type::RPress), this);
-}
-
-void InputManager::handleMouseWheel(const Mouse::Event e, const Tuple mousePos)
-{
-	if (e.GetType() == Mouse::Event::Type::WheelUp)
+	switch (e.GetType())
 	{
-		if (basePanel.interactsWith(mousePos))
+	case Mouse::Event::Type::LPress:
+		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::LPress);
+	case Mouse::Event::Type::RPress:
+		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::RPress);
+	case Mouse::Event::Type::WheelUp:
+	case Mouse::Event::Type::WheelDown:
+		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::MWheel);
+	}
+}
+
+bool InputManager::handleFocus(const InputHandler::Event e)
+{
+	if (focusedPanel == nullptr)
+		return false;
+
+	if (focusedPanel->checkFocus(e))
+	{
+		focusedPanel->handleEvent(e, this);
+		return true;
+	}
+	else
+	{
+		focusedPanel->loseFocus();
+		focusedPanel = nullptr;
+		return false;
+	}
+}
+
+void InputManager::handleLeftClick(const InputHandler::Event e)
+{
+	if (basePanel.interactsWith(e.mousePos))
+		basePanel.handleEvent(e, this);
+}
+void InputManager::handleRightClick(const InputHandler::Event e)
+{
+	if (basePanel.interactsWith(e.mousePos))
+		basePanel.handleEvent(e, this);
+}
+void InputManager::handleMouseWheel(InputHandler::Event e, Mouse::Event wheelE)
+{
+	if (wheelE.GetType() == Mouse::Event::Type::WheelUp)
+	{
+		if (basePanel.interactsWith(e.mousePos))
 		{
 			debugInfo.clear();
-			basePanel.handleEvent(InputHandler::Event(mousePos, ' ', InputHandler::Event::Type::MWheel), this);
+			basePanel.handleEvent(e, this);
 
 			assert(!debugInfo.empty());
 
@@ -86,7 +137,7 @@ void InputManager::handleMouseWheel(const Mouse::Event e, const Tuple mousePos)
 			basePanel.updateDebugPanel(text, true);
 		}
 	}
-	else if (e.GetType() == Mouse::Event::Type::WheelDown)
+	else if (wheelE.GetType() == Mouse::Event::Type::WheelDown)
 	{
 		debugInfo.clear();
 		basePanel.updateDebugPanel("", false);
