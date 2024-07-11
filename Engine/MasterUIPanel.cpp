@@ -6,6 +6,7 @@ MasterUIPanel::MasterUIPanel()
 	Container(Rect(0,0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1), nullptr)
 {
 	drawBorder = false;
+	drawBackground = false;
 
 	setContents();
 	debugPanel.drawPanel = false;

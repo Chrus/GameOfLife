@@ -5,6 +5,9 @@ Board::Board(Rect rect, Container* parent)
 	:
 	Container(rect, parent)
 {
+	//for debugging.  Shouldnt see Cyan
+	color = Colors::Cyan;
+
 	numCells.x = iRect.width() / Cell::DEFAULT_SIZE;
 	numCells.y = iRect.height() / Cell::DEFAULT_SIZE;
 

@@ -6,6 +6,10 @@ ExpandablePanel::ExpandablePanel(Rect expanderRect, Rect contentsRect, Container
 	Container(contentsRect, parent),
 	expander(expanderRect, text, this)
 {
+	drawBackground = true;
+	drawBorder = true;
+	expander.drawBackground = true;
+	expander.drawBorder = true;
 }
 
 bool ExpandablePanel::interactsWith(const Tuple point) const

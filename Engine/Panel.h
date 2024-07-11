@@ -41,9 +41,9 @@ public:
 	}
 
 	//Variables
-	bool drawBorder = true;
+	bool drawBorder = false;
 	bool drawPanel = true;
-	bool drawBackground = true;
+	bool drawBackground = false;
 	Color color = DEFAULT_COLOR;
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
