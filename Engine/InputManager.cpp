@@ -17,7 +17,9 @@ void InputManager::update()
 			return;
 
 		InputHandler::Event e = translateEvent(chiliEvent);
-
+		if (e.type == InputHandler::Event::Type::Invalid)
+			return;
+		
 		//if true the focused panel is claiming the event and will handle it directly
 		//if false then process the event from the start
 		if (handleFocus(e))
@@ -80,6 +82,8 @@ InputHandler::Event InputManager::translateEvent(const Mouse::Event e)
 	case Mouse::Event::Type::WheelDown:
 		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::MWheel);
 	}
+
+	return InputHandler::Event({ -1,-1 }, ' ', InputHandler::Event::Type::Invalid);
 }
 
 bool InputManager::handleFocus(const InputHandler::Event e)

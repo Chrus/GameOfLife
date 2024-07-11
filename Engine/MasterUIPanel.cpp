@@ -20,6 +20,9 @@ DebugInfo MasterUIPanel::getDebugInfo() const
 
 void MasterUIPanel::setContents()
 {
+	contents.push_back(&board);
+
+	//debug needs to be last
 	contents.push_back(&debugPanel);
 
 	//testing/debugging code, to remove
@@ -28,7 +31,6 @@ void MasterUIPanel::setContents()
 	//contents.push_back(&c3);
 	//contents.push_back(&c4);
 	//contents.push_back(&c5);
-
 	contents.push_back(&eP);
 }
 

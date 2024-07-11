@@ -40,6 +40,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	inputManager.update();
+	basePanel.update();
 }
 
 void Game::ComposeFrame()
