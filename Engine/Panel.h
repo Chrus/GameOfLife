@@ -31,7 +31,7 @@ public:
 
 		visualRect.size = newSize;
 	}
-	const int getBorderSize() { return borderSize; }
+	int getBorderSize() const { return borderSize; }
 	void setBorderSize(int newSize)
 	{
 		assert(newSize < visualRect.width());
@@ -48,7 +48,7 @@ public:
 	Color borderColor = DEFAULT_BORDER_COLOR;
 
 	//Functions
-	virtual void Panel::update() {}
+	virtual void Panel::update() {};
 	virtual void Panel::draw(Graphics& gfx) const;
 	virtual DebugInfo Panel::getDebugInfo() const = 0;
 

@@ -26,5 +26,5 @@ void Panel::draw(Graphics& gfx) const
 	if (drawBackground)
 		gfx.drawRect(visualRect, color);
 	if (drawBorder)
-		gfx.drawBorder(visualRect, color, borderColor, borderSize);
+		gfx.drawBorder(visualRect, borderColor, borderSize);
 }
