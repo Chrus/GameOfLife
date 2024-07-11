@@ -327,7 +327,7 @@ void Graphics::drawRect(const Rect& area, Color c)
 		}
 	}
 }
-void Graphics::drawBorder(const Rect& area, Color c, Color borderColor, int borderSize)
+void Graphics::drawBorder(const Rect& area, Color borderColor, int borderSize)
 {
 	//draw top and bottom border
 	for (int x = area.x(); x <= area.right(); x++)

@@ -39,7 +39,7 @@ void Container::draw(Graphics& gfx) const
 }
 DebugInfo Container::getDebugInfo() const
 {
-	return std::make_pair("Container", "# of Contents: " + contents.size());
+	return std::make_pair("Container", "# of Contents: " + std::to_string(contents.size()));
 }
 
 void Container::handleEvent(const InputHandler::Event event, InputManager* manager)

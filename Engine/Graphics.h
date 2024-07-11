@@ -59,7 +59,7 @@ public:
 	}
 	void PutPixel( int x,int y,Color c );
 	void drawRect(const Rect& area, Color c);
-	void drawBorder(const Rect& area, Color c, Color borderColor, int borderSize);
+	void drawBorder(const Rect& area, Color borderColor, int borderSize);
 	void drawSprite(const Rect& rect, const Color* pixels);
 	void drawSprite(const Rect& rect, const Color* pixels, Color chroma);
 	void drawChar(const Tuple& pos, const Rect& drawRect, const Rect& textSpriteSheetRect, const Color* textSpriteSheet, Color chroma);
@@ -80,5 +80,5 @@ private:
 	Color*                                              pSysBuffer = nullptr;
 public:
 	static constexpr int ScreenWidth = 1800;
-	static constexpr int ScreenHeight = 1200;
+	static constexpr int ScreenHeight = 1300;
 };

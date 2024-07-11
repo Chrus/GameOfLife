@@ -16,7 +16,7 @@ void TextPanel::draw(Graphics& gfx) const
 	if (drawBackground)
 		gfx.drawRect(textRect, color);
 	if (drawBorder)
-		gfx.drawBorder(textRect, color, borderColor, borderSize);
+		gfx.drawBorder(textRect, borderColor, borderSize);
 
 	Tuple curPos = textRect.position;
 	for (char c : text)
