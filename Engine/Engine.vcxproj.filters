@@ -111,6 +111,12 @@
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ControlsPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -182,6 +188,12 @@
     <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ControlsPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -198,6 +210,21 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Fixedsys8x14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Fixedsys16x28.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Step50x50.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Play50x50.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Stop50x50.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

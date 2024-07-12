@@ -140,11 +140,13 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="Container.h" />
+    <ClInclude Include="ControlsPanel.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="ExpandablePanel.h" />
     <ClInclude Include="Game.h" />
@@ -169,8 +171,10 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Container.cpp" />
+    <ClCompile Include="ControlsPanel.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="ExpandablePanel.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -256,6 +260,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
+    <Image Include="Images\Fixedsys16x28.bmp" />
+    <Image Include="Images\Fixedsys8x14.bmp" />
+    <Image Include="Images\Play50x50.bmp" />
+    <Image Include="Images\Step50x50.bmp" />
+    <Image Include="Images\Stop50x50.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

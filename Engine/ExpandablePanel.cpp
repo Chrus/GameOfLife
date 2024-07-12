@@ -4,8 +4,9 @@
 ExpandablePanel::ExpandablePanel(Rect expanderRect, Rect contentsRect, Container* parent, std::string text)
 	:
 	Container(contentsRect, parent),
-	expander(expanderRect, text, this)
+	expander(expanderRect, text, *this)
 {
+
 	drawBackground = true;
 	drawBorder = true;
 	expander.drawBackground = true;

@@ -1,12 +1,14 @@
 #include "Board.h"
 #include <algorithm>
 
-Board::Board(Rect rect, Container* parent)
+Board::Board(Rect rect, Container* parent, ControlsPanel* controls)
 	:
-	Container(rect, parent)
+	Container(rect, parent),
+	controls(controls)
 {
 	//for debugging.  Shouldnt see Cyan
 	color = Colors::Cyan;
+	drawBorder = true;
 
 	numCells.x = iRect.width() / Cell::DEFAULT_SIZE;
 	numCells.y = iRect.height() / Cell::DEFAULT_SIZE;
@@ -28,15 +30,13 @@ DebugInfo Board::getDebugInfo() const
 
 void Board::update()
 {
-	updateTimer -= 1;
-	if (updateTimer <= 0)
-	{
-		updateTimer = updateTimerMax;
-		Container::update();
+	Container::update();
 
+	if (controls->checkForIteration())
+	{
 		for (auto x : contents)
 			dynamic_cast<Cell*>(x)->updateState();
-	}
+	}	
 }
 
 void Board::setContents()

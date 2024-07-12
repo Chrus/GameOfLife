@@ -1,16 +1,21 @@
 #pragma once
-#include "ActionPanel.h"
+#include "Container.h"
 #include "TextPanel.h"
 
 class Button : public ActionPanel
 {
 public:
 	//Constructors
-	Button(Rect rect, std::string buttonText);
+	Button();
+	Button(Rect rect, Container& parent);
+	Button(Rect rect, std::string fileName, Container& parent);
+	Button(Rect rect, std::string fileName, std::string text, Container& parent);
+	~Button();
 
 	//Inherited via Panel
 	void draw(Graphics& gfx) const override;
 
 protected:
-	TextPanel text;
+	SpritePanel* sprite = nullptr;
+	Container* parent;
 };

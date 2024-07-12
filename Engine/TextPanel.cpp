@@ -1,10 +1,14 @@
 #include "TextPanel.h"
 
-TextPanel::TextPanel(Rect& panelRect, std::string text)
+TextPanel::TextPanel(std::string fileName, Rect& panelRect, std::string text)
 	:
-	SpritePanel(TEXT_SPRITE, panelRect),
-	glyphSize(Tuple(GLYPH_WIDTH, GLYPH_HEIGHT))
+	SpritePanel(fileName, panelRect)
 {
+	if (fileName == TEXT_SPRITE16X28)
+		glyphSize = Tuple(16, 28);
+	else //default to "Images\\Fixedsys8x14.bmp"
+		glyphSize = Tuple(8, 14);
+
 	setText(text);
 }
 

@@ -22,30 +22,22 @@ protected:
 	class HeaderButton : public Button
 	{
 	public:
-		HeaderButton()
+		HeaderButton(Rect rect, std::string text, ExpandablePanel& parent)
 			:
-			Button(Rect(),""),
-			parent(nullptr)
-		{}
-		HeaderButton(Rect rect, std::string text, ExpandablePanel* parent)
-			:
-			Button(rect, text),
-			parent(parent)
-		{}
+			Button(rect, std::string(TextPanel::TEXT_SPRITE16X28), text, parent){	}
 
 		// Inherited via Panel
 		DebugInfo getDebugInfo() const override
 		{
-			return DebugInfo("Button: ", text.getText());
+			return DebugInfo("ExpandablePanel Header: ", 
+				sprite->getDebugInfo().first + sprite->getDebugInfo().second);
 		}
 		// Inherited via ActionPanel
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
 			if (event.type == InputHandler::Event::Type::LPress)
-				parent->expanderClick(manager);
+				dynamic_cast<ExpandablePanel*>(parent)->expanderClick(manager);
 		}
-
-		ExpandablePanel* parent;
 	};
 
 	//Variables

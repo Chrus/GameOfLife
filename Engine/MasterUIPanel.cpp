@@ -5,9 +5,6 @@ MasterUIPanel::MasterUIPanel()
 	:
 	Container(Rect(0,0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1), nullptr)
 {
-	drawBorder = false;
-	drawBackground = false;
-
 	setContents();
 	debugPanel.drawPanel = false;
 	debugPanel.drawBackground = true;
@@ -22,6 +19,7 @@ DebugInfo MasterUIPanel::getDebugInfo() const
 void MasterUIPanel::setContents()
 {
 	contents.push_back(&board);
+	contents.push_back(&controls);
 
 	//debug needs to be last
 	contents.push_back(&debugPanel);

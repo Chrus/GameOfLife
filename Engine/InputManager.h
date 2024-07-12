@@ -26,6 +26,10 @@ private:
 	std::vector<DebugInfo> debugInfo;
 
 private:
+	//Variables
+	bool leftHeld = false;
+
+	//Functions
 	InputHandler::Event translateEvent(const Mouse::Event e);
 	bool handleFocus(const InputHandler::Event e);
 

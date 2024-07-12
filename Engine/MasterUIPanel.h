@@ -3,6 +3,7 @@
 #include "TextPanel.h"
 #include "ExpandablePanel.h"
 #include "Board.h"
+#include "ControlsPanel.h"
 
 //TODO remove?
 #include "Cell.h"
@@ -23,8 +24,11 @@ public:
 
 
 private:
-	TextPanel debugPanel = TextPanel(Rect(0, 0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1), "");
-	Board board = Board(Rect(75, 0, Graphics::ScreenWidth - 76, Graphics::ScreenHeight - 1), this);
+	ControlsPanel controls = ControlsPanel(Rect(450, 200, 100, 50), this);
+	Board board = Board(Rect(75, 0, Graphics::ScreenWidth - 76, Graphics::ScreenHeight - 1), this, &controls);
+	TextPanel debugPanel = TextPanel(std::string(TextPanel::TEXT_SPRITE16X28),
+		Rect(0, 0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1),
+		" ");
 
 	//Debugg/Testing code
 	//Cell c1 = Cell(Tuple(50, 50));

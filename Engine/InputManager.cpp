@@ -9,16 +9,35 @@ InputManager::InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& base
 
 void InputManager::update()
 {
-	if (!mouse.IsEmpty())
+	if (!mouse.LeftIsPressed())
+	{
+		leftHeld = false;
+		return;
+	}
+	if (mouse.LeftIsPressed() && !leftHeld)
+		handleLeftClick(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY()}, ' ', InputHandler::Event::Type::LPress));
+
+	return;
+
+
+	while (!mouse.IsEmpty())
 	{
 		Mouse::Event chiliEvent = mouse.Read();
-		if (!chiliEvent.IsValid() || chiliEvent.GetType() == Mouse::Event::Type::Move
-			|| chiliEvent.GetType() == Mouse::Event::Type::LRelease)
-			return;
+		//if (!chiliEvent.IsValid() || chiliEvent.GetType() == Mouse::Event::Type::Move
+		//	)//|| chiliEvent.GetType() == Mouse::Event::Type::LRelease)
+		//	return;
 
 		InputHandler::Event e = translateEvent(chiliEvent);
-		if (e.type == InputHandler::Event::Type::Invalid)
+		//if (e.type == InputHandler::Event::Type::Invalid)
+		//	return;
+
+		if (chiliEvent.GetType() == Mouse::Event::Type::LRelease)
+		{
+			leftHeld = false;
 			return;
+		}
+		//if (e.type == InputHandler::Event::Type::LPress && leftHeld)
+		//	return;
 		
 		//if true the focused panel is claiming the event and will handle it directly
 		//if false then process the event from the start
@@ -106,6 +125,8 @@ bool InputManager::handleFocus(const InputHandler::Event e)
 
 void InputManager::handleLeftClick(const InputHandler::Event e)
 {
+	leftHeld = true;
+
 	if (basePanel.interactsWith(e.mousePos))
 		basePanel.handleEvent(e, this);
 }

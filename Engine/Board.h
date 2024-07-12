@@ -1,12 +1,13 @@
 #pragma once
 #include "Container.h"
 #include "Cell.h"
+#include "ControlsPanel.h"
 
 class Board : public Container
 {
 public:
 	//Constructors
-	Board(Rect rect, Container* parent);
+	Board(Rect rect, Container* parent, ControlsPanel* controls);
 	~Board();
 
 	//Inherited via Panel
@@ -23,8 +24,7 @@ public:
 
 private:
 	Tuple numCells;
-	int updateTimer = 1;
-	const int updateTimerMax = 15;
+	ControlsPanel* controls;		
 
 	//Functions
 	void initCellArray(const int xCount,const int yCount);

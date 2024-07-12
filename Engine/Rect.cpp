@@ -47,8 +47,8 @@ Rect Rect::centerInside(const Rect& smallerRect) const
 	Rect drawRect = Rect(position.x,position.y,width(),height());
 
 	//currnetly not handling clipping, throw an error if we are
-	assert(smallerRect.width() < width());
-	assert(smallerRect.height() < height());
+	assert(smallerRect.width() <= width());
+	assert(smallerRect.height() <= height());
 
 	//Center the spritesheet if it is smaller than the Panel rect
 	if (smallerRect.width() < width())

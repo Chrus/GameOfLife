@@ -6,12 +6,10 @@ class TextPanel : public SpritePanel
 {
 public:
 	//Statics
-	static constexpr char TEXT_SPRITE[] = "Images\\Fixedsys16x28.bmp";
-	static constexpr int GLYPH_WIDTH = 16;
-	static constexpr int GLYPH_HEIGHT = 28;
+	static constexpr char TEXT_SPRITE16X28[] = "Images\\Fixedsys16x28.bmp";
+	static constexpr char TEXT_SPRITE8X14[] = "Images\\Fixedsys8x14.bmp";
 
-
-	TextPanel(Rect& panelRect, std::string text);
+	TextPanel(std::string fileName, Rect& panelRect, std::string text);
 
 	//Inherited from Panel
 	void draw(Graphics& gfx) const override;

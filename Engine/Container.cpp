@@ -46,17 +46,21 @@ void Container::handleEvent(const InputHandler::Event event, InputManager* manag
 {
 	ActionPanel::handleEvent(event, manager);
 
+	ActionPanel* last = nullptr;
 	for (const auto& element : contents)
 	{
 		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
 		{
 			if (p->interactsWith(event.mousePos))
 			{
-				p->handleEvent(event, manager);
-				break;
+				last = p;
+				//p->handleEvent(event, manager);
+				//break;
 			}
 		}
 	}
+	if (last != nullptr)
+		last->handleEvent(event, manager);
 }
 bool Container::checkFocus(InputHandler::Event event) const
 {
