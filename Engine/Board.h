@@ -1,13 +1,13 @@
 #pragma once
 #include "Container.h"
 #include "Cell.h"
-#include "ControlsPanel.h"
+#include "PlayPanel.h"
 
 class Board : public Container
 {
 public:
 	//Constructors
-	Board(Rect rect, Container* parent, ControlsPanel* controls);
+	Board(Rect rect, Container* parent, PlayPanel* controls);
 	~Board();
 
 	//Inherited via Panel
@@ -21,10 +21,11 @@ public:
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
 	Cell* getCell(const Tuple position);
+	void setAllCells(bool alive);
 
 private:
 	Tuple numCells;
-	ControlsPanel* controls;		
+	PlayPanel* playPanel;		
 
 	//Functions
 	void initCellArray(const int xCount,const int yCount);

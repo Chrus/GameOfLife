@@ -7,6 +7,12 @@ Container::Container(Rect rect, Container* parent)
 	parent(parent)
 {}
 
+Container::~Container()
+{
+	//for (auto* e : contents)
+	//	delete e;
+}
+
 //checks to see if point is in a clickable area of the container.
 bool Container::interactsWith(const Tuple point) const
 {

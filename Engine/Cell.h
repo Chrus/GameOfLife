@@ -17,6 +17,7 @@ public:
 	//Functions
 	void setNeighbors(std::vector<Cell*> newNeighbors);
 	void updateState();
+	void setAlive(bool cellAlive);
 
 private:
 	bool alive = false;

@@ -7,6 +7,7 @@ class Container:public ActionPanel
 public:
 	//Constructors
 	Container(Rect rect, Container* parent);
+	~Container();
 
 	//Inherited from ActionPanel
 	bool interactsWith(const Tuple point) const override;

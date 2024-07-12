@@ -54,6 +54,12 @@ void Cell::updateState()
 	switchState = false;
 }
 
+void Cell::setAlive(bool cellAlive)
+{
+	alive = cellAlive;
+	switchState = false;
+}
+
 DebugInfo Cell::getDebugInfo() const
 {
 	return std::make_pair("Cell:", "{" + std::to_string(arrayPos.x)

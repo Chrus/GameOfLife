@@ -2,11 +2,11 @@
 #include "Container.h"
 #include "CheckBox.h"
 
-class ControlsPanel : public Container
+class PlayPanel : public Container
 {
 public:
 	//Constructor
-	ControlsPanel(Rect rect, Container* parent);
+	PlayPanel(Rect rect, Container* parent);
 
 	//Inherited via Container
 	void setContents() override;
@@ -29,7 +29,7 @@ private:
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
 			checked = !checked;
-			dynamic_cast<ControlsPanel*>(parent)->playClick();
+			dynamic_cast<PlayPanel*>(parent)->playClick();
 		}
 	};
 	class StepButton : public Button
@@ -45,7 +45,7 @@ private:
 		}
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			dynamic_cast<ControlsPanel*>(parent)->stepClick();
+			dynamic_cast<PlayPanel*>(parent)->stepClick();
 		}
 	};
 	

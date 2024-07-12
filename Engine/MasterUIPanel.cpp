@@ -19,18 +19,14 @@ DebugInfo MasterUIPanel::getDebugInfo() const
 void MasterUIPanel::setContents()
 {
 	contents.push_back(&board);
-	contents.push_back(&controls);
+	contents.push_back(&playPanel);
+	contents.push_back(&sideBar);
 
 	//debug needs to be last
 	contents.push_back(&debugPanel);
 
 	//testing/debugging code, to remove
-	//contents.push_back(&c1);
-	//contents.push_back(&c2);
-	//contents.push_back(&c3);
-	//contents.push_back(&c4);
-	//contents.push_back(&c5);
-	contents.push_back(&eP);
+	//contents.push_back(&eP);
 }
 
 void MasterUIPanel::updateDebugPanel(std::string text, bool display)

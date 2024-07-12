@@ -146,7 +146,8 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="Container.h" />
-    <ClInclude Include="ControlsPanel.h" />
+    <ClInclude Include="ControlsExpander.h" />
+    <ClInclude Include="PlayPanel.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="ExpandablePanel.h" />
     <ClInclude Include="Game.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SideBar.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpritePanel.h" />
@@ -174,7 +176,8 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Container.cpp" />
-    <ClCompile Include="ControlsPanel.cpp" />
+    <ClCompile Include="ControlsExpander.cpp" />
+    <ClCompile Include="PlayPanel.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="ExpandablePanel.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -188,6 +191,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="SideBar.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpritePanel.cpp" />
     <ClCompile Include="TextPanel.cpp" />

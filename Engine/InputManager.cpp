@@ -14,12 +14,22 @@ void InputManager::update()
 		leftHeld = false;
 		return;
 	}
+
 	if (mouse.LeftIsPressed() && !leftHeld)
-		handleLeftClick(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY()}, ' ', InputHandler::Event::Type::LPress));
+	{
+		//temp handling focus until this is reworked
+		if (handleFocus(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress)))
+		{
+			leftHeld = true;
+			return;
+		}
+
+		handleLeftClick(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress));
+	}
 
 	return;
 
-
+	//Todo I need to revise all of this
 	while (!mouse.IsEmpty())
 	{
 		Mouse::Event chiliEvent = mouse.Read();

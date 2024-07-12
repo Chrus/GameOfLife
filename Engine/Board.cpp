@@ -1,10 +1,10 @@
 #include "Board.h"
 #include <algorithm>
 
-Board::Board(Rect rect, Container* parent, ControlsPanel* controls)
+Board::Board(Rect rect, Container* parent, PlayPanel* controls)
 	:
 	Container(rect, parent),
-	controls(controls)
+	playPanel(controls)
 {
 	//for debugging.  Shouldnt see Cyan
 	color = Colors::Cyan;
@@ -32,7 +32,7 @@ void Board::update()
 {
 	Container::update();
 
-	if (controls->checkForIteration())
+	if (playPanel->checkForIteration())
 	{
 		for (auto x : contents)
 			dynamic_cast<Cell*>(x)->updateState();
@@ -58,6 +58,12 @@ Cell* Board::getCell(const int xPos, const int yPos)
 Cell* Board::getCell(const Tuple position) 
 {
 	return getCell(position.x, position.y);
+}
+
+void Board::setAllCells(bool alive)
+{
+	for (auto x : contents)
+		dynamic_cast<Cell*>(x)->setAlive(alive);
 }
 
 void Board::initCellArray(const int xCount, const int yCount)

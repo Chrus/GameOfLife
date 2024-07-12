@@ -1,5 +1,5 @@
-#include "ControlsPanel.h"
-ControlsPanel::ControlsPanel(Rect rect, Container* parent)
+#include "PlayPanel.h"
+PlayPanel::PlayPanel(Rect rect, Container* parent)
 	:
 	Container(rect, parent),
 	playButton(Rect(rect.x(), rect.y(), 50, 50), "Images\\Play50x50new.bmp", "Images\\Stop50x50new.bmp", *this),
@@ -11,13 +11,13 @@ ControlsPanel::ControlsPanel(Rect rect, Container* parent)
 	stepButton.drawBorder = true;
 }
 
-void ControlsPanel::setContents()
+void PlayPanel::setContents()
 {
 	contents.push_back(&playButton);
 	contents.push_back(&stepButton);
 }
 
-bool ControlsPanel::checkForIteration()
+bool PlayPanel::checkForIteration()
 {
 	if (step)
 	{
@@ -35,12 +35,12 @@ bool ControlsPanel::checkForIteration()
 	}
 }
 
-void ControlsPanel::playClick()
+void PlayPanel::playClick()
 {
 	play = !play;
 }
 
-void ControlsPanel::stepClick()
+void PlayPanel::stepClick()
 {
 	step = true;
 }

@@ -111,10 +111,16 @@
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControlsPanel.h">
+    <ClInclude Include="PlayPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CheckBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SideBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlsExpander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -188,10 +194,16 @@
     <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControlsPanel.cpp">
+    <ClCompile Include="PlayPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CheckBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SideBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlsExpander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
