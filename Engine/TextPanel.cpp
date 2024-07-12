@@ -67,7 +67,7 @@ Rect TextPanel::mapGlyphRect(char c) const
 Rect TextPanel::calcTextRect() const
 {
 	int maxWidth = 1;
-	int maxHeight = 0;
+	int maxHeight = 1;
 	int currentWidth = 1;
 
 	for (auto c : text)
