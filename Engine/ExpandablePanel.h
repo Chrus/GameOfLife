@@ -35,7 +35,8 @@ protected:
 		// Inherited via ActionPanel
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress)
+			if (event.type == InputHandler::Event::Type::LPress
+				&& !event.keyHeld)
 				dynamic_cast<ExpandablePanel*>(parent)->expanderClick(manager);
 		}
 	};

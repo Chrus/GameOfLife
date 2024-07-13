@@ -17,10 +17,6 @@ public:
 	DebugInfo getDebugInfo() const override;
 	// Inherited via InputHandler
 	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
-	bool checkFocus(InputHandler::Event event) const override;
-	void loseFocus() override;
-
-	//Functions
 
 protected:
 	virtual void setContents() {}

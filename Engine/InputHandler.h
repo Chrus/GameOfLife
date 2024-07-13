@@ -16,16 +16,18 @@ public:
 			Invalid
 		};
 
-		Event(Tuple mousePos, char key, Type type)
+		Event(Tuple mousePos, char key, Type type, bool keyHeld)
 			:
 			mousePos(mousePos),
 			key(key),
-			type(type)
+			type(type),
+			keyHeld(keyHeld)
 		{}
 
 		const Tuple mousePos;
 		const char key;
 		const Type type;
+		const bool keyHeld;
 	};
 
 	virtual void handleEvent(const InputHandler::Event event, InputManager* manager) = 0;

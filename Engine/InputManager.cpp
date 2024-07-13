@@ -10,22 +10,34 @@ InputManager::InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& base
 void InputManager::update()
 {
 	if (!mouse.LeftIsPressed())
-	{
 		leftHeld = false;
-		return;
-	}
+	if (!mouse.RightIsPressed())
+		rightHeld = false;
 
-	if (mouse.LeftIsPressed() && !leftHeld)
+
+	if (mouse.LeftIsPressed())
 	{
+		InputHandler::Event e = InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress, leftHeld);
 		//temp handling focus until this is reworked
-		if (handleFocus(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress)))
+		if (handleFocus(e))
 		{
 			leftHeld = true;
 			return;
 		}
-
-		handleLeftClick(InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress));
+		handleLeftClick(e);
 	}
+
+	if (mouse.RightIsPressed())
+	{
+		InputHandler::Event e = InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::RPress, rightHeld);
+		if (handleFocus(e))
+		{
+			rightHeld = true;
+			return;
+		}
+		handleRightClick(e);
+	}
+
 
 	return;
 
@@ -40,7 +52,7 @@ void InputManager::update()
 		InputHandler::Event e = translateEvent(chiliEvent);
 		//if (e.type == InputHandler::Event::Type::Invalid)
 		//	return;
-
+		
 		if (chiliEvent.GetType() == Mouse::Event::Type::LRelease)
 		{
 			leftHeld = false;
@@ -101,18 +113,18 @@ void InputManager::removeFocus(ActionPanel* panel)
 
 InputHandler::Event InputManager::translateEvent(const Mouse::Event e)
 {
-	switch (e.GetType())
-	{
-	case Mouse::Event::Type::LPress:
-		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::LPress);
-	case Mouse::Event::Type::RPress:
-		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::RPress);
-	case Mouse::Event::Type::WheelUp:
-	case Mouse::Event::Type::WheelDown:
-		return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::MWheel);
-	}
+	//switch (e.GetType())
+	//{
+	//case Mouse::Event::Type::LPress:
+	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::LPress);
+	//case Mouse::Event::Type::RPress:
+	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::RPress);
+	//case Mouse::Event::Type::WheelUp:
+	//case Mouse::Event::Type::WheelDown:
+	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::MWheel);
+	//}
 
-	return InputHandler::Event({ -1,-1 }, ' ', InputHandler::Event::Type::Invalid);
+	return InputHandler::Event({ -1,-1 }, ' ', InputHandler::Event::Type::Invalid, false);
 }
 
 bool InputManager::handleFocus(const InputHandler::Event e)
@@ -135,15 +147,17 @@ bool InputManager::handleFocus(const InputHandler::Event e)
 
 void InputManager::handleLeftClick(const InputHandler::Event e)
 {
-	leftHeld = true;
-
 	if (basePanel.interactsWith(e.mousePos))
 		basePanel.handleEvent(e, this);
+
+	leftHeld = true;
 }
 void InputManager::handleRightClick(const InputHandler::Event e)
 {
 	if (basePanel.interactsWith(e.mousePos))
 		basePanel.handleEvent(e, this);
+
+	rightHeld = true;
 }
 void InputManager::handleMouseWheel(InputHandler::Event e, Mouse::Event wheelE)
 {

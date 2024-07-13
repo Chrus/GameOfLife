@@ -68,10 +68,3 @@ void Container::handleEvent(const InputHandler::Event event, InputManager* manag
 	if (last != nullptr)
 		last->handleEvent(event, manager);
 }
-bool Container::checkFocus(InputHandler::Event event) const
-{
-	return false;
-}
-void Container::loseFocus()
-{
-}

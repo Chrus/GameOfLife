@@ -27,6 +27,10 @@ public:
 	{
 		return Tuple(x + right.x, y + right.y);
 	}
+	Tuple Tuple::operator-(const Tuple& right) const
+	{
+		return Tuple(x - right.x, y - right.y);
+	}
 	Tuple Tuple::operator*(int right) const
 	{
 		return Tuple(x * right, y * right);

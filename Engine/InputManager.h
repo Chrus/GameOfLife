@@ -28,6 +28,7 @@ private:
 private:
 	//Variables
 	bool leftHeld = false;
+	bool rightHeld = false;
 
 	//Functions
 	InputHandler::Event translateEvent(const Mouse::Event e);

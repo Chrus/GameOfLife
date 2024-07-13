@@ -28,8 +28,12 @@ private:
 		}
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			checked = !checked;
-			dynamic_cast<PlayPanel*>(parent)->playClick();
+			if (event.type == InputHandler::Event::Type::LPress
+				&& !event.keyHeld)
+			{
+				checked = !checked;
+				dynamic_cast<PlayPanel*>(parent)->playClick();
+			}
 		}
 	};
 	class StepButton : public Button
@@ -45,7 +49,9 @@ private:
 		}
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			dynamic_cast<PlayPanel*>(parent)->stepClick();
+			if (event.type == InputHandler::Event::Type::LPress
+				&& !event.keyHeld)
+				dynamic_cast<PlayPanel*>(parent)->stepClick();
 		}
 	};
 	

@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <algorithm>
+#include "InputManager.h"
 
 Board::Board(Rect rect, Container* parent, PlayPanel* controls)
 	:
@@ -44,6 +45,45 @@ void Board::setContents()
 	initCellArray(numCells.x, numCells.y);
 }
 
+void Board::handleEvent(const InputHandler::Event event, InputManager* manager)
+{
+	Container::handleEvent(event, manager);
+	
+	if (event.type == InputHandler::Event::Type::LPress
+		|| event.type == InputHandler::Event::Type::RPress)
+	{
+		//only need to take focus the first time
+		if (!event.keyHeld)
+		{
+			Container::handleEvent(event, manager);
+			lastCellUpdated = cellAtMouse(event.mousePos);
+			manager->takeFocus(this);
+		}
+		else  //only need to update all the cells if the mouse is on a new one
+		{
+			Cell* currentCell = cellAtMouse(event.mousePos);
+			if (lastCellUpdated != currentCell)
+			{
+				Container::handleEvent(event, manager);
+				lastCellUpdated = currentCell;
+			}
+		}
+	}
+}
+
+bool Board::checkFocus(InputHandler::Event event) const
+{
+	if (!iRect.contains(event.mousePos)
+		|| playPanel->interactsWith(event.mousePos))
+		return false;
+	return true;
+}
+
+void Board::loseFocus()
+{
+	lastCellUpdated = nullptr;
+}
+
 int Board::getCellCount() const
 {
 	return numCells.x * numCells.y;
@@ -58,6 +98,15 @@ Cell* Board::getCell(const int xPos, const int yPos)
 Cell* Board::getCell(const Tuple position) 
 {
 	return getCell(position.x, position.y);
+}
+
+Cell* Board::cellAtMouse(const Tuple mousePosition)
+{
+	Tuple temp = mousePosition - iRect.position;
+	temp.x = temp.x % Cell::DEFAULT_SIZE;
+	temp.y = temp.y % Cell::DEFAULT_SIZE;
+
+	return getCell(temp);
 }
 
 void Board::setAllCells(bool alive)

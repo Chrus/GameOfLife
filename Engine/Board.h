@@ -17,15 +17,22 @@ public:
 	//Inherited via Container
 	void setContents() override;
 
+	//Inherited via InputHandler
+	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
+	bool checkFocus(InputHandler::Event event) const override;
+	void loseFocus() override;
+
 	//Functions
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
 	Cell* getCell(const Tuple position);
+	Cell* cellAtMouse(const Tuple mousePosition);
 	void setAllCells(bool alive);
 
 private:
 	Tuple numCells;
-	PlayPanel* playPanel;		
+	PlayPanel* playPanel;
+	Cell* lastCellUpdated;
 
 	//Functions
 	void initCellArray(const int xCount,const int yCount);
