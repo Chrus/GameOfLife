@@ -14,6 +14,8 @@ void InputManager::update()
 	if (!mouse.RightIsPressed())
 		rightHeld = false;
 
+	assert(shortcuts != nullptr);
+	shortcuts->checkKey(keyboard.ReadChar());
 
 	if (mouse.LeftIsPressed())
 	{
@@ -109,6 +111,11 @@ void InputManager::removeFocus(ActionPanel* panel)
 
 	panel->loseFocus();
 	focusedPanel = nullptr;
+}
+
+void InputManager::setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel)
+{
+	shortcuts = &ShortcutManager(board, controls, playPanel);
 }
 
 InputHandler::Event InputManager::translateEvent(const Mouse::Event e)

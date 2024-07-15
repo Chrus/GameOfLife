@@ -13,6 +13,8 @@ public:
 
 	//Functions
 	bool checkForIteration();
+	void playClick();
+	void stepClick();
 
 private:
 	class PlayButton : public CheckBox
@@ -57,9 +59,7 @@ private:
 	
 	//Variables
 	PlayButton playButton;
-	void playClick();
 	StepButton stepButton;
-	void stepClick();
 
 	bool step = false;
 	bool play = false;

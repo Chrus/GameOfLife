@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "InputManager.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -27,6 +28,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	inputManager(wnd.mouse,wnd.kbd,basePanel)
 {
+	
 }
 
 void Game::Go()
@@ -39,6 +41,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	basePanel.initShortcutManager(&inputManager);
+
 	inputManager.update();
 	basePanel.update();
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "Board.h"
+#include "ControlsExpander.h"
 
 class SideBar : public Container
 {
@@ -10,6 +11,10 @@ public:
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
+	ControlsExpander* getControls()
+	{
+		return dynamic_cast<ControlsExpander*>(contents[0]);
+	}
 
 protected:
 	//Inherited via Container

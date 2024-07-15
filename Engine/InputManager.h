@@ -2,6 +2,7 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 #include "MasterUIPanel.h"
+#include "ShortcutManager.h"
 
 class InputManager
 {
@@ -16,12 +17,14 @@ public:
 	//Functions
 	void takeFocus(ActionPanel* panel);
 	void removeFocus(ActionPanel* panel);
+	void setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel);
 	
 private:
 	//Variables
 	Mouse& mouse;
 	Keyboard& keyboard;
-	MasterUIPanel &basePanel;
+	MasterUIPanel& basePanel;
+	ShortcutManager* shortcuts = nullptr;
 	ActionPanel* focusedPanel = nullptr;
 	std::vector<DebugInfo> debugInfo;
 

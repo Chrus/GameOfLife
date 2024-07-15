@@ -22,6 +22,7 @@ public:
 	void updateDebugPanel(std::string text, bool display);
 
 	//Functions
+	void initShortcutManager(InputManager* input);
 
 
 private:
@@ -30,10 +31,6 @@ private:
 	TextPanel debugPanel = TextPanel(std::string(TextPanel::TEXT_SPRITE16X28),
 		Rect(0, 0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1),
 		" ");
-	SideBar sideBar = SideBar(Rect(0, 0, 75, 1299), this, board);
-	
-	//Debugg/Testing code
-	//ExpandablePanel eP = ExpandablePanel(Rect(0, 0, 75, 1299),
-	//	Rect(200, 200, 25, 25), this, "T\ne\nm\np");
 
+	SideBar sideBar = SideBar(Rect(0, 0, 75, 1299), this, board);
 };
