@@ -14,6 +14,10 @@ public:
 	//Inherited via Container
 	void setContents();
 
+	//Functions
+	void clearButtonClick() const;
+	void fillButtonClick() const;
+
 private:
 	class ClearButton : public Button
 	{
@@ -30,7 +34,7 @@ private:
 		// Inherited via ActionPanel
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress)
+			if (event.type == InputHandler::Event::Type::LPress && !event.keyHeld)
 				dynamic_cast<ControlsExpander*>(parent)->clearButtonClick();
 		}
 	};
@@ -49,16 +53,12 @@ private:
 		// Inherited via ActionPanel
 		void handleEvent(const InputHandler::Event event, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress)
+			if (event.type == InputHandler::Event::Type::LPress && !event.keyHeld)
 				dynamic_cast<ControlsExpander*>(parent)->fillButtonClick();
 		}
 	};
 
 	//Variables
 	Board& board;
-
-	//Functions
-	void clearButtonClick() const;
-	void fillButtonClick() const;
 };
 
