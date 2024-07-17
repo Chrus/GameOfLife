@@ -42,5 +42,5 @@ void MasterUIPanel::updateDebugPanel(std::string text, bool display)
 
 void MasterUIPanel::initShortcutManager(InputManager* input)
 {
-	input->setShortcutManager(&board, sideBar.getControls(), &playPanel);
+	input->setShortcutManager(&board, sideBar.getEditExpander(), &playPanel);
 }

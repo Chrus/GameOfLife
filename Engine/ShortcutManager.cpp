@@ -1,6 +1,6 @@
 #include "ShortcutManager.h"
 
-ShortcutManager::ShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel)
+ShortcutManager::ShortcutManager(Board* board, EditExpander* controls, PlayPanel* playPanel)
 	:
 	board(board),
 	controls(controls),

@@ -1,7 +1,7 @@
-#include "ControlsExpander.h"
+#include "EditExpander.h"
 #include "Seperator.h"
 
-ControlsExpander::ControlsExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board)
+EditExpander::EditExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board)
 	:
 	ExpandablePanel(expanderRect, contentsRect, parent, text),
 	board(board)
@@ -10,17 +10,17 @@ ControlsExpander::ControlsExpander(Rect expanderRect, Rect contentsRect, Contain
 	savedCells = new bool[1];
 }
 
-ControlsExpander::~ControlsExpander()
+EditExpander::~EditExpander()
 {
 	delete[] savedCells;
 }
 
-DebugInfo ControlsExpander::getDebugInfo() const
+DebugInfo EditExpander::getDebugInfo() const
 {
 	return DebugInfo("ControlsExpander", "");
 }
 
-void ControlsExpander::setContents()
+void EditExpander::setContents()
 {
 	ClearButton* clear = new ClearButton(
 		Rect(iRect.x() + 5, iRect.y() + 5, iRect.width() - 10, 30),
@@ -47,15 +47,15 @@ void ControlsExpander::setContents()
 	contents.push_back(load);
 }
 
-void ControlsExpander::clearButtonClick() const
+void EditExpander::clearButtonClick() const
 {
 	board.setAllCells(false);
 }
-void ControlsExpander::fillButtonClick() const
+void EditExpander::fillButtonClick() const
 {
 	board.setAllCells(true);
 }
-void ControlsExpander::saveButtonClick() 
+void EditExpander::saveButtonClick() 
 {
 	delete[] savedCells;
 	savedCells = new bool[board.getCellCount()]();
@@ -63,7 +63,7 @@ void ControlsExpander::saveButtonClick()
 	for (int x = 0; x < board.getCellCount(); x++)
 		savedCells[x] = board.getCell(x)->getState();
 }
-void ControlsExpander::loadButtonClick() const
+void EditExpander::loadButtonClick() const
 {
 	for (int x = 0; x < board.getCellCount(); x++)
 		board.getCell(x)->setAlive(savedCells[x]);

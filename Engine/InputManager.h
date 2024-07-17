@@ -16,7 +16,7 @@ public:
 
 	//Functions
 	void setFocus(ActionPanel* panel);
-	void setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel);
+	void setShortcutManager(Board* board, EditExpander* editExpander, PlayPanel* playPanel);
 	
 private:
 	//Variables

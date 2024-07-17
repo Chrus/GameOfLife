@@ -146,7 +146,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="Container.h" />
-    <ClInclude Include="ControlsExpander.h" />
+    <ClInclude Include="EditExpander.h" />
     <ClInclude Include="PlayPanel.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="ExpandablePanel.h" />
@@ -178,7 +178,7 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="Container.cpp" />
-    <ClCompile Include="ControlsExpander.cpp" />
+    <ClCompile Include="EditExpander.cpp" />
     <ClCompile Include="PlayPanel.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="ExpandablePanel.cpp" />

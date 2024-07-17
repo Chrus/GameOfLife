@@ -7,7 +7,7 @@ class ShortcutManager
 {
 public:
 	//Constructors
-	ShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel);
+	ShortcutManager(Board* board, EditExpander* controls, PlayPanel* playPanel);
 	ShortcutManager() {};
 
 	bool checkKey(const char key);
@@ -15,7 +15,7 @@ public:
 private:
 	//Variables
 	Board* board;
-	ControlsExpander* controls;
+	EditExpander* controls;
 	PlayPanel* playPanel;
 	std::vector<char> keys;
 

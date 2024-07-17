@@ -11,9 +11,9 @@ public:
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
-	ControlsExpander* getControls()
+	EditExpander* getEditExpander()
 	{
-		return dynamic_cast<ControlsExpander*>(contents[0]);
+		return dynamic_cast<EditExpander*>(contents[0]);
 	}
 
 protected:

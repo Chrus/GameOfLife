@@ -44,9 +44,9 @@ void InputManager::setFocus(ActionPanel* panel)
 	focusedPanel = panel;
 }
 
-void InputManager::setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel)
+void InputManager::setShortcutManager(Board* board, EditExpander* editExpander, PlayPanel* playPanel)
 {
-	shortcuts = ShortcutManager(board, controls, playPanel);
+	shortcuts = ShortcutManager(board, editExpander, playPanel);
 }
 
 void InputManager::handleFocus(const Mouse::Event e)

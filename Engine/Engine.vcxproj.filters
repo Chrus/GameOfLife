@@ -120,7 +120,7 @@
     <ClInclude Include="SideBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControlsExpander.h">
+    <ClInclude Include="EditExpander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ShortcutManager.h">
@@ -209,7 +209,7 @@
     <ClCompile Include="SideBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControlsExpander.cpp">
+    <ClCompile Include="EditExpander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShortcutManager.cpp">

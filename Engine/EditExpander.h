@@ -2,12 +2,12 @@
 #include "ExpandablePanel.h"
 #include "Board.h"
 
-class ControlsExpander : public ExpandablePanel
+class EditExpander : public ExpandablePanel
 {
 public:
 	//Constructors
-	ControlsExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board);
-	~ControlsExpander();
+	EditExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board);
+	~EditExpander();
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
@@ -41,7 +41,7 @@ private:
 
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
-				dynamic_cast<ControlsExpander*>(parent)->clearButtonClick();
+				dynamic_cast<EditExpander*>(parent)->clearButtonClick();
 			return true;
 		}
 	};
@@ -64,7 +64,7 @@ private:
 
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
-				dynamic_cast<ControlsExpander*>(parent)->fillButtonClick();
+				dynamic_cast<EditExpander*>(parent)->fillButtonClick();
 			return true;
 		}
 	};
@@ -87,7 +87,7 @@ private:
 
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
-				dynamic_cast<ControlsExpander*>(parent)->saveButtonClick();
+				dynamic_cast<EditExpander*>(parent)->saveButtonClick();
 			return true;
 		}
 	};
@@ -110,7 +110,7 @@ private:
 
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
-				dynamic_cast<ControlsExpander*>(parent)->loadButtonClick();
+				dynamic_cast<EditExpander*>(parent)->loadButtonClick();
 			return true;
 		}
 	};
