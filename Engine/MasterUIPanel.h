@@ -26,7 +26,7 @@ public:
 
 
 private:
-	PlayPanel playPanel = PlayPanel(Rect(800, 0, 100, 50), this);
+	PlayPanel playPanel = PlayPanel(Rect(800, 3, 100, 50), this);
 	Board board = Board(Rect(75, 0, Graphics::ScreenWidth - 76, Graphics::ScreenHeight - 1), this, &playPanel);
 	TextPanel debugPanel = TextPanel(std::string(TextPanel::TEXT_SPRITE16X28),
 		Rect(0, 0, Graphics::ScreenWidth - 1, Graphics::ScreenHeight - 1),

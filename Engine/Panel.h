@@ -13,7 +13,7 @@ public:
 	//Default Values
 	static constexpr int DEFAULT_BORDER_SIZE = 3;
 	static constexpr Color DEFAULT_COLOR = Colors::BackgroundBlue;
-	static constexpr Color DEFAULT_BORDER_COLOR = Colors::BorderBlue;
+	static constexpr Color DEFAULT_BORDER_COLOR = Colors::BorderBlu;
 	static constexpr int DEFAULT_SIZE = 15;
 
 	//Constructors

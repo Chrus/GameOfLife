@@ -7,6 +7,7 @@ class ControlsExpander : public ExpandablePanel
 public:
 	//Constructors
 	ControlsExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board);
+	~ControlsExpander();
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
@@ -17,6 +18,8 @@ public:
 	//Functions
 	void clearButtonClick() const;
 	void fillButtonClick() const;
+	void saveButtonClick();
+	void loadButtonClick() const;
 
 private:
 	class ClearButton : public Button
@@ -65,8 +68,55 @@ private:
 			return true;
 		}
 	};
+	class SaveButton : public Button
+	{
+	public:
+		SaveButton(Rect rect, std::string text, ExpandablePanel& parent)
+			:
+			Button(rect, std::string(TextPanel::TEXT_SPRITE8X14), text, parent) {	}
+
+		// Inherited via Panel
+		DebugInfo getDebugInfo() const override
+		{
+			return DebugInfo("SaveButton", "");
+		}
+		// Inherited via ActionPanel
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
+		{
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
+				dynamic_cast<ControlsExpander*>(parent)->saveButtonClick();
+			return true;
+		}
+	};
+	class LoadButton : public Button
+	{
+	public:
+		LoadButton(Rect rect, std::string text, ExpandablePanel& parent)
+			:
+			Button(rect, std::string(TextPanel::TEXT_SPRITE8X14), text, parent) {	}
+
+		// Inherited via Panel
+		DebugInfo getDebugInfo() const override
+		{
+			return DebugInfo("LoadButton", "");
+		}
+		// Inherited via ActionPanel
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
+		{
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
+				dynamic_cast<ControlsExpander*>(parent)->loadButtonClick();
+			return true;
+		}
+	};
 
 	//Variables
 	Board& board;
+	bool* savedCells;
 };
 

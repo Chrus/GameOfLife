@@ -18,6 +18,7 @@ public:
 	void setNeighbors(std::vector<Cell*> newNeighbors);
 	void updateState();
 	void setAlive(bool cellAlive);
+	bool getState() const { return alive; }
 
 private:
 	bool alive = false;

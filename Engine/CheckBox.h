@@ -11,8 +11,11 @@ public:
 	//Inherited via Panel
 	void draw(Graphics& gfx) const override;
 
-protected:
-	SpritePanel* checkedSprite = nullptr;
+	//Variables
 	bool checked = false;
+
+protected:
+	//Variables
+	SpritePanel* checkedSprite = nullptr;
 };
 

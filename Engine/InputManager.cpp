@@ -10,8 +10,7 @@ InputManager::InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& base
 void InputManager::update()
 {
 	//maybe need to move where shortcuts are checked/handled
-	assert(shortcuts != nullptr);
-	shortcuts->checkKey(keyboard.ReadChar());
+	shortcuts.checkKey(keyboard.ReadChar());
 
 	Mouse::Event e = mouse.Read();
 	while (e.IsValid())
@@ -47,7 +46,7 @@ void InputManager::setFocus(ActionPanel* panel)
 
 void InputManager::setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel)
 {
-	shortcuts = &ShortcutManager(board, controls, playPanel);
+	shortcuts = ShortcutManager(board, controls, playPanel);
 }
 
 void InputManager::handleFocus(const Mouse::Event e)

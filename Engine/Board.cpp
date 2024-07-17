@@ -103,6 +103,11 @@ Cell* Board::getCell(const Tuple position)
 	return getCell(position.x, position.y);
 }
 
+Cell* Board::getCell(const int position)
+{
+	return dynamic_cast<Cell*>(contents[position]);
+}
+
 Cell* Board::cellAtMouse(const Tuple mousePosition)
 {
 	Tuple temp = mousePosition - iRect.position;
@@ -114,7 +119,7 @@ Cell* Board::cellAtMouse(const Tuple mousePosition)
 
 void Board::setAllCells(bool alive)
 {
-	for (auto x : contents)
+	for (auto* x : contents)
 		dynamic_cast<Cell*>(x)->setAlive(alive);
 }
 

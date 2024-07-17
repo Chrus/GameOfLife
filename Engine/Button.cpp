@@ -3,14 +3,24 @@
 Button::Button()
 	:
 	ActionPanel(Rect())
-{}
+{
+	color = Colors::LightGray;
+	borderColor = Colors::Black;
+	drawBorder = true;
+	drawBackground = true;
+}
 
 //Button with no sprite or text
 Button::Button(Rect rect, Container& parent)
 	:
 	ActionPanel(rect),
 	parent(&parent)
-{}
+{
+	color = Colors::LightGray;
+	borderColor = Colors::Black;
+	drawBorder = true;
+	drawBackground = true;
+}
 
 //Button with a sprite
 Button::Button(Rect rect, std::string fileName, Container& parent)

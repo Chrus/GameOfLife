@@ -23,7 +23,7 @@ private:
 	Mouse& mouse;
 	Keyboard& keyboard;
 	MasterUIPanel& basePanel;
-	ShortcutManager* shortcuts = nullptr;
+	ShortcutManager shortcuts;
 	ActionPanel* focusedPanel = nullptr;
 	std::vector<DebugInfo> debugInfo;
 

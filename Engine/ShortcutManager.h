@@ -8,6 +8,7 @@ class ShortcutManager
 public:
 	//Constructors
 	ShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel);
+	ShortcutManager() {};
 
 	bool checkKey(const char key);
 

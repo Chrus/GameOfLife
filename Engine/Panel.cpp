@@ -24,7 +24,7 @@ void Panel::draw(Graphics& gfx) const
 		return;
 
 	if (drawBackground)
-		gfx.drawRect(visualRect, color);
+		gfx.drawRect(visualRect.getExpanded(borderSize * -1), color);
 	if (drawBorder)
 		gfx.drawBorder(visualRect, borderColor, borderSize);
 }

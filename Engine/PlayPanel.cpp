@@ -3,12 +3,14 @@ PlayPanel::PlayPanel(Rect rect, Container* parent)
 	:
 	Container(rect, parent),
 	playButton(Rect(rect.x(), rect.y(), 50, 50), "Images\\Play50x50new.bmp", "Images\\Stop50x50new.bmp", *this),
-	stepButton(Rect(rect.x() + 51, rect.y(), 50, 50), "Images\\Step50x50new.bmp",*this)
+	stepButton(Rect(rect.x() + 50, rect.y(), 50, 50), "Images\\Step50x50new.bmp",*this)
 {
 	setContents();
 	drawBackground = true;
-	playButton.drawBorder = true;
-	stepButton.drawBorder = true;
+	playButton.borderColor = Colors::BorderBlu;
+	playButton.drawBackground = false;
+	stepButton.borderColor = Colors::BorderBlu;
+	stepButton.drawBackground = false;
 }
 
 void PlayPanel::setContents()
@@ -40,6 +42,7 @@ bool PlayPanel::checkForIteration()
 void PlayPanel::playClick()
 {
 	play = !play;
+	playButton.checked = play;
 }
 
 void PlayPanel::stepClick()

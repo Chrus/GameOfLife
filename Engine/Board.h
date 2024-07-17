@@ -26,6 +26,7 @@ public:
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
 	Cell* getCell(const Tuple position);
+	Cell* getCell(const int position);
 	Cell* cellAtMouse(const Tuple mousePosition);
 	void setAllCells(bool alive);
 

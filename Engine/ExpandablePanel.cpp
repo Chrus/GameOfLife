@@ -8,8 +8,11 @@ ExpandablePanel::ExpandablePanel(Rect expanderRect, Rect contentsRect, Container
 {
 	drawBackground = true;
 	drawBorder = true;
+
 	expander.drawBackground = true;
 	expander.drawBorder = true;
+	expander.borderColor = Colors::BorderBlu;
+	expander.color = Colors::BackgroundBlue;
 }
 
 bool ExpandablePanel::interactsWith(const Tuple point) const

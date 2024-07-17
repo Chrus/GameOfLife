@@ -161,6 +161,7 @@
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Seperator.h" />
     <ClInclude Include="ShortcutManager.h" />
     <ClInclude Include="SideBar.h" />
     <ClInclude Include="Sound.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Seperator.cpp" />
     <ClCompile Include="ShortcutManager.cpp" />
     <ClCompile Include="SideBar.cpp" />
     <ClCompile Include="Sound.cpp" />

@@ -6,10 +6,10 @@ ShortcutManager::ShortcutManager(Board* board, ControlsExpander* controls, PlayP
 	controls(controls),
 	playPanel(playPanel)
 {
-	keys.push_back('c');//clear
-	keys.push_back('f');//fill
-	keys.push_back('\r');//step
-	keys.push_back(' ');//play/stop
+	//keys.push_back('c');//clear
+	//keys.push_back('f');//fill
+	//keys.push_back('\r');//step
+	//keys.push_back(' ');//play/stop
 }
 
 bool ShortcutManager::checkKey(const char key)
@@ -35,13 +35,13 @@ bool ShortcutManager::checkKey(const char key)
 
 void ShortcutManager::fill() const
 {
-	assert(controls != nullptr);
+	assert(board != nullptr);
 	board->setAllCells(true);
 }
 
 void ShortcutManager::clear() const
 {
-	assert(controls != nullptr);
+	assert(board != nullptr);
 	board->setAllCells(false);
 }
 
