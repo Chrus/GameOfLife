@@ -1,7 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "Board.h"
-#include "ControlsExpander.h"
+#include "EditExpander.h"
 
 class SideBar : public Container
 {

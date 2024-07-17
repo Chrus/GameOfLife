@@ -1,5 +1,5 @@
 #include "SideBar.h"
-#include "ControlsExpander.h"
+#include "EditExpander.h"
 
 SideBar::SideBar(Rect rect, Container* parent, Board& board)
 	:

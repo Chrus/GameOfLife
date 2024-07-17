@@ -1,13 +1,13 @@
 #pragma once
 #include <functional>
 #include "Board.h"
-#include "ControlsExpander.h"
+#include "EditExpander.h"
 
 class ShortcutManager
 {
 public:
 	//Constructors
-	ShortcutManager(Board* board, EditExpander* controls, PlayPanel* playPanel);
+	ShortcutManager(Board* board, EditExpander* editPanel, PlayPanel* playPanel);
 	ShortcutManager() {};
 
 	bool checkKey(const char key);
@@ -15,7 +15,7 @@ public:
 private:
 	//Variables
 	Board* board;
-	EditExpander* controls;
+	EditExpander* editPanel;
 	PlayPanel* playPanel;
 	std::vector<char> keys;
 

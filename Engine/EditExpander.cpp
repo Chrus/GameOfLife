@@ -17,7 +17,7 @@ EditExpander::~EditExpander()
 
 DebugInfo EditExpander::getDebugInfo() const
 {
-	return DebugInfo("ControlsExpander", "");
+	return DebugInfo("EditExpander", "");
 }
 
 void EditExpander::setContents()

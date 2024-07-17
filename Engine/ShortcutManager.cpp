@@ -1,9 +1,9 @@
 #include "ShortcutManager.h"
 
-ShortcutManager::ShortcutManager(Board* board, EditExpander* controls, PlayPanel* playPanel)
+ShortcutManager::ShortcutManager(Board* board, EditExpander* editPanel, PlayPanel* playPanel)
 	:
 	board(board),
-	controls(controls),
+	editPanel(editPanel),
 	playPanel(playPanel)
 {
 	//keys.push_back('c');//clear
