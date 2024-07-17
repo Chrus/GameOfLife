@@ -1,7 +1,7 @@
 #pragma once
-#include <functional>
 #include "Board.h"
 #include "EditExpander.h"
+
 
 class ShortcutManager
 {
@@ -11,13 +11,14 @@ public:
 	ShortcutManager() {};
 
 	bool checkKey(const char key);
+	std::vector<std::string> getKeys() const;
 
 private:
 	//Variables
 	Board* board;
 	EditExpander* editPanel;
 	PlayPanel* playPanel;
-	std::vector<char> keys;
+	std::vector<std::string> keys;
 
 	//Functions
 	void fill() const;

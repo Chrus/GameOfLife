@@ -17,6 +17,7 @@ public:
 	//Functions
 	void setFocus(ActionPanel* panel);
 	void setShortcutManager(Board* board, EditExpander* editExpander, PlayPanel* playPanel);
+	std::vector<std::string> getShortcutsText() const;
 	
 private:
 	//Variables
@@ -34,6 +35,5 @@ private:
 
 	//Functions
 	void handleFocus(const Mouse::Event e);
-
 	void handleMouseWheel(const Mouse::Event e);
 };

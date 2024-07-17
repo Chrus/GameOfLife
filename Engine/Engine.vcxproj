@@ -163,6 +163,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Seperator.h" />
     <ClInclude Include="ShortcutManager.h" />
+    <ClInclude Include="ShortcutsExpander.h" />
     <ClInclude Include="SideBar.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Seperator.cpp" />
     <ClCompile Include="ShortcutManager.cpp" />
+    <ClCompile Include="ShortcutsExpander.cpp" />
     <ClCompile Include="SideBar.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpritePanel.cpp" />

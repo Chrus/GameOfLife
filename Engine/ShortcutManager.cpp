@@ -6,10 +6,10 @@ ShortcutManager::ShortcutManager(Board* board, EditExpander* editPanel, PlayPane
 	editPanel(editPanel),
 	playPanel(playPanel)
 {
-	//keys.push_back('c');//clear
-	//keys.push_back('f');//fill
-	//keys.push_back('\r');//step
-	//keys.push_back(' ');//play/stop
+	keys.push_back(std::string("C: Clear"));//clear
+	keys.push_back(std::string("F: Fill"));//fill
+	keys.push_back(std::string("Enter: Step"));//step
+	keys.push_back(std::string("Space: Play/Stop"));//play/stop
 }
 
 bool ShortcutManager::checkKey(const char key)
@@ -32,6 +32,12 @@ bool ShortcutManager::checkKey(const char key)
 
 	return false;
 }
+
+std::vector<std::string> ShortcutManager::getKeys() const
+{
+	return keys;
+}
+
 
 void ShortcutManager::fill() const
 {

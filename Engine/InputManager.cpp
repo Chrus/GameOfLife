@@ -49,6 +49,11 @@ void InputManager::setShortcutManager(Board* board, EditExpander* editExpander, 
 	shortcuts = ShortcutManager(board, editExpander, playPanel);
 }
 
+std::vector<std::string> InputManager::getShortcutsText() const
+{
+	return shortcuts.getKeys();
+}
+
 void InputManager::handleFocus(const Mouse::Event e)
 {
 	if (focusedPanel == nullptr)

@@ -129,6 +129,9 @@
     <ClInclude Include="Seperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShortcutsExpander.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -216,6 +219,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Seperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortcutsExpander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

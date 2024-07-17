@@ -15,6 +15,7 @@ public:
 	{
 		return dynamic_cast<EditExpander*>(contents[0]);
 	}
+	void setShortcutsText(std::vector<std::string> shortcuts);
 
 protected:
 	//Inherited via Container
