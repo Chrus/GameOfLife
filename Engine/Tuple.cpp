@@ -13,6 +13,13 @@ Tuple::Tuple(int x, int y)
 {
 }
 
+Tuple::Tuple(std::pair<int, int> pair)
+	:
+	x(pair.first),
+	y(pair.second)
+{
+}
+
 std::string Tuple::toString() const
 {
 	return "(" + std::to_string(x) + "," + std::to_string(y) + ")";

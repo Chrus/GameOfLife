@@ -1,4 +1,5 @@
 #include "Cell.h"
+#include "Mouse.h"
 
 Cell::Cell(Tuple position, Tuple arrayPos)
 	:
@@ -26,14 +27,16 @@ void Cell::update()
 	}
 }
 
-void Cell::handleEvent(const InputHandler::Event event, InputManager* manager)
+bool Cell::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
-	ActionPanel::handleEvent(event, manager);
+	ActionPanel::handleEvent(event, held, manager);
 
-	if (event.type == InputHandler::Event::Type::LPress)
+	if (event.LeftIsPressed())
 		alive = true;
-	else if (event.type == InputHandler::Event::Type::RPress)
+	else if (event.RightIsPressed())
 		alive = false;
+
+	return true;
 }
 
 void Cell::setNeighbors(std::vector<Cell*> newNeighbors)
@@ -43,8 +46,6 @@ void Cell::setNeighbors(std::vector<Cell*> newNeighbors)
 	
 	for (Cell* x : newNeighbors)
 		neighbors.push_back(x);
-	/*for (Cell* x = newNeighbors; x != nullptr; x++)
-		neighbors.push_back(x);*/
 }
 
 void Cell::updateState()

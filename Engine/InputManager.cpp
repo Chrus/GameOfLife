@@ -9,91 +9,30 @@ InputManager::InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& base
 
 void InputManager::update()
 {
-	if (!mouse.LeftIsPressed())
-		leftHeld = false;
-	if (!mouse.RightIsPressed())
-		rightHeld = false;
-
+	//maybe need to move where shortcuts are checked/handled
 	assert(shortcuts != nullptr);
 	shortcuts->checkKey(keyboard.ReadChar());
 
-	if (mouse.LeftIsPressed())
+	Mouse::Event e = mouse.Read();
+	while (e.IsValid())
 	{
-		InputHandler::Event e = InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::LPress, leftHeld);
-		//temp handling focus until this is reworked
-		if (handleFocus(e))
+		//debug panel gets handled regardless of focus
+		if (e.GetType() == Mouse::Event::Type::WheelUp
+			|| e.GetType() == Mouse::Event::Type::WheelDown)
+			handleMouseWheel(e);
+		else
 		{
-			leftHeld = true;
-			return;
+			handleFocus(e);
+			if (focusedPanel != nullptr)
+				focusedPanel->handleEvent(e, LRHeld(leftHeld, rightHeld), this);
+			else
+				basePanel.handleEvent(e, LRHeld(leftHeld, rightHeld), this);
 		}
-		handleLeftClick(e);
+
+		e = mouse.Read();
 	}
-
-	if (mouse.RightIsPressed())
-	{
-		InputHandler::Event e = InputHandler::Event({ mouse.GetPosX(), mouse.GetPosY() }, ' ', InputHandler::Event::Type::RPress, rightHeld);
-		if (handleFocus(e))
-		{
-			rightHeld = true;
-			return;
-		}
-		handleRightClick(e);
-	}
-
-
-	return;
-
-	//Todo I need to revise all of this
-	while (!mouse.IsEmpty())
-	{
-		Mouse::Event chiliEvent = mouse.Read();
-		//if (!chiliEvent.IsValid() || chiliEvent.GetType() == Mouse::Event::Type::Move
-		//	)//|| chiliEvent.GetType() == Mouse::Event::Type::LRelease)
-		//	return;
-
-		InputHandler::Event e = translateEvent(chiliEvent);
-		//if (e.type == InputHandler::Event::Type::Invalid)
-		//	return;
-		
-		if (chiliEvent.GetType() == Mouse::Event::Type::LRelease)
-		{
-			leftHeld = false;
-			return;
-		}
-		//if (e.type == InputHandler::Event::Type::LPress && leftHeld)
-		//	return;
-		
-		//if true the focused panel is claiming the event and will handle it directly
-		//if false then process the event from the start
-		if (handleFocus(e))
-			return;
-
-		switch (chiliEvent.GetType())
-		{
-			case Mouse::Event::Type::LPress:
-			{
-				handleLeftClick(e);
-				break;
-			}
-			case Mouse::Event::Type::RPress:
-			{
-				handleRightClick(e);
-				break;
-			}
-			//display debug panel
-			case Mouse::Event::Type::WheelUp:
-			{
-				handleMouseWheel(e, chiliEvent);
-				break;
-			}
-			//hide debug panel
-			case Mouse::Event::Type::WheelDown:
-			{
-				handleMouseWheel(e, chiliEvent);
-				break;
-			}
-		}
-	}
+	leftHeld = mouse.LeftIsPressed();
+	rightHeld = mouse.RightIsPressed();
 }
 
 void InputManager::addDebugText(DebugInfo info)
@@ -101,16 +40,9 @@ void InputManager::addDebugText(DebugInfo info)
 	debugInfo.push_back(info);
 }
 
-void InputManager::takeFocus(ActionPanel* panel)
+void InputManager::setFocus(ActionPanel* panel)
 {
 	focusedPanel = panel;
-}
-void InputManager::removeFocus(ActionPanel* panel)
-{
-	assert(panel == focusedPanel);
-
-	panel->loseFocus();
-	focusedPanel = nullptr;
 }
 
 void InputManager::setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel)
@@ -118,62 +50,33 @@ void InputManager::setShortcutManager(Board* board, ControlsExpander* controls, 
 	shortcuts = &ShortcutManager(board, controls, playPanel);
 }
 
-InputHandler::Event InputManager::translateEvent(const Mouse::Event e)
-{
-	//switch (e.GetType())
-	//{
-	//case Mouse::Event::Type::LPress:
-	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::LPress);
-	//case Mouse::Event::Type::RPress:
-	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::RPress);
-	//case Mouse::Event::Type::WheelUp:
-	//case Mouse::Event::Type::WheelDown:
-	//	return InputHandler::Event({ e.GetPosX(), e.GetPosY() }, ' ', InputHandler::Event::Type::MWheel);
-	//}
-
-	return InputHandler::Event({ -1,-1 }, ' ', InputHandler::Event::Type::Invalid, false);
-}
-
-bool InputManager::handleFocus(const InputHandler::Event e)
+void InputManager::handleFocus(const Mouse::Event e)
 {
 	if (focusedPanel == nullptr)
-		return false;
+		return;
 
-	if (focusedPanel->checkFocus(e))
-	{
-		focusedPanel->handleEvent(e, this);
-		return true;
-	}
-	else
+	//First check to see if the event is valid for the panel's current action
+	bool stillFocused = focusedPanel->checkFocus(e, LRHeld(leftHeld, rightHeld));
+
+	if (!stillFocused)
 	{
 		focusedPanel->loseFocus();
 		focusedPanel = nullptr;
-		return false;
 	}
 }
 
-void InputManager::handleLeftClick(const InputHandler::Event e)
+void InputManager::handleMouseWheel(Mouse::Event e)
 {
-	if (basePanel.interactsWith(e.mousePos))
-		basePanel.handleEvent(e, this);
-
-	leftHeld = true;
-}
-void InputManager::handleRightClick(const InputHandler::Event e)
-{
-	if (basePanel.interactsWith(e.mousePos))
-		basePanel.handleEvent(e, this);
-
-	rightHeld = true;
-}
-void InputManager::handleMouseWheel(InputHandler::Event e, Mouse::Event wheelE)
-{
-	if (wheelE.GetType() == Mouse::Event::Type::WheelUp)
+	if (e.GetType() == Mouse::Event::Type::WheelUp)
 	{
-		if (basePanel.interactsWith(e.mousePos))
+		if (basePanel.getVisualRect().contains(Tuple(e.GetPos())))
 		{
+			//if (focusedPanel == nullptr)
+			//	basePanel.updateDebugPanel("Null", true);
+			//else
+			//	basePanel.updateDebugPanel(focusedPanel->getDebugInfo().first, true);
 			debugInfo.clear();
-			basePanel.handleEvent(e, this);
+			basePanel.handleEvent(e, LRHeld(leftHeld,rightHeld), this);
 
 			assert(!debugInfo.empty());
 
@@ -193,7 +96,7 @@ void InputManager::handleMouseWheel(InputHandler::Event e, Mouse::Event wheelE)
 			basePanel.updateDebugPanel(text, true);
 		}
 	}
-	else if (wheelE.GetType() == Mouse::Event::Type::WheelDown)
+	else if (e.GetType() == Mouse::Event::Type::WheelDown)
 	{
 		debugInfo.clear();
 		basePanel.updateDebugPanel("", false);

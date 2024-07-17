@@ -6,7 +6,6 @@ ExpandablePanel::ExpandablePanel(Rect expanderRect, Rect contentsRect, Container
 	Container(contentsRect, parent),
 	expander(expanderRect, text, *this)
 {
-
 	drawBackground = true;
 	drawBorder = true;
 	expander.drawBackground = true;
@@ -16,29 +15,45 @@ ExpandablePanel::ExpandablePanel(Rect expanderRect, Rect contentsRect, Container
 bool ExpandablePanel::interactsWith(const Tuple point) const
 {
 	if (isOpen)
-		return iRect.contains(point) || expander.interactsWith(point);
+	{
+		bool check = false;
+		if (iRect.contains(point))
+			check = true;
+		if (expander.interactsWith(point))
+			check = true;
+
+		return check;// iRect.contains(point) || expander.interactsWith(point);
+	}
 	else
 		return expander.interactsWith(point);
 }
 
-void ExpandablePanel::handleEvent(const InputHandler::Event event, InputManager* manager)
+bool ExpandablePanel::handleEvent(const Mouse::Event event, LRHeld held, InputManager* manager)
 {
-	ActionPanel::handleEvent(event, manager);
+	ActionPanel::handleEvent(event, held, manager);
 
-	if (expander.interactsWith(event.mousePos))
-		expander.handleEvent(event, manager);
-	else if (Container::interactsWith(event.mousePos))
-		Container::handleEvent(event, manager);
+	Tuple mousePos = Tuple(event.GetPos());
+	if (expander.interactsWith(mousePos))
+		return expander.handleEvent(event, held, manager);
+	else if (iRect.contains(mousePos))
+	{
+		Container::handleEvent(event, held, manager);
+		return true;
+	}
+	return true;
 }
 
-bool ExpandablePanel::checkFocus(InputHandler::Event event) const
+bool ExpandablePanel::checkFocus(const Mouse::Event event, const LRHeld held) const
 {
-	if (event.type == InputHandler::Event::Type::LPress
-		|| event.type == InputHandler::Event::Type::RPress)
-		return iRect.contains(event.mousePos)
-		|| expander.interactsWith(event.mousePos);
+	if (event.GetType() == Mouse::Event::Type::LPress
+		|| event.GetType() == Mouse::Event::Type::RPress)
+	{
+		bool inside = iRect.contains(Tuple(event.GetPos()))
+			|| expander.interactsWith(Tuple(event.GetPos()));
 
-	return false;
+		return inside;
+	}
+	return true;
 }
 
 void ExpandablePanel::loseFocus()
@@ -59,16 +74,15 @@ DebugInfo ExpandablePanel::getDebugInfo() const
 	return DebugInfo("Expandable Panel", "");
 }
 
-void ExpandablePanel::expanderClick(InputManager* manager)
+bool ExpandablePanel::expanderClick(InputManager* manager)
 {
 	if (!isOpen)
 	{
-		manager->takeFocus(this);
+		manager->setFocus(this);
 		isOpen = true;
 	}
 	else
-	{
-		manager->removeFocus(this);
-		loseFocus();
-	}
+		isOpen = false;
+
+	return isOpen;
 }

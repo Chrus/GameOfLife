@@ -29,8 +29,10 @@ bool ActionPanel::interactsWith(const Tuple point) const
 	return iRect.contains(point);
 }
 
-void ActionPanel::handleEvent(const InputHandler::Event event, InputManager* manager)
+bool ActionPanel::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
-	if (event.type == InputHandler::Event::Type::MWheel)
+	if (event.GetType() == Mouse::Event::Type::WheelUp)
 		manager->addDebugText(getDebugInfo());
+
+	return true;
 }

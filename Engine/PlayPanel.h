@@ -28,14 +28,17 @@ private:
 		{
 			return DebugInfo("PlayButton", "");
 		}
-		void handleEvent(const InputHandler::Event event, InputManager* manager) override
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress
-				&& !event.keyHeld)
+			CheckBox::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
 			{
 				checked = !checked;
 				dynamic_cast<PlayPanel*>(parent)->playClick();
 			}
+			return true;
 		}
 	};
 	class StepButton : public Button
@@ -49,11 +52,14 @@ private:
 		{
 			return DebugInfo("StepButton", "");
 		}
-		void handleEvent(const InputHandler::Event event, InputManager* manager) override
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress
-				&& !event.keyHeld)
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
 				dynamic_cast<PlayPanel*>(parent)->stepClick();
+			return true;
 		}
 	};
 	

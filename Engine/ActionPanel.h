@@ -11,7 +11,7 @@ public:
 	ActionPanel(Rect visualRect, Rect interactionRect);
 
 	// Inherited via InputHandler
-	void handleEvent(const InputHandler::Event event, InputManager* manager) override = 0;
+	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override = 0;
 
 	//Functions
 	virtual bool interactsWith(const Tuple point) const;

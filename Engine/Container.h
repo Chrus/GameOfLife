@@ -16,7 +16,7 @@ public:
 	virtual void draw(Graphics& gfx) const override;
 	DebugInfo getDebugInfo() const override;
 	// Inherited via InputHandler
-	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
+	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
 
 protected:
 	virtual void setContents() {}

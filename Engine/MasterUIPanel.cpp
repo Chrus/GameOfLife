@@ -24,9 +24,6 @@ void MasterUIPanel::setContents()
 
 	//debug needs to be last
 	contents.push_back(&debugPanel);
-
-	//testing/debugging code, to remove
-	//contents.push_back(&eP);
 }
 
 void MasterUIPanel::updateDebugPanel(std::string text, bool display)

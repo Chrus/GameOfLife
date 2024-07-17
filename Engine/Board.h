@@ -18,8 +18,8 @@ public:
 	void setContents() override;
 
 	//Inherited via InputHandler
-	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
-	bool checkFocus(InputHandler::Event event) const override;
+	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
+	bool checkFocus(Mouse::Event event, const LRHeld held) const override;
 	void loseFocus() override;
 
 	//Functions

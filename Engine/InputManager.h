@@ -15,8 +15,7 @@ public:
 	void addDebugText(DebugInfo info);
 
 	//Functions
-	void takeFocus(ActionPanel* panel);
-	void removeFocus(ActionPanel* panel);
+	void setFocus(ActionPanel* panel);
 	void setShortcutManager(Board* board, ControlsExpander* controls, PlayPanel* playPanel);
 	
 private:
@@ -34,10 +33,7 @@ private:
 	bool rightHeld = false;
 
 	//Functions
-	InputHandler::Event translateEvent(const Mouse::Event e);
-	bool handleFocus(const InputHandler::Event e);
+	void handleFocus(const Mouse::Event e);
 
-	void handleLeftClick(const InputHandler::Event e);
-	void handleRightClick(const InputHandler::Event e);
-	void handleMouseWheel(const InputHandler::Event e, const Mouse::Event wheelE);
+	void handleMouseWheel(const Mouse::Event e);
 };

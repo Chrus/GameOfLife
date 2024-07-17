@@ -8,6 +8,7 @@ public:
 	//Constructors
 	Tuple();
 	Tuple(int x, int y);
+	Tuple(std::pair<int, int> pair);
 
 	//Operators
 	bool Tuple::operator==(const Tuple& other) const

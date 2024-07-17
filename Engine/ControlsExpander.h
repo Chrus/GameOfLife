@@ -32,10 +32,14 @@ private:
 			return DebugInfo("ClearButton", "");
 		}
 		// Inherited via ActionPanel
-		void handleEvent(const InputHandler::Event event, InputManager* manager) override
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress && !event.keyHeld)
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
 				dynamic_cast<ControlsExpander*>(parent)->clearButtonClick();
+			return true;
 		}
 	};
 	class FillButton : public Button
@@ -51,10 +55,14 @@ private:
 			return DebugInfo("FillButton", "");
 		}
 		// Inherited via ActionPanel
-		void handleEvent(const InputHandler::Event event, InputManager* manager) override
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress && !event.keyHeld)
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
 				dynamic_cast<ControlsExpander*>(parent)->fillButtonClick();
+			return true;
 		}
 	};
 

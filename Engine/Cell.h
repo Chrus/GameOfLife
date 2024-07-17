@@ -12,7 +12,7 @@ public:
 	void update() override;
 
 	//Inherited via ActionPanel
-	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
+	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
 
 	//Functions
 	void setNeighbors(std::vector<Cell*> newNeighbors);

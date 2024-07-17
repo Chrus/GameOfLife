@@ -31,10 +31,10 @@ DebugInfo Board::getDebugInfo() const
 
 void Board::update()
 {
-	Container::update();
-
 	if (playPanel->checkForIteration())
 	{
+		Container::update();
+
 		for (auto x : contents)
 			dynamic_cast<Cell*>(x)->updateState();
 	}	
@@ -45,36 +45,39 @@ void Board::setContents()
 	initCellArray(numCells.x, numCells.y);
 }
 
-void Board::handleEvent(const InputHandler::Event event, InputManager* manager)
+bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
-	Container::handleEvent(event, manager);
+	//Using ActionPanel:: not Container:: to handle debug events but not cells
+	ActionPanel::handleEvent(event, held, manager);
 	
-	if (event.type == InputHandler::Event::Type::LPress
-		|| event.type == InputHandler::Event::Type::RPress)
+	if (event.GetType() == Mouse::Event::Type::LPress
+		|| event.GetType() == Mouse::Event::Type::RPress)
 	{
-		//only need to take focus the first time
-		if (!event.keyHeld)
+		lastCellUpdated = cellAtMouse(Tuple(event.GetPos()));
+		manager->setFocus(this);
+		Container::handleEvent(event, held, manager);
+	}
+	else if (event.GetType() == Mouse::Event::Type::Move)
+	{
+		Cell* currentCell = cellAtMouse(Tuple(event.GetPos()));
+		if (lastCellUpdated != currentCell)
 		{
-			Container::handleEvent(event, manager);
-			lastCellUpdated = cellAtMouse(event.mousePos);
-			manager->takeFocus(this);
-		}
-		else  //only need to update all the cells if the mouse is on a new one
-		{
-			Cell* currentCell = cellAtMouse(event.mousePos);
-			if (lastCellUpdated != currentCell)
-			{
-				Container::handleEvent(event, manager);
-				lastCellUpdated = currentCell;
-			}
+			lastCellUpdated = currentCell;
+			Container::handleEvent(event, held, manager);
 		}
 	}
+	else if (event.GetType() == Mouse::Event::Type::LRelease
+		|| event.GetType() == Mouse::Event::Type::RRelease)
+		return false;
+
+	return true;
 }
 
-bool Board::checkFocus(InputHandler::Event event) const
+bool Board::checkFocus(const Mouse::Event event, const LRHeld held) const
 {
-	if (!iRect.contains(event.mousePos)
-		|| playPanel->interactsWith(event.mousePos))
+	Tuple mousePos = Tuple(event.GetPos());
+	if (!iRect.contains(mousePos)
+		|| playPanel->interactsWith(mousePos))
 		return false;
 	return true;
 }

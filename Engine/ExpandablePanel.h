@@ -11,8 +11,8 @@ public:
 	//Inherited via ActionPanel
 	bool interactsWith(const Tuple point) const override;
 	//Inherited via InputHandler
-	void handleEvent(const InputHandler::Event event, InputManager* manager) override;
-	bool checkFocus(InputHandler::Event event) const override;
+	bool handleEvent(const Mouse::Event event, LRHeld held, InputManager* manager) override;
+	bool checkFocus(Mouse::Event event, LRHeld held) const override;
 	void loseFocus() override;
 	//Inherited via Panel
 	void draw(Graphics& gfx) const override;
@@ -33,11 +33,16 @@ protected:
 				sprite->getDebugInfo().first + sprite->getDebugInfo().second);
 		}
 		// Inherited via ActionPanel
-		void handleEvent(const InputHandler::Event event, InputManager* manager) override
+		bool handleEvent(const Mouse::Event event, LRHeld held, InputManager* manager) override
 		{
-			if (event.type == InputHandler::Event::Type::LPress
-				&& !event.keyHeld)
-				dynamic_cast<ExpandablePanel*>(parent)->expanderClick(manager);
+			Button::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
+			{
+				return dynamic_cast<ExpandablePanel*>(parent)->expanderClick(manager);
+			}
+			return dynamic_cast<ExpandablePanel*>(parent)->isOpen;
 		}
 	};
 
@@ -46,7 +51,7 @@ protected:
 	bool isOpen = false;
 
 	//Functions
-	void expanderClick(InputManager* manager);
+	bool expanderClick(InputManager* manager);
 
 private:
 

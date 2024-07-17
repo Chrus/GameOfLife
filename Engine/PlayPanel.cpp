@@ -30,9 +30,11 @@ bool PlayPanel::checkForIteration()
 		if (--currentTime < 0)
 		{
 			currentTime = updateTime;
-			return false;
+			return true;
 		}
 	}
+
+	return false;
 }
 
 void PlayPanel::playClick()

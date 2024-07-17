@@ -48,23 +48,25 @@ DebugInfo Container::getDebugInfo() const
 	return std::make_pair("Container", "# of Contents: " + std::to_string(contents.size()));
 }
 
-void Container::handleEvent(const InputHandler::Event event, InputManager* manager)
+bool Container::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
-	ActionPanel::handleEvent(event, manager);
+	ActionPanel::handleEvent(event, held, manager);
 
 	ActionPanel* last = nullptr;
 	for (const auto& element : contents)
 	{
 		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
 		{
-			if (p->interactsWith(event.mousePos))
+			if (p->interactsWith(Tuple(event.GetPos())))
 			{
 				last = p;
-				//p->handleEvent(event, manager);
+				//p->handleEvent(event, held, manager);
 				//break;
 			}
 		}
 	}
 	if (last != nullptr)
-		last->handleEvent(event, manager);
+		return last->handleEvent(event, held, manager);
+
+	return true;
 }
