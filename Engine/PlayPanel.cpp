@@ -42,6 +42,8 @@ bool PlayPanel::checkForIteration()
 void PlayPanel::playClick()
 {
 	play = !play;
+	//checkbox sets checked.  But we also do it
+	//because shortcuts calls this function too.
 	playButton.checked = play;
 }
 

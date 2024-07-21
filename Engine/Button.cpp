@@ -2,7 +2,8 @@
 
 Button::Button()
 	:
-	ActionPanel(Rect())
+	ActionPanel(Rect()),
+	parent(nullptr)
 {
 	color = Colors::LightGray;
 	borderColor = Colors::Black;
@@ -48,5 +49,8 @@ void Button::draw(Graphics & gfx) const
 {
 	ActionPanel::draw(gfx);
 
-	sprite->draw(gfx);
+	if (sprite != nullptr)
+		sprite->draw(gfx);
+	else
+		drawCustom(gfx);
 }

@@ -165,6 +165,7 @@
     <ClInclude Include="ShortcutManager.h" />
     <ClInclude Include="ShortcutsExpander.h" />
     <ClInclude Include="SideBar.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpritePanel.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="ShortcutManager.cpp" />
     <ClCompile Include="ShortcutsExpander.cpp" />
     <ClCompile Include="SideBar.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpritePanel.cpp" />
     <ClCompile Include="TextPanel.cpp" />

@@ -27,6 +27,7 @@ public:
 	int Rect::right() const { return position.x + size.x; }
 	int Rect::top() const { return position.y; }
 	int Rect::bottom() const { return position.y + size.y; }
+	Tuple Rect::center() const { return Tuple(position.x / 2, position.y / 2); }
 
 	//Functions
 	void Rect::moveBy(const Tuple& amount);

@@ -35,7 +35,6 @@ private:
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
 			{
-				checked = !checked;
 				dynamic_cast<PlayPanel*>(parent)->playClick();
 			}
 			return true;

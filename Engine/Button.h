@@ -16,6 +16,10 @@ public:
 	void draw(Graphics& gfx) const override;
 
 protected:
+	//Variables
 	SpritePanel* sprite = nullptr;
 	Container* parent;
+
+	//Functions 
+	virtual void drawCustom(Graphics& gfx) const {}
 };
