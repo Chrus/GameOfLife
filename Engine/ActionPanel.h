@@ -15,6 +15,7 @@ public:
 
 	//Functions
 	virtual bool interactsWith(const Tuple point) const;
+	void setIRect(const Rect newIRect);
 
 protected:
 	//The space of the panel that the user can interact with/click on

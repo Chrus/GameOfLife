@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="BrushRadioGroup.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CheckBox.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="MasterUIPanel.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Panel.h" />
+    <ClInclude Include="RadioGroup.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Seperator.h" />
@@ -175,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BrushRadioGroup.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CheckBox.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="MasterUIPanel.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="RadioGroup.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Seperator.cpp" />
     <ClCompile Include="ShortcutManager.cpp" />

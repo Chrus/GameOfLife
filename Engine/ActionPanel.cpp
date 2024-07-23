@@ -29,6 +29,13 @@ bool ActionPanel::interactsWith(const Tuple point) const
 	return iRect.contains(point);
 }
 
+void ActionPanel::setIRect(const Rect newIRect)
+{
+	assert(visualRect.contains(newIRect));
+
+	iRect = newIRect;
+}
+
 bool ActionPanel::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
 	if (event.GetType() == Mouse::Event::Type::WheelUp)

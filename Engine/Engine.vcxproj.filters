@@ -135,6 +135,12 @@
     <ClInclude Include="Slider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RadioGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrushRadioGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -228,6 +234,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BrushRadioGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

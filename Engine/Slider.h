@@ -4,7 +4,7 @@ class Slider : public ActionPanel
 {
 public:
 	//Constructors
-	Slider(Rect visualRect);
+	Slider(Rect rect);
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
