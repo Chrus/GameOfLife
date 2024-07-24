@@ -13,7 +13,7 @@ public:
 	DebugInfo getDebugInfo() const override;
 
 	//Inherited via Container
-	void setContents();
+	void setContents() override;
 
 	//Functions
 	void clearButtonClick() const;

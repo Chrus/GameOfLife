@@ -2,10 +2,9 @@
 #include <algorithm>
 #include "InputManager.h"
 
-Board::Board(Rect rect, Container* parent, PlayPanel* controls)
+Board::Board(Rect rect, Container* parent)
 	:
-	Container(rect, parent),
-	playPanel(controls)
+	Container(rect, parent)
 {
 	//for debugging.  Shouldnt see Cyan
 	color = Colors::Cyan;

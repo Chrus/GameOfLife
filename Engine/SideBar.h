@@ -15,7 +15,10 @@ public:
 	{
 		return dynamic_cast<EditExpander*>(contents[0]);
 	}
+
+	//Functions
 	void setShortcutsText(std::vector<std::string> shortcuts);
+	PlayPanel* getPlayPanel() const;
 
 protected:
 	//Inherited via Container

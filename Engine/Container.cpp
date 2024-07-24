@@ -52,21 +52,27 @@ bool Container::handleEvent(const Mouse::Event event, const LRHeld held, InputMa
 {
 	ActionPanel::handleEvent(event, held, manager);
 
-	ActionPanel* last = nullptr;
+	if (event.GetType() == Mouse::Event::Type::LPress)
+	{
+		ActionPanel* p = dynamic_cast<ActionPanel*>(contents[1]);
+
+	}
+
+	//ActionPanel* last = nullptr;
 	for (const auto& element : contents)
 	{
 		if (ActionPanel* p = dynamic_cast<ActionPanel*>(element))
 		{
 			if (p->interactsWith(Tuple(event.GetPos())))
 			{
-				last = p;
-				//p->handleEvent(event, held, manager);
-				//break;
+				//last = p;
+				p->handleEvent(event, held, manager);
+				break;
 			}
 		}
 	}
-	if (last != nullptr)
-		return last->handleEvent(event, held, manager);
+	//if (last != nullptr)
+	//	return last->handleEvent(event, held, manager);
 
 	return true;
 }

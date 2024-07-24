@@ -3,7 +3,7 @@ PlayPanel::PlayPanel(Rect rect, Container* parent)
 	:
 	Container(rect, parent),
 	playButton(Rect(rect.x(), rect.y(), 50, 50), "Images\\Play50x50new.bmp", "Images\\Stop50x50new.bmp", *this),
-	stepButton(Rect(rect.x() + 50, rect.y(), 50, 50), "Images\\Step50x50new.bmp",*this)
+	stepButton(Rect(rect.x(), rect.y() + 50, 50, 50), "Images\\Step50x50new.bmp",*this)
 {
 	setContents();
 	drawBackground = true;

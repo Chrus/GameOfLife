@@ -24,5 +24,6 @@ private:
 	static constexpr int TRACK_THICKNESS = 2;
 	Rect track;
 	bool selecting = false;
+	ActionPanel* parent;
 };
 

@@ -7,7 +7,7 @@ class Board : public Container
 {
 public:
 	//Constructors
-	Board(Rect rect, Container* parent, PlayPanel* controls);
+	Board(Rect rect, Container* parent);
 	~Board();
 
 	//Inherited via Panel
@@ -23,6 +23,7 @@ public:
 	void loseFocus() override;
 
 	//Functions
+	void init(PlayPanel* play) { playPanel = play; }
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
 	Cell* getCell(const Tuple position);
