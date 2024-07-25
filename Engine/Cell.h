@@ -10,6 +10,8 @@ public:
 	
 	//Inherited via Panel
 	void update() override;
+	DebugInfo getDebugInfo() const override;
+	void draw(Graphics& gfx) const override;
 
 	//Inherited via ActionPanel
 	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
@@ -19,14 +21,11 @@ public:
 	void updateState();
 	void setAlive(bool cellAlive);
 	bool getState() const { return alive; }
+	Tuple arrayPosition() const { return arrayPos; }
 
 private:
 	bool alive = false;
 	bool switchState = false;
 	Tuple arrayPos;
 	std::vector<Cell*> neighbors;
-
-	// Inherited via Panel
-	DebugInfo getDebugInfo() const override;
-	void draw(Graphics& gfx) const override;
 };

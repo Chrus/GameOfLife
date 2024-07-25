@@ -52,12 +52,6 @@ bool Container::handleEvent(const Mouse::Event event, const LRHeld held, InputMa
 {
 	ActionPanel::handleEvent(event, held, manager);
 
-	if (event.GetType() == Mouse::Event::Type::LPress)
-	{
-		ActionPanel* p = dynamic_cast<ActionPanel*>(contents[1]);
-
-	}
-
 	//ActionPanel* last = nullptr;
 	for (const auto& element : contents)
 	{

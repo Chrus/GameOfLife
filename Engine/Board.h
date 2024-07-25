@@ -2,6 +2,7 @@
 #include "Container.h"
 #include "Cell.h"
 #include "PlayPanel.h"
+#include "set"
 
 class Board : public Container
 {
@@ -13,6 +14,7 @@ public:
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
 	void update() override;
+	void draw(Graphics& gfx) const override;
 
 	//Inherited via Container
 	void setContents() override;
@@ -30,11 +32,13 @@ public:
 	Cell* getCell(const int position);
 	Cell* cellAtMouse(const Tuple mousePosition);
 	void setAllCells(bool alive);
+	int tupToIndex(const Tuple arrayPosition) const;
 
 private:
 	Tuple numCells;
 	PlayPanel* playPanel;
-	Cell* lastCellUpdated;
+	Cell* lastCellUpdated = nullptr;
+	std::set<int> selectedCells;
 
 	//Functions
 	void initCellArray(const int xCount,const int yCount);

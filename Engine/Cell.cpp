@@ -6,6 +6,8 @@ Cell::Cell(Tuple position, Tuple arrayPos)
 	ActionPanel(Rect(position.x, position.y, DEFAULT_SIZE, DEFAULT_SIZE)),
 	arrayPos(arrayPos)
 {
+	borderSize = 1;
+	drawBorder = true;
 }
 
 void Cell::update()
@@ -31,10 +33,10 @@ bool Cell::handleEvent(const Mouse::Event event, const LRHeld held, InputManager
 {
 	ActionPanel::handleEvent(event, held, manager);
 
-	if (event.LeftIsPressed())
-		alive = true;
-	else if (event.RightIsPressed())
-		alive = false;
+	if (event.LeftIsPressed() && !alive)
+		switchState = true;
+	else if (event.RightIsPressed() && alive)
+		switchState = true;
 
 	return true;
 }

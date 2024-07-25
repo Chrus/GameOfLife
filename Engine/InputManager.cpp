@@ -21,9 +21,17 @@ void InputManager::update()
 			handleMouseWheel(e);
 		else
 		{
+			//checking to see if panel removes focus before the event is proccessed
 			handleFocus(e);
 			if (focusedPanel != nullptr)
-				focusedPanel->handleEvent(e, LRHeld(leftHeld, rightHeld), this);
+			{
+				//checking to see if the panel removes focus after proccesing the event
+				if (!focusedPanel->handleEvent(e, LRHeld(leftHeld, rightHeld), this))
+				{
+					focusedPanel->loseFocus();
+					focusedPanel = nullptr;
+				}
+			}
 			else
 				basePanel.handleEvent(e, LRHeld(leftHeld, rightHeld), this);
 		}

@@ -6,7 +6,7 @@ Board::Board(Rect rect, Container* parent)
 	:
 	Container(rect, parent)
 {
-	//for debugging.  Shouldnt see Cyan
+	drawBackground = true;
 	color = Colors::Cyan;
 	drawBorder = true;
 
@@ -30,6 +30,10 @@ DebugInfo Board::getDebugInfo() const
 
 void Board::update()
 {
+	//Dont update the board if in the middle of clickndraging
+	if (lastCellUpdated != nullptr)
+		return;
+
 	if (playPanel->checkForIteration())
 	{
 		Container::update();
@@ -37,6 +41,21 @@ void Board::update()
 		for (auto x : contents)
 			dynamic_cast<Cell*>(x)->updateState();
 	}	
+}
+
+void Board::draw(Graphics& gfx) const
+{
+	ActionPanel::draw(gfx);
+
+	for (int x = 0; x < contents.size(); x++)
+	{
+		Cell* cell = dynamic_cast<Cell*>(contents[x]);
+		assert(cell != nullptr);
+
+		cell->draw(gfx);
+		if (selectedCells.find(x) != selectedCells.end())
+			gfx.drawRect(cell->getVisualRect().getExpanded((Cell::DEFAULT_SIZE / 4) * -1), Colors::Gray);
+	}
 }
 
 void Board::setContents()
@@ -52,17 +71,21 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 	if (event.GetType() == Mouse::Event::Type::LPress
 		|| event.GetType() == Mouse::Event::Type::RPress)
 	{
-		lastCellUpdated = cellAtMouse(Tuple(event.GetPos()));
 		manager->setFocus(this);
-		Container::handleEvent(event, held, manager);
+		lastCellUpdated = cellAtMouse(Tuple(event.GetPos()));
+		lastCellUpdated->handleEvent(event, held, manager);
+		selectedCells.insert(tupToIndex(lastCellUpdated->arrayPosition()));
 	}
-	else if (event.GetType() == Mouse::Event::Type::Move)
+	else if (event.GetType() == Mouse::Event::Type::Move
+		&& lastCellUpdated != nullptr)
 	{
 		Cell* currentCell = cellAtMouse(Tuple(event.GetPos()));
+		//if not on the last cell selected
 		if (lastCellUpdated != currentCell)
 		{
 			lastCellUpdated = currentCell;
-			Container::handleEvent(event, held, manager);
+			lastCellUpdated->handleEvent(event, held, manager);
+			selectedCells.insert(tupToIndex(lastCellUpdated->arrayPosition()));
 		}
 	}
 	else if (event.GetType() == Mouse::Event::Type::LRelease
@@ -75,25 +98,34 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 bool Board::checkFocus(const Mouse::Event event, const LRHeld held) const
 {
 	Tuple mousePos = Tuple(event.GetPos());
-	if (!iRect.contains(mousePos)
-		|| playPanel->interactsWith(mousePos))
+	if (!iRect.contains(mousePos))
 		return false;
+
 	return true;
 }
 
 void Board::loseFocus()
 {
+	for (int x : selectedCells)
+		dynamic_cast<Cell*>(contents[x])->updateState();
+
 	lastCellUpdated = nullptr;
+	selectedCells.clear();
 }
 
 int Board::getCellCount() const
 {
 	return numCells.x * numCells.y;
 }
+
 Cell* Board::getCell(const int xPos, const int yPos) 
 {
-	assert(yPos * numCells.x + xPos < getCellCount());
-
+	//assert(yPos * numCells.x + xPos < getCellCount());
+	if (yPos * numCells.x + xPos >= getCellCount())
+	{
+		selectedCells.insert(10);
+	}
+	
 	return dynamic_cast<Cell*>(contents[yPos * numCells.x + xPos]);
 		
 }
@@ -101,7 +133,6 @@ Cell* Board::getCell(const Tuple position)
 {
 	return getCell(position.x, position.y);
 }
-
 Cell* Board::getCell(const int position)
 {
 	return dynamic_cast<Cell*>(contents[position]);
@@ -109,9 +140,9 @@ Cell* Board::getCell(const int position)
 
 Cell* Board::cellAtMouse(const Tuple mousePosition)
 {
-	Tuple temp = mousePosition - iRect.position;
-	temp.x = temp.x % Cell::DEFAULT_SIZE;
-	temp.y = temp.y % Cell::DEFAULT_SIZE;
+	Tuple temp = mousePosition - visualRect.position;
+	temp.x = temp.x / Cell::DEFAULT_SIZE;
+	temp.y = temp.y / Cell::DEFAULT_SIZE;
 
 	return getCell(temp);
 }
@@ -120,6 +151,14 @@ void Board::setAllCells(bool alive)
 {
 	for (auto* x : contents)
 		dynamic_cast<Cell*>(x)->setAlive(alive);
+}
+
+int Board::tupToIndex(const Tuple arrayPosition) const
+{
+	int cellIndex = arrayPosition.y * numCells.x + arrayPosition.x;
+	assert(cellIndex < numCells.x * numCells.y);
+
+	return cellIndex;
 }
 
 void Board::initCellArray(const int xCount, const int yCount)
