@@ -21,7 +21,6 @@ public:
 
 	//Inherited via InputHandler
 	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
-	bool checkFocus(Mouse::Event event, const LRHeld held) const override;
 	void loseFocus() override;
 
 	//Functions

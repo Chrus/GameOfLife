@@ -14,6 +14,6 @@ public:
 	//checkFocus() will only be called if it is currently focused.  
 	//return false ONLY if you want focus to be removed before the event is proccessed.
 	//otherwise default to true
-	virtual bool checkFocus(const Mouse::Event event, const LRHeld held) const { return false; }
+	virtual bool checkFocus(const Mouse::Event event, const LRHeld held) const { return true; }
 	virtual void loseFocus() {}
 };

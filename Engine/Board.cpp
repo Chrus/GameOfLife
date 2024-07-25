@@ -6,11 +6,6 @@ Board::Board(Rect rect, Container* parent)
 	:
 	Container(rect, parent)
 {
-	drawBackground = true;
-	color = Colors::Cyan;
-	//drawBorder = true;
-	borderSize = 0;
-
 	numCells.x = iRect.width() / Cell::DEFAULT_SIZE;
 	numCells.y = iRect.height() / Cell::DEFAULT_SIZE;
 
@@ -66,6 +61,7 @@ void Board::setContents()
 
 	if (extraSize.x > 0 || extraSize.y > 0)
 	{
+		//centering the cell area inside the extra board space
 		iRect = Rect(visualRect.x() + extraSize.x / 2,
 			visualRect.y() + extraSize.y / 2,
 			numCells.x * Cell::DEFAULT_SIZE,
@@ -89,6 +85,7 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 		selectedCells.insert(tupToIndex(lastCellUpdated->arrayPosition()));
 	}
 	else if (event.GetType() == Mouse::Event::Type::Move
+		&& iRect.contains(event.GetPos())
 		&& lastCellUpdated != nullptr)
 	{
 		Cell* currentCell = cellAtMouse(Tuple(event.GetPos()));
@@ -102,15 +99,6 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 	}
 	else if (event.GetType() == Mouse::Event::Type::LRelease
 		|| event.GetType() == Mouse::Event::Type::RRelease)
-		return false;
-
-	return true;
-}
-
-bool Board::checkFocus(const Mouse::Event event, const LRHeld held) const
-{
-	Tuple mousePos = Tuple(event.GetPos());
-	if (!iRect.contains(mousePos))
 		return false;
 
 	return true;
@@ -190,8 +178,8 @@ void Board::initCellArray(const int xCount, const int yCount)
 	{
 		for (int y = 0; y < numCells.y; y++)
 		{
-			Cell* cell = new Cell(Tuple(iRect.x() + borderSize + (x * Cell::DEFAULT_SIZE),
-				iRect.y() + borderSize + (y * Cell::DEFAULT_SIZE)),
+			Cell* cell = new Cell(Tuple(iRect.x() + (x * Cell::DEFAULT_SIZE),
+				iRect.y() + (y * Cell::DEFAULT_SIZE)),
 				Tuple(x,y));
 
 			contents[y * numCells.x + x] = cell;
