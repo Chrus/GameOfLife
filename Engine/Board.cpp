@@ -8,7 +8,8 @@ Board::Board(Rect rect, Container* parent)
 {
 	drawBackground = true;
 	color = Colors::Cyan;
-	drawBorder = true;
+	//drawBorder = true;
+	borderSize = 0;
 
 	numCells.x = iRect.width() / Cell::DEFAULT_SIZE;
 	numCells.y = iRect.height() / Cell::DEFAULT_SIZE;
@@ -60,6 +61,17 @@ void Board::draw(Graphics& gfx) const
 
 void Board::setContents()
 {
+	Tuple extraSize = { visualRect.width() - (numCells.x * Cell::DEFAULT_SIZE),
+		visualRect.height() - (numCells.y * Cell::DEFAULT_SIZE) };
+
+	if (extraSize.x > 0 || extraSize.y > 0)
+	{
+		iRect = Rect(visualRect.x() + extraSize.x / 2,
+			visualRect.y() + extraSize.y / 2,
+			numCells.x * Cell::DEFAULT_SIZE,
+			numCells.y * Cell::DEFAULT_SIZE);
+	}
+
 	initCellArray(numCells.x, numCells.y);
 }
 
@@ -140,7 +152,7 @@ Cell* Board::getCell(const int position)
 
 Cell* Board::cellAtMouse(const Tuple mousePosition)
 {
-	Tuple temp = mousePosition - visualRect.position;
+	Tuple temp = mousePosition - iRect.position;
 	temp.x = temp.x / Cell::DEFAULT_SIZE;
 	temp.y = temp.y / Cell::DEFAULT_SIZE;
 
@@ -178,8 +190,8 @@ void Board::initCellArray(const int xCount, const int yCount)
 	{
 		for (int y = 0; y < numCells.y; y++)
 		{
-			Cell* cell = new Cell(Tuple(visualRect.x() + borderSize + (x * Cell::DEFAULT_SIZE),
-				visualRect.y() + borderSize + (y * Cell::DEFAULT_SIZE)),
+			Cell* cell = new Cell(Tuple(iRect.x() + borderSize + (x * Cell::DEFAULT_SIZE),
+				iRect.y() + borderSize + (y * Cell::DEFAULT_SIZE)),
 				Tuple(x,y));
 
 			contents[y * numCells.x + x] = cell;
