@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "MasterUIPanel.h"
 #include "InputManager.h"
+#include "BrushManager.h"
 
 class Game
 {
@@ -39,12 +40,15 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	void Init();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-	MasterUIPanel basePanel;
 	InputManager inputManager;
+	BrushManager brushes;
+	MasterUIPanel basePanel;
+	bool init = false;
 };

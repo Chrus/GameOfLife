@@ -22,7 +22,7 @@ public:
 	void updateDebugPanel(std::string text, bool display);
 
 	//Functions
-	void initShortcutManager(InputManager* input);
+	void init(InputManager* input, BrushManager* brushes);
 
 private:
 	Board board = Board(Rect(75, 0, Graphics::ScreenWidth - 76, Graphics::ScreenHeight - 1), this);

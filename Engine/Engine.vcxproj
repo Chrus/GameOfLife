@@ -138,7 +138,9 @@
   <ItemGroup>
     <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Brush.h" />
     <ClInclude Include="BrushExpander.h" />
+    <ClInclude Include="BrushManager.h" />
     <ClInclude Include="BrushRadioGroup.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
@@ -178,7 +180,9 @@
   <ItemGroup>
     <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Brush.cpp" />
     <ClCompile Include="BrushExpander.cpp" />
+    <ClCompile Include="BrushManager.cpp" />
     <ClCompile Include="BrushRadioGroup.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />

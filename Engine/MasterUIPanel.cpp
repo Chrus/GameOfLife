@@ -8,8 +8,6 @@ MasterUIPanel::MasterUIPanel()
 	setContents();
 	debugPanel.drawPanel = false;
 	debugPanel.drawBackground = true;
-
-	board.init(sideBar.getPlayPanel());
 }
 
 DebugInfo MasterUIPanel::getDebugInfo() const
@@ -41,8 +39,10 @@ void MasterUIPanel::updateDebugPanel(std::string text, bool display)
 	}
 }
 
-void MasterUIPanel::initShortcutManager(InputManager* input)
+void MasterUIPanel::init(InputManager* input, BrushManager* brushes)
 {
 	input->setShortcutManager(&board, sideBar.getEditExpander(), sideBar.getPlayPanel());
-	sideBar.setShortcutsText(input->getShortcutsText());
+	sideBar.init(input->getShortcutsText(), brushes);
+
+	board.init(sideBar.getPlayPanel(), brushes);
 }

@@ -1,5 +1,6 @@
 #include "BrushExpander.h"
 #include "Seperator.h"
+#include "BrushRadioGroup.h"
 #include "Slider.h"
 
 BrushExpander::BrushExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text)
@@ -14,16 +15,23 @@ DebugInfo BrushExpander::getDebugInfo() const
 	return DebugInfo("BrushExpander","");
 }
 
+void BrushExpander::update()
+{
+	manager->setRandomness(randomSlider->getRatio());
+	manager->setSize(sizeSlider->getRatio());
+	manager->setFill(fillCheckbox->checked);
+}
+
 void BrushExpander::setContents()
 {
-	BrushRadioGroup* brush = new BrushRadioGroup(
+	brushButtons = new BrushRadioGroup(
 		Rect(iRect.x(), iRect.y(), iRect.width(), 150),
 		this, 2);
-	brush->drawBorder = false;
-	brush->color = Colors::Cyan;
+	brushButtons->drawBorder = false;
+	brushButtons->color = Colors::Cyan;
 
 	Seperator* sep1 = new Seperator(
-		Tuple(iRect.x(), brush->getVisualRect().bottom()),
+		Tuple(iRect.x(), brushButtons->getVisualRect().bottom()),
 		iRect.width(), 5);
 
 	TextPanel* sizeText = new TextPanel(
@@ -31,18 +39,20 @@ void BrushExpander::setContents()
 		Rect(iRect.x(), sep1->getVisualRect().bottom(), iRect.width(), 25),
 		std::string("Size"));
 
-	Slider* sizeSlider = new Slider(
-		Rect(iRect.x() + 2, sizeText->getVisualRect().bottom(), iRect.width() - 4, 10));
+	sizeSlider = new Slider(
+		Rect(iRect.x() + 2, sizeText->getVisualRect().bottom(), iRect.width() - 4, 10), this);
+	sizeSlider->setValue(0);
 
 	TextPanel* randomText = new TextPanel(
 		TextPanel::TEXT_SPRITE8X14,
 		Rect(iRect.x(), sizeSlider->getVisualRect().bottom(), iRect.width(), 25),
 		std::string("Randomness"));
 
-	Slider* randomSlider = new Slider(
-		Rect(iRect.x() + 2, randomText->getVisualRect().bottom(), iRect.width() - 4, 10));
+	randomSlider = new Slider(
+		Rect(iRect.x() + 2, randomText->getVisualRect().bottom(), iRect.width() - 4, 10), this);
+	randomSlider->setValue(0);
 
-	CheckBox* fillCheckbox = new CheckBox(
+	fillCheckbox = new CheckBox(
 		Rect(iRect.x() + 10, randomSlider->getVisualRect().bottom() + 15, 20, 20),
 		*this);
 
@@ -51,12 +61,12 @@ void BrushExpander::setContents()
 		Rect(fillCheckbox->getVisualRect().right(), fillCheckbox->getVisualRect().top(), 50, 25),
 		std::string("Fill"));
 	
-	contents.push_back(brush);
+	contents.push_back(brushButtons);
 	contents.push_back(sep1);
 	contents.push_back(sizeText);
 	contents.push_back(sizeSlider);
 	contents.push_back(randomText);
 	contents.push_back(randomSlider);
-	contents.push_back(fillCheckbox);
-	contents.push_back(fillText);
+	//contents.push_back(fillCheckbox);
+	//contents.push_back(fillText);
 }

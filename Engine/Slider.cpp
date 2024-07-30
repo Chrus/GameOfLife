@@ -1,9 +1,10 @@
 #include "Slider.h"
 #include "InputManager.h"
 
-Slider::Slider(Rect rect)
+Slider::Slider(Rect rect, Container* parent)
 	:
-	ActionPanel(rect)
+	ActionPanel(rect),
+	parent(parent)
 {
 	iRect = Rect(visualRect.x() + (visualRect.width() / 2) - SLIDER_SIZE / 2,
 		visualRect.y() + (visualRect.height() / 2) - SLIDER_SIZE / 2,
@@ -30,6 +31,11 @@ void Slider::draw(Graphics& gfx) const
 	gfx.drawRect(iRect, Colors::Black);
 }
 
+bool Slider::interactsWith(const Tuple point) const
+{
+	return visualRect.contains(point);
+}
+
 bool Slider::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
 	if (selecting && event.GetType() == Mouse::Event::Type::Move)
@@ -37,28 +43,38 @@ bool Slider::handleEvent(const Mouse::Event event, const LRHeld held, InputManag
 	else if (event.GetType() == Mouse::Event::Type::LPress)
 	{
 		selecting = true;
+		setValue(event.GetPosX());
 		manager->setFocus(this);
+	}
+	else if (selecting && !event.LeftIsPressed())
+	{
+		selecting = false;
+		setValue(event.GetPosX());
+		manager->setFocus(parent);
 	}
 
 	return true;
 }
 
-bool Slider::checkFocus(const Mouse::Event event, const LRHeld held) const
-{
-	return selecting && event.GetType() != Mouse::Event::Type::LRelease;
-}
-
-void Slider::loseFocus()
-{
-	selecting = false;
-}
-
 int Slider::getValue() const
 {
-	int currentValue = iRect.center().x;
+	float currentValue = iRect.center().x;
+	float right = track.right();
+	float left = track.left();
 
-	return ((currentValue - track.left())
-		/ (track.right() - track.left())) * 100;
+	float ret = ((currentValue - left)
+		/ (right - left)) * 100;
+
+	return static_cast<int>(ret);
+}
+
+float Slider::getRatio() const
+{
+	float currentValue = iRect.center().x;
+	float right = track.right();
+	float left = track.left();
+
+	return ((currentValue - left) / (right - left));
 }
 
 void Slider::setValue(const int xPosition)

@@ -3,6 +3,7 @@
 #include "Cell.h"
 #include "PlayPanel.h"
 #include "set"
+#include "BrushManager.h"
 
 class Board : public Container
 {
@@ -21,10 +22,15 @@ public:
 
 	//Inherited via InputHandler
 	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
+	bool checkFocus(const Mouse::Event event, const LRHeld held) const override;
 	void loseFocus() override;
 
 	//Functions
-	void init(PlayPanel* play) { playPanel = play; }
+	void init(PlayPanel* play, BrushManager* brushManager)
+	{
+		playPanel = play; 
+		brushes = brushManager;
+	}
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
 	Cell* getCell(const Tuple position);
@@ -36,6 +42,7 @@ public:
 private:
 	Tuple numCells;
 	PlayPanel* playPanel;
+	BrushManager* brushes;
 	Cell* lastCellUpdated = nullptr;
 	std::set<int> selectedCells;
 

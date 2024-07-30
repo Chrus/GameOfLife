@@ -17,7 +17,7 @@ public:
 	}
 
 	//Functions
-	void setShortcutsText(std::vector<std::string> shortcuts);
+	void init(std::vector<std::string> shortcuts, BrushManager* manager);
 	PlayPanel* getPlayPanel() const;
 
 protected:

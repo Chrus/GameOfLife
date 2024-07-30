@@ -64,8 +64,8 @@ void Board::setContents()
 		//centering the cell area inside the extra board space
 		iRect = Rect(visualRect.x() + extraSize.x / 2,
 			visualRect.y() + extraSize.y / 2,
-			numCells.x * Cell::DEFAULT_SIZE,
-			numCells.y * Cell::DEFAULT_SIZE);
+			numCells.x * Cell::DEFAULT_SIZE - 1,
+			numCells.y * Cell::DEFAULT_SIZE - 1);
 	}
 
 	initCellArray(numCells.x, numCells.y);
@@ -75,14 +75,23 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 {
 	//Using ActionPanel:: not Container:: to handle debug events but not cells
 	ActionPanel::handleEvent(event, held, manager);
+
+	if (!iRect.contains(event.GetPos()))
+		return true;
 	
 	if (event.GetType() == Mouse::Event::Type::LPress
 		|| event.GetType() == Mouse::Event::Type::RPress)
 	{
 		manager->setFocus(this);
 		lastCellUpdated = cellAtMouse(Tuple(event.GetPos()));
-		lastCellUpdated->handleEvent(event, held, manager);
-		selectedCells.insert(tupToIndex(lastCellUpdated->arrayPosition()));
+
+		std::set<int> newCells = brushes->applyBrush(lastCellUpdated->arrayPosition(), numCells);
+		selectedCells.insert(newCells.begin(), newCells.end());
+		for (int x : newCells)
+		{
+			if (brushes->applyRandomness())
+				getCell(x)->handleEvent(event, held, manager);
+		}
 	}
 	else if (event.GetType() == Mouse::Event::Type::Move
 		&& iRect.contains(event.GetPos())
@@ -93,8 +102,14 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 		if (lastCellUpdated != currentCell)
 		{
 			lastCellUpdated = currentCell;
-			lastCellUpdated->handleEvent(event, held, manager);
-			selectedCells.insert(tupToIndex(lastCellUpdated->arrayPosition()));
+
+			std::set<int> newCells = brushes->applyBrush(lastCellUpdated->arrayPosition(), numCells);
+			selectedCells.insert(newCells.begin(), newCells.end());
+			for (int x : newCells)
+			{
+				if (brushes->applyRandomness())
+					getCell(x)->handleEvent(event, held, manager);
+			}
 		}
 	}
 	else if (event.GetType() == Mouse::Event::Type::LRelease
@@ -104,11 +119,21 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 	return true;
 }
 
+bool Board::checkFocus(const Mouse::Event event, const LRHeld held) const
+{
+	if (event.GetType() == Mouse::Event::Type::LRelease
+		|| event.GetType() == Mouse::Event::Type::RRelease)
+		return iRect.contains(event.GetPos());
+
+	return true;
+}
+
 void Board::loseFocus()
 {
 	for (int x : selectedCells)
 		dynamic_cast<Cell*>(contents[x])->updateState();
 
+	brushes->endSelection();
 	lastCellUpdated = nullptr;
 	selectedCells.clear();
 }
@@ -120,12 +145,10 @@ int Board::getCellCount() const
 
 Cell* Board::getCell(const int xPos, const int yPos) 
 {
-	//assert(yPos * numCells.x + xPos < getCellCount());
-	if (yPos * numCells.x + xPos >= getCellCount())
-	{
-		selectedCells.insert(10);
-	}
-	
+	assert(xPos < numCells.x);
+	assert(yPos < numCells.y);
+	assert(yPos * numCells.x + xPos < getCellCount());
+
 	return dynamic_cast<Cell*>(contents[yPos * numCells.x + xPos]);
 		
 }

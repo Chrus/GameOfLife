@@ -21,7 +21,7 @@ protected:
 	int buttonCount = 0;
 	CheckBox* selected = nullptr;
 
-	void select(CheckBox* button);
+	virtual void select(CheckBox* button);
 	void addButton(CheckBox* newButton) ;
 };
 

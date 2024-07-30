@@ -1,22 +1,25 @@
 #pragma once
-#include "ActionPanel.h"
+#include "Container.h"
+
 class Slider : public ActionPanel
 {
 public:
 	//Constructors
-	Slider(Rect rect);
+	Slider(Rect rect, Container* parent);
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
 	void draw(Graphics& gfx) const override;
 
+	//Inherited via ActionPanel
+	bool interactsWith(const Tuple point) const override;
+
 	//Inherited via InputHandler
 	bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override;
-	bool checkFocus(const Mouse::Event event, const LRHeld held) const override;
-	void loseFocus() override;
 
 	//Functions
 	int getValue() const;
+	float getRatio() const;
 	void setValue(const int xPosition);
 
 private:
@@ -24,6 +27,5 @@ private:
 	static constexpr int TRACK_THICKNESS = 2;
 	Rect track;
 	bool selecting = false;
-	ActionPanel* parent;
+	Container* parent;
 };
-

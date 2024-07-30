@@ -20,11 +20,15 @@ DebugInfo SideBar::getDebugInfo() const
 	return DebugInfo("Sidebar", "");
 }
 
-void SideBar::setShortcutsText(std::vector<std::string> shortcuts)
+void SideBar::init(std::vector<std::string> shortcuts, BrushManager* manager)
 {
 	ShortcutsExpander* s = dynamic_cast<ShortcutsExpander*>(contents[3]);
 	assert(s != nullptr);
 	s->setShortcutsText(shortcuts);
+
+	BrushExpander* b = dynamic_cast<BrushExpander*>(contents[1]);
+	assert(b != nullptr);
+	b->init(manager);
 }
 
 PlayPanel* SideBar::getPlayPanel() const

@@ -144,6 +144,12 @@
     <ClInclude Include="BrushExpander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Brush.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrushManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -246,6 +252,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BrushExpander.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Brush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BrushManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

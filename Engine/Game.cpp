@@ -28,21 +28,30 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	inputManager(wnd.mouse,wnd.kbd,basePanel)
 {
-	basePanel.initShortcutManager(&inputManager);
+	Init();
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
-	UpdateModel();
-	ComposeFrame();
-	gfx.EndFrame();
+	if (init)
+	{
+		gfx.BeginFrame();
+		UpdateModel();
+		ComposeFrame();
+		gfx.EndFrame();
+	}
 }
 
 void Game::UpdateModel()
 {
 	inputManager.update();
 	basePanel.update();
+}
+
+void Game::Init() 
+{
+	basePanel.init(&inputManager, &brushes);
+	init = true;
 }
 
 void Game::ComposeFrame()
