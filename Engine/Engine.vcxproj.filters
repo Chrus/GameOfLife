@@ -25,8 +25,20 @@
     <Filter Include="Source Files\UI Base Classes">
       <UniqueIdentifier>{67964a3e-5c00-46f4-95f3-e81896bdecaf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Expanders">
+      <UniqueIdentifier>{e12006a1-d701-47fd-8cc5-c2e7e7261af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Expanders">
+      <UniqueIdentifier>{2b60522b-f1e1-415e-b77b-0f6889f00088}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\UI Base Classes">
       <UniqueIdentifier>{6012153c-40d3-4e46-9edb-a3c5337caa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{f001b409-275e-4a1d-9d8b-121ec7b6bf89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{6d46da0e-3bbf-4ad0-a0f3-c8aba46b2ab2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +87,6 @@
     <ClInclude Include="Rect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -105,50 +114,53 @@
     <ClInclude Include="TextPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CheckBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SideBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditExpander.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShortcutManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Seperator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShortcutsExpander.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RadioGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BrushRadioGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BrushExpander.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Brush.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BrushExpander.h">
+      <Filter>Header Files\Expanders</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EditExpander.h">
+      <Filter>Header Files\Expanders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortcutsExpander.h">
+      <Filter>Header Files\Expanders</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="BrushManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Seperator.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Header Files\UI Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortcutManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="RadioGroup.h">
+      <Filter>Header Files\UI Base Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +197,6 @@
     <ClCompile Include="Rect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -209,13 +218,7 @@
     <ClCompile Include="SpritePanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Container.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextPanel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Board.cpp">
@@ -230,35 +233,44 @@
     <ClCompile Include="SideBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditExpander.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShortcutManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Seperator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShortcutsExpander.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RadioGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BrushRadioGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BrushExpander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Brush.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="BrushExpander.cpp">
+      <Filter>Source Files\Expanders</Filter>
+    </ClCompile>
+    <ClCompile Include="EditExpander.cpp">
+      <Filter>Source Files\Expanders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortcutsExpander.cpp">
+      <Filter>Source Files\Expanders</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Seperator.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
     <ClCompile Include="BrushManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortcutManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioGroup.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
