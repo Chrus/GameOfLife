@@ -20,6 +20,7 @@ void BrushExpander::update()
 	manager->setRandomness(randomSlider->getRatio());
 	manager->setSize(sizeSlider->getRatio());
 	manager->setFill(fillCheckbox->checked);
+	manager->preview = previewCheckbox->checked;
 }
 
 void BrushExpander::setContents()
@@ -34,9 +35,23 @@ void BrushExpander::setContents()
 		Tuple(iRect.x(), brushButtons->getVisualRect().bottom()),
 		iRect.width(), 5);
 
+	previewCheckbox = new CheckBox(
+		Rect(iRect.x() + 10, sep1->getVisualRect().bottom() + 5, 20, 20),
+		*this);
+	previewCheckbox->checked = true;
+
+	TextPanel* previewText = new TextPanel(
+		TextPanel::TEXT_SPRITE8X14,
+		Rect(previewCheckbox->getVisualRect().right() + 5, previewCheckbox->getVisualRect().top(), 100, 25),
+		std::string("Show Preview"));
+
+	Seperator* sep2 = new Seperator(
+		Tuple(iRect.x(), previewCheckbox->getVisualRect().bottom() + 5),
+		iRect.width(), 5);
+
 	TextPanel* sizeText = new TextPanel(
 		TextPanel::TEXT_SPRITE8X14,
-		Rect(iRect.x(), sep1->getVisualRect().bottom(), iRect.width(), 25),
+		Rect(iRect.x(), sep2->getVisualRect().bottom(), iRect.width(), 25),
 		std::string("Size"));
 
 	sizeSlider = new Slider(
@@ -63,6 +78,9 @@ void BrushExpander::setContents()
 	
 	contents.push_back(brushButtons);
 	contents.push_back(sep1);
+	contents.push_back(previewCheckbox);
+	contents.push_back(previewText);
+	contents.push_back(sep2);
 	contents.push_back(sizeText);
 	contents.push_back(sizeSlider);
 	contents.push_back(randomText);

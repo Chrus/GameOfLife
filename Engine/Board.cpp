@@ -52,6 +52,21 @@ void Board::draw(Graphics& gfx) const
 		if (selectedCells.find(x) != selectedCells.end())
 			gfx.drawRect(cell->getVisualRect().getExpanded((Cell::DEFAULT_SIZE / 4) * -1), Colors::Gray);
 	}
+
+	if (brushes->preview && iRect.contains(lastMousePos))
+	{
+		Cell* start = peekCell(lastMousePos);
+		
+		std::set<int> preview = brushes->currentBrush->
+			previewBrush(start->arrayPosition(), numCells, brushes);
+
+		for (int x : preview)
+		{
+			Cell* cell = const_cast<Board*>(this)->getCell(x);
+			gfx.drawBorder(cell->getVisualRect(),
+				Colors::White, 2);
+		}
+	}
 }
 
 void Board::setContents()
@@ -78,6 +93,8 @@ bool Board::handleEvent(const Mouse::Event event, const LRHeld held, InputManage
 
 	if (!iRect.contains(event.GetPos()))
 		return true;
+
+	lastMousePos = event.GetPos();
 	
 	if (event.GetType() == Mouse::Event::Type::LPress
 		|| event.GetType() == Mouse::Event::Type::RPress)
@@ -168,6 +185,15 @@ Cell* Board::cellAtMouse(const Tuple mousePosition)
 	temp.y = temp.y / Cell::DEFAULT_SIZE;
 
 	return getCell(temp);
+}
+
+Cell* Board::peekCell(const Tuple mousePosition) const
+{
+	Tuple temp = mousePosition - iRect.position;
+	temp.x = temp.x / Cell::DEFAULT_SIZE;
+	temp.y = temp.y / Cell::DEFAULT_SIZE;
+
+	return dynamic_cast<Cell*>(contents[temp.y * numCells.x + temp.x]);
 }
 
 void Board::setAllCells(bool alive)

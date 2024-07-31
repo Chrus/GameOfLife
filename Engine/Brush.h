@@ -14,7 +14,20 @@ public:
 	Brush() = default;
 
 	//Functions
-	virtual std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) = 0;
+	virtual std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) = 0;
+	virtual std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager)
+	{
+		std::set<int> ret;
+		std::set<int> newCells = previewBrush(start, canvasSize, manager);
+
+		for (int x : newCells)
+		{
+			if (selected.insert(x).second == true)
+				ret.insert(x);
+		}
+
+		return ret;
+	}
 	virtual void drawThumbnail(Graphics& gfx, const Rect area) const = 0;
 	void endSelection() { selected.clear(); }
 

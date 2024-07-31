@@ -40,8 +40,12 @@ public:
 	void setFill(const bool fill) { this->fill = fill; }
 	bool getFill() const { return fill; }
 
-private:
+	//Variables
+	bool preview = true;
 	Brush* currentBrush = nullptr;
+
+private:
+
 	std::vector<Brush*> brushes;
 
 	float sizeRatio = 0.0f;
@@ -52,13 +56,13 @@ private:
 	{
 	public:
 		// Inherited via Brush
-		std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
+		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
 
 			std::set<int> ret;
 
-			for (int x = 0 - (size / 2); x < std::max(1,size / 2); x++)
+			for (int x = 0 - (size / 2); x < std::max(1, size / 2); x++)
 			{
 				for (int y = 0 - (size / 2); y < std::max(1, size / 2); y++)
 				{
@@ -66,8 +70,7 @@ private:
 					pos = fixWrapping(pos, canvasSize);
 					int index = tupToIndex(pos, canvasSize);
 
-					if (selected.insert(index).second == true)
-						ret.insert(index);
+					ret.insert(index);
 				}
 			}
 
@@ -76,12 +79,12 @@ private:
 		void drawThumbnail(Graphics& gfx, const Rect area) const override
 		{
 			gfx.drawRect(area.getExpanded(area.width() / 4 * -1), Colors::Black);
-		}
+		};
 	};
 	class CircleBrush : public Brush
 	{
 		// Inherited via Brush
-		std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
+		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int radius = manager->getSize(maxSize) / 2;
 			std::set<int> ret;
@@ -97,8 +100,7 @@ private:
 						pos = fixWrapping(pos, canvasSize);
 						int index = tupToIndex(pos, canvasSize);
 
-						if (selected.insert(index).second == true)
-							ret.insert(index);
+						ret.insert(index);
 					}
 				}
 			}
@@ -124,7 +126,7 @@ private:
 	class TriangleBrush : public Brush
 	{
 		// Inherited via Brush
-		std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
+		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
 			std::set<int> ret;
@@ -149,7 +151,7 @@ private:
 	class VerticalBrush : public Brush
 	{
 		// Inherited via Brush
-		std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
+		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
 			std::set<int> ret;
@@ -160,8 +162,7 @@ private:
 				pos = fixWrapping(pos, canvasSize);
 				int index = tupToIndex(pos, canvasSize);
 
-				if (selected.insert(index).second == true)
-					ret.insert(index);
+				ret.insert(index);
 			}
 
 			return ret;
@@ -188,7 +189,7 @@ private:
 	class HorizontalBrush : public Brush
 	{
 		// Inherited via Brush
-		std::set<int> applyBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
+		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
 			std::set<int> ret;
@@ -199,8 +200,7 @@ private:
 				pos = fixWrapping(pos, canvasSize);
 				int index = tupToIndex(pos, canvasSize);
 
-				if (selected.insert(index).second == true)
-					ret.insert(index);
+				ret.insert(index);
 			}
 
 			return ret;

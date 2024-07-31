@@ -31,5 +31,6 @@ private:
 	Slider* sizeSlider;
 	Slider* randomSlider;
 	CheckBox* fillCheckbox;
+	CheckBox* previewCheckbox;
 };
 

@@ -227,9 +227,6 @@
     <ClCompile Include="PlayPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CheckBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SideBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -270,6 +267,9 @@
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="RadioGroup.cpp">
+      <Filter>Source Files\UI Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
       <Filter>Source Files\UI Base Classes</Filter>
     </ClCompile>
   </ItemGroup>

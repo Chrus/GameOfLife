@@ -36,6 +36,7 @@ public:
 	Cell* getCell(const Tuple position);
 	Cell* getCell(const int position);
 	Cell* cellAtMouse(const Tuple mousePosition);
+	Cell* peekCell(const Tuple mousePosition) const;
 	void setAllCells(bool alive);
 	int tupToIndex(const Tuple arrayPosition) const;
 
@@ -45,6 +46,7 @@ private:
 	BrushManager* brushes;
 	Cell* lastCellUpdated = nullptr;
 	std::set<int> selectedCells;
+	Tuple lastMousePos{ -1,-1 };
 
 	//Functions
 	void initCellArray(const int xCount,const int yCount);

@@ -48,7 +48,7 @@ void SideBar::setContents()
 
 	BrushExpander* brush = new BrushExpander(
 		Rect(iRect.x(), iRect.y() + 100, iRect.width(), expanderHeight),
-		Rect(iRect.right() + 1, iRect.y() + 100, 100, 300),
+		Rect(iRect.right() + 1, iRect.y() + 100, 150, 300),
 		this,
 		std::string("B\nr\nu\ns\nh\ne\ns"));
 
