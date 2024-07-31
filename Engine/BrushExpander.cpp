@@ -18,8 +18,15 @@ DebugInfo BrushExpander::getDebugInfo() const
 void BrushExpander::update()
 {
 	manager->setRandomness(randomSlider->getRatio());
+	int rand = randomSlider->getRatio() * 100;
+	randomText->setText("Randomness: " + std::string(std::to_string(rand)) + "%");
+
 	manager->setSize(sizeSlider->getRatio());
+	int temp = std::max(1, manager->getSize(manager->currentBrush->maxSize));
+	sizeText->setText(std::string("Size: " + std::to_string(temp)));
+
 	manager->setFill(fillCheckbox->checked);
+
 	manager->preview = previewCheckbox->checked;
 }
 
@@ -49,7 +56,7 @@ void BrushExpander::setContents()
 		Tuple(iRect.x(), previewCheckbox->getVisualRect().bottom() + 5),
 		iRect.width(), 5);
 
-	TextPanel* sizeText = new TextPanel(
+	sizeText = new TextPanel(
 		TextPanel::TEXT_SPRITE8X14,
 		Rect(iRect.x(), sep2->getVisualRect().bottom(), iRect.width(), 25),
 		std::string("Size"));
@@ -58,7 +65,7 @@ void BrushExpander::setContents()
 		Rect(iRect.x() + 2, sizeText->getVisualRect().bottom(), iRect.width() - 4, 10), this);
 	sizeSlider->setValue(0);
 
-	TextPanel* randomText = new TextPanel(
+	randomText = new TextPanel(
 		TextPanel::TEXT_SPRITE8X14,
 		Rect(iRect.x(), sizeSlider->getVisualRect().bottom(), iRect.width(), 25),
 		std::string("Randomness"));

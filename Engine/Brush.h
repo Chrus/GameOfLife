@@ -31,10 +31,12 @@ public:
 	virtual void drawThumbnail(Graphics& gfx, const Rect area) const = 0;
 	void endSelection() { selected.clear(); }
 
+	//Variables
+	int maxSize = 20;
+
 protected:
 	//Variables
 	std::set<int> selected;
-	int maxSize = 20;
 	
 	//Functions
 	int tupToIndex(const Tuple pos, const Tuple canvas) const

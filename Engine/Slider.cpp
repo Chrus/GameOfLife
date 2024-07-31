@@ -58,9 +58,9 @@ bool Slider::handleEvent(const Mouse::Event event, const LRHeld held, InputManag
 
 int Slider::getValue() const
 {
-	float currentValue = iRect.center().x;
-	float right = track.right();
-	float left = track.left();
+	float currentValue = iRect.center().x + 0.0f;
+	float right = track.right() + 0.0f;
+	float left = track.left() + 0.0f;
 
 	float ret = ((currentValue - left)
 		/ (right - left)) * 100;
@@ -70,9 +70,9 @@ int Slider::getValue() const
 
 float Slider::getRatio() const
 {
-	float currentValue = iRect.center().x;
-	float right = track.right();
-	float left = track.left();
+	float currentValue = iRect.center().x + 0.0f;
+	float right = track.right() + 0.0f;
+	float left = track.left() + 0.0f;
 
 	return ((currentValue - left) / (right - left));
 }

@@ -53,7 +53,8 @@ void Board::draw(Graphics& gfx) const
 			gfx.drawRect(cell->getVisualRect().getExpanded((Cell::DEFAULT_SIZE / 4) * -1), Colors::Gray);
 	}
 
-	if (brushes->preview && iRect.contains(lastMousePos))
+	if (brushes->preview && iRect.contains(lastMousePos)
+		&& lastCellUpdated == nullptr)
 	{
 		Cell* start = peekCell(lastMousePos);
 		
@@ -64,7 +65,7 @@ void Board::draw(Graphics& gfx) const
 		{
 			Cell* cell = const_cast<Board*>(this)->getCell(x);
 			gfx.drawBorder(cell->getVisualRect(),
-				Colors::White, 2);
+				Colors::Gray, 2);
 		}
 	}
 }

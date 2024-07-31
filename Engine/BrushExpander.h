@@ -28,7 +28,9 @@ public:
 
 private:
 	BrushRadioGroup* brushButtons;
+	TextPanel* sizeText;
 	Slider* sizeSlider;
+	TextPanel* randomText;
 	Slider* randomSlider;
 	CheckBox* fillCheckbox;
 	CheckBox* previewCheckbox;

@@ -2,6 +2,7 @@
 #include "vector"
 #include <random>
 #include "Graphics.h"
+#include "Cell.h"
 
 #pragma once
 class BrushManager
@@ -150,6 +151,11 @@ private:
 	};
 	class VerticalBrush : public Brush
 	{
+	public:
+		VerticalBrush()
+		{
+			maxSize = Graphics::ScreenHeight / Cell::DEFAULT_SIZE;
+		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
@@ -188,6 +194,11 @@ private:
 	};
 	class HorizontalBrush : public Brush
 	{
+	public:
+		HorizontalBrush()
+		{
+			maxSize = Graphics::ScreenWidth / Cell::DEFAULT_SIZE;
+		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
