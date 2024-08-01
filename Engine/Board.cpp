@@ -1,6 +1,8 @@
 #include "Board.h"
 #include <algorithm>
 #include "InputManager.h"
+#include "PlayPanel.h"
+#include "BrushManager.h"
 
 Board::Board(Rect rect, Container* parent)
 	:
@@ -32,6 +34,8 @@ void Board::update()
 
 	if (playPanel->checkForIteration())
 	{
+		edit->setUndoButton(false);
+
 		Container::update();
 
 		for (auto x : contents)
@@ -148,6 +152,8 @@ bool Board::checkFocus(const Mouse::Event event, const LRHeld held) const
 
 void Board::loseFocus()
 {
+	edit->setUndoCells();
+
 	for (int x : selectedCells)
 		dynamic_cast<Cell*>(contents[x])->updateState();
 

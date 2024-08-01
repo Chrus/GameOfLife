@@ -19,7 +19,10 @@ public:
 	void clearButtonClick() const;
 	void fillButtonClick() const;
 	void saveButtonClick();
-	void loadButtonClick() const;
+	void loadButtonClick();
+	void undoButtonClick();
+	void setUndoButton(bool state);
+	void setUndoCells();
 
 private:
 	class ClearButton : public Button
@@ -108,9 +111,38 @@ private:
 		{
 			Button::handleEvent(event, held, manager);
 
+			if (!clickable)
+				return true;
+
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
 				dynamic_cast<EditExpander*>(parent)->loadButtonClick();
+			return true;
+		}
+	};
+	class UndoButton : public Button
+	{
+	public:
+		UndoButton(Rect rect, std::string text, ExpandablePanel& parent)
+			:
+			Button(rect, std::string(TextPanel::TEXT_SPRITE8X14), text, parent) {	}
+
+		// Inherited via Panel
+		DebugInfo getDebugInfo() const override
+		{
+			return DebugInfo("UndoButton", "");
+		}
+		// Inherited via ActionPanel
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
+		{
+			Button::handleEvent(event, held, manager);
+
+			if (!clickable)
+				return true;
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
+				dynamic_cast<EditExpander*>(parent)->undoButtonClick();
 			return true;
 		}
 	};
@@ -118,5 +150,8 @@ private:
 	//Variables
 	Board& board;
 	bool* savedCells;
+	bool* undoCells;
+	LoadButton* load;
+	UndoButton* undo;
 };
 

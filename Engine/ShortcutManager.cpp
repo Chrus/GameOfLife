@@ -1,4 +1,5 @@
 #include "ShortcutManager.h"
+#include "PlayPanel.h"
 
 ShortcutManager::ShortcutManager(Board* board, EditExpander* editPanel, PlayPanel* playPanel)
 	:

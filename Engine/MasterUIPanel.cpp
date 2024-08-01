@@ -44,5 +44,5 @@ void MasterUIPanel::init(InputManager* input, BrushManager* brushes)
 	input->setShortcutManager(&board, sideBar.getEditExpander(), sideBar.getPlayPanel());
 	sideBar.init(input->getShortcutsText(), brushes);
 
-	board.init(sideBar.getPlayPanel(), brushes);
+	board.init(sideBar.getPlayPanel(), brushes, sideBar.getEditExpander());
 }

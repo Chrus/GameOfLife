@@ -54,3 +54,18 @@ void Button::draw(Graphics & gfx) const
 	else
 		drawCustom(gfx);
 }
+
+void Button::setState(bool active)
+{
+	//todo add inactive visuals for buttons with a sprite/custom visual
+	clickable = active;
+
+	TextPanel* text = dynamic_cast<TextPanel*>(sprite);
+	if (text != nullptr)
+	{
+		if (active)
+			text->setTextColor(Colors::Black);
+		else
+			text->setTextColor(Colors::Gray);
+	}
+}

@@ -1,9 +1,11 @@
 #pragma once
 #include "Container.h"
 #include "Cell.h"
-#include "PlayPanel.h"
 #include "set"
-#include "BrushManager.h"
+
+class EditExpander;
+class PlayPanel;
+class BrushManager;
 
 class Board : public Container
 {
@@ -26,10 +28,11 @@ public:
 	void loseFocus() override;
 
 	//Functions
-	void init(PlayPanel* play, BrushManager* brushManager)
+	void init(PlayPanel* play, BrushManager* brushManager, EditExpander* editExpander)
 	{
 		playPanel = play; 
 		brushes = brushManager;
+		edit = editExpander;
 	}
 	int getCellCount() const;
 	Cell* getCell(const int xPos, const int yPos);
@@ -44,6 +47,7 @@ private:
 	Tuple numCells;
 	PlayPanel* playPanel;
 	BrushManager* brushes;
+	EditExpander* edit;
 	Cell* lastCellUpdated = nullptr;
 	std::set<int> selectedCells;
 	Tuple lastMousePos{ -1,-1 };

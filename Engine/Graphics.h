@@ -63,6 +63,7 @@ public:
 	void drawSprite(const Rect& rect, const Color* pixels);
 	void drawSprite(const Rect& rect, const Color* pixels, Color chroma);
 	void drawChar(const Tuple& pos, const Rect& drawRect, const Rect& textSpriteSheetRect, const Color* textSpriteSheet, Color chroma);
+	void drawChar(const Tuple& pos, const Rect& drawRect, const Rect& textSpriteSheetRect, const Color* textSpriteSheet, Color chroma, Color textColor);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

@@ -15,10 +15,14 @@ public:
 	//Inherited via Panel
 	void draw(Graphics& gfx) const override;
 
+	//Functions
+	void setState(bool active);
+
 protected:
 	//Variables
 	SpritePanel* sprite = nullptr;
 	Container* parent;
+	bool clickable = true;
 
 	//Functions 
 	virtual void drawCustom(Graphics& gfx) const {}

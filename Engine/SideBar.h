@@ -3,6 +3,9 @@
 #include "Board.h"
 #include "EditExpander.h"
 
+class ShortcutsExpander;
+class BrushExpander;
+
 class SideBar : public Container
 {
 public:
@@ -11,14 +14,11 @@ public:
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
-	EditExpander* getEditExpander()
-	{
-		return dynamic_cast<EditExpander*>(contents[0]);
-	}
 
 	//Functions
-	void init(std::vector<std::string> shortcuts, BrushManager* manager);
-	PlayPanel* getPlayPanel() const;
+	void init(std::vector<std::string> shortcutsText, BrushManager* manager);
+	PlayPanel* getPlayPanel() { return play; }
+	EditExpander* getEditExpander() { return edit; }
 
 protected:
 	//Inherited via Container
@@ -26,5 +26,10 @@ protected:
 
 private:
 	Board& board;
+
+	PlayPanel* play;
+	BrushExpander* brush;
+	EditExpander* edit;
+	ShortcutsExpander* shortcuts;
 };
 

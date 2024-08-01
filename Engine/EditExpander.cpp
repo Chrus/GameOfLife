@@ -8,6 +8,7 @@ EditExpander::EditExpander(Rect expanderRect, Rect contentsRect, Container* pare
 {
 	setContents();
 	savedCells = new bool[1];
+	undoCells = new bool[1];
 }
 
 EditExpander::~EditExpander()
@@ -36,15 +37,22 @@ void EditExpander::setContents()
 		Rect(iRect.x() + 5, seperator->getVisualRect().bottom() + 5, iRect.width() - 10, 30),
 		std::string("Save"), *this);
 
-	LoadButton* load = new LoadButton(
+	load = new LoadButton(
 		Rect(iRect.x() + 5, save->getVisualRect().bottom() + 5, iRect.width() - 10, 30),
 		std::string("Load"), *this);
+	load->setState(false);
+
+	undo = new UndoButton(
+		Rect(iRect.x() + 5, load->getVisualRect().bottom() + 5, iRect.width() - 10, 30),
+		std::string("Undo"), *this);
+	undo->setState(false);
 
 	contents.push_back(clear);
 	contents.push_back(fill);
 	contents.push_back(seperator);
 	contents.push_back(save);
 	contents.push_back(load);
+	contents.push_back(undo);
 }
 
 void EditExpander::clearButtonClick() const
@@ -59,12 +67,43 @@ void EditExpander::saveButtonClick()
 {
 	delete[] savedCells;
 	savedCells = new bool[board.getCellCount()]();
+	load->setState(true);
 
 	for (int x = 0; x < board.getCellCount(); x++)
 		savedCells[x] = board.getCell(x)->getState();
 }
-void EditExpander::loadButtonClick() const
+void EditExpander::loadButtonClick() 
+{
+	delete[] undoCells;
+	undoCells = new bool[board.getCellCount()]();
+	for (int x = 0; x < board.getCellCount(); x++)
+	{
+		//First save the previous state for undo
+		undoCells[x] = board.getCell(x)->getState();
+		//Then update the cell from the saved state
+		board.getCell(x)->setAlive(savedCells[x]);
+	}
+	undo->setState(true);		
+}
+
+void EditExpander::undoButtonClick()
 {
 	for (int x = 0; x < board.getCellCount(); x++)
-		board.getCell(x)->setAlive(savedCells[x]);
+		board.getCell(x)->setAlive(undoCells[x]);
+
+	undo->setState(false);
+}
+
+void EditExpander::setUndoButton(bool state)
+{
+	undo->setState(state);
+}
+
+void EditExpander::setUndoCells()
+{
+	delete[] undoCells;
+	undoCells = new bool[board.getCellCount()]();
+	for (int x = 0; x < board.getCellCount(); x++)
+		undoCells[x] = board.getCell(x)->getState();
+	undo->setState(true);
 }

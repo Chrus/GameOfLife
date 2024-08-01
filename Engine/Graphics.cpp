@@ -381,6 +381,19 @@ void Graphics::drawChar(const Tuple& pos, const Rect& drawRect,
 		}
 	}
 }
+void Graphics::drawChar(const Tuple& pos, const Rect& drawRect,
+	const Rect& textSpriteSheetRect, const Color* textSpriteSheet, Color chroma, Color textColor)
+{
+	for (int y = drawRect.top(); y < drawRect.bottom(); y++)
+	{
+		for (int x = drawRect.left(); x < drawRect.right(); x++)
+		{
+			if (textSpriteSheet[y * textSpriteSheetRect.width() + x] != chroma)
+				PutPixel(pos.x + x - drawRect.left(), pos.y + y - drawRect.top(),
+					textColor);
+		}
+	}
+}
 
 //////////////////////////////////////////////////
 //           Graphics Exception

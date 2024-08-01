@@ -21,6 +21,7 @@ public:
 	Rect mapGlyphRect(char c) const;
 	void setText(const std::string newText);
 	std::string getText() const { return text; }
+	void setTextColor(const Color newColor) { textColor = newColor; }
 
 private:
 	//Statics
@@ -36,4 +37,5 @@ private:
 	Tuple glyphSize;
 	std::string text;
 	Rect textRect;
+	Color textColor = Colors::Black;
 };

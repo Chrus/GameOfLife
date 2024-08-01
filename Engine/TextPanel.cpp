@@ -34,7 +34,7 @@ void TextPanel::draw(Graphics& gfx) const
 
 		if (c >= firstChar + 1 && c <= lastChar)
 		{
-			gfx.drawChar(curPos, mapGlyphRect(c), spriteRect, pixels.data(), Colors::White);
+			gfx.drawChar(curPos, mapGlyphRect(c), spriteRect, pixels.data(), Colors::White, textColor);
 		}
 		curPos.x += glyphSize.x;
 	}
