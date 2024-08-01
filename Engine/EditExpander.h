@@ -1,6 +1,9 @@
 #pragma once
 #include "ExpandablePanel.h"
 #include "Board.h"
+#include "Slider.h"
+#include "TextPanel.h"
+#include "CheckBox.h"
 
 class EditExpander : public ExpandablePanel
 {
@@ -11,13 +14,15 @@ public:
 
 	//Inherited via Panel
 	DebugInfo getDebugInfo() const override;
+	void update() override;
 
 	//Inherited via Container
 	void setContents() override;
 
 	//Functions
-	void clearButtonClick() const;
-	void fillButtonClick() const;
+	void clearButtonClick();
+	void fillButtonClick();
+	void overrideButtonClick();
 	void saveButtonClick();
 	void loadButtonClick();
 	void undoButtonClick();
@@ -68,6 +73,29 @@ private:
 			if (event.GetType() == Mouse::Event::Type::LPress
 				&& !held.first)
 				dynamic_cast<EditExpander*>(parent)->fillButtonClick();
+			return true;
+		}
+	};
+	class OverrideButton : public CheckBox
+	{
+	public:
+		OverrideButton(Rect rect, ExpandablePanel& parent)
+			:
+			CheckBox(rect, parent) {	}
+
+		// Inherited via Panel
+		DebugInfo getDebugInfo() const override
+		{
+			return DebugInfo("OverrideButton", "");
+		}
+		// Inherited via ActionPanel
+		bool handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager) override
+		{
+			CheckBox::handleEvent(event, held, manager);
+
+			if (event.GetType() == Mouse::Event::Type::LPress
+				&& !held.first)
+				dynamic_cast<EditExpander*>(parent)->overrideButtonClick();
 			return true;
 		}
 	};
@@ -147,11 +175,20 @@ private:
 		}
 	};
 
+	//Functions
+	void updateButtonText();
+
 	//Variables
 	Board& board;
 	bool* savedCells;
 	bool* undoCells;
+	ClearButton* clear;
+	FillButton* fill;
 	LoadButton* load;
 	UndoButton* undo;
+	Slider* randomSlider;
+	TextPanel* randomText;
+	OverrideButton* override;
+	int lastSliderValue = 0;
 };
 

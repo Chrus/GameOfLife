@@ -41,7 +41,7 @@ void SideBar::setContents()
 
 	edit = new EditExpander(
 		Rect(iRect.x(), expanderHeight + 100, iRect.width(), expanderHeight),
-		Rect(iRect.right() + 1, expanderHeight + 100, 100, 250),
+		Rect(iRect.right() + 1, expanderHeight + 100, 150, 293),
 		this,
 		std::string("E\nd\ni\nt"),
 		board);

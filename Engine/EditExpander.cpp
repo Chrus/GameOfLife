@@ -1,5 +1,6 @@
 #include "EditExpander.h"
 #include "Seperator.h"
+#include <random>
 
 EditExpander::EditExpander(Rect expanderRect, Rect contentsRect, Container* parent, std::string text, Board& board)
 	:
@@ -21,17 +22,80 @@ DebugInfo EditExpander::getDebugInfo() const
 	return DebugInfo("EditExpander", "");
 }
 
+void EditExpander::update()
+{
+	int randomness = randomSlider->getValue();
+	if (lastSliderValue != randomness)
+	{
+		randomText->setText(std::string("Randomness: " + std::to_string(randomness) + "%"));
+		lastSliderValue = randomness;
+		updateButtonText();
+	}
+}
+
+void EditExpander::updateButtonText()
+{
+	if (randomSlider->getValue() == 0)
+	{
+		clear->setText("Clear");
+		fill->setText("Fill");
+	}
+	else
+	{
+		std::string clearText = "  Clear ";
+		clearText.append(std::to_string(100 - randomSlider->getValue()) + "%\n");
+		if (override->checked)
+			clearText.append("of the Board ");
+		else
+			clearText.append("of Live Cells");
+
+		std::string fillText = "  Fill ";
+		fillText.append(std::to_string(100 - randomSlider->getValue()) + "%\n");
+		if (override->checked)
+			fillText.append("of the Board ");
+		else
+			fillText.append("of Dead Cells");
+		
+		fill->setText(fillText);
+		clear->setText(clearText);
+	}
+}
+
+
 void EditExpander::setContents()
 {
-	ClearButton* clear = new ClearButton(
-		Rect(iRect.x() + 5, iRect.y() + 5, iRect.width() - 10, 30),
+	clear = new ClearButton(
+		Rect(iRect.x() + 5, iRect.y() + 5, iRect.width() - 10, 45),
 		std::string("Clear"), *this);
 
-	FillButton* fill = new FillButton(
-		Rect(iRect.x() + 5, iRect.y() + 40, iRect.width() - 10, 30),
+	fill = new FillButton(
+		Rect(iRect.x() + 5, clear->getVisualRect().bottom() + 5, iRect.width() - 10, 45),
 		std::string("Fill"), *this);
 
-	Seperator* seperator = new Seperator(Tuple(iRect.x(), iRect.y() + 75), iRect.width(), 5);
+	randomText = new TextPanel(
+		TextPanel::TEXT_SPRITE8X14,
+		Rect(iRect.x(), fill->getVisualRect().bottom() + 5, iRect.width(), 20),
+		"Randomness: 0%");
+
+	randomSlider = new Slider(
+		Rect(iRect.x() + 5, randomText->getVisualRect().bottom(), iRect.width() - 10, 10),
+		this);
+	randomSlider->setValue(0);
+
+	override = new OverrideButton(
+		Rect(iRect.x() + 5, randomSlider->getVisualRect().bottom() + 10, 20, 20),
+		*this);
+	override->checked = true;
+
+	TextPanel* overrideText = new TextPanel(
+		TextPanel::TEXT_SPRITE8X14,
+		Rect(override->getVisualRect().right(), 
+			override->getVisualRect().top(), 
+			iRect.width() - override->getVisualRect().width() - 10, 
+			override->getVisualRect().height()),
+		std::string("Override Cells"));
+
+	Seperator* seperator = new Seperator(Tuple(iRect.x(), override->getVisualRect().bottom() + 5), iRect.width(), 5);
 
 	SaveButton* save = new SaveButton(
 		Rect(iRect.x() + 5, seperator->getVisualRect().bottom() + 5, iRect.width() - 10, 30),
@@ -49,19 +113,75 @@ void EditExpander::setContents()
 
 	contents.push_back(clear);
 	contents.push_back(fill);
+	contents.push_back(randomText);
+	contents.push_back(randomSlider);
+	contents.push_back(override);
+	contents.push_back(overrideText);
 	contents.push_back(seperator);
 	contents.push_back(save);
 	contents.push_back(load);
 	contents.push_back(undo);
 }
 
-void EditExpander::clearButtonClick() const
+void EditExpander::clearButtonClick()
 {
-	board.setAllCells(false);
+	//Dont need to do anything
+	if (randomSlider->getValue() == 100)
+		return;
+
+	setUndoCells();
+
+	if (randomSlider->getValue() == 0)
+		board.setAllCells(false);
+	else
+	{
+		std::random_device rd;
+		std::mt19937 rng(rd());
+		std::uniform_int_distribution<int> xDist(0, 100);
+		int random;
+		int value = randomSlider->getValue();
+
+		for (int x = 0; x < board.getCellCount(); x++)
+		{
+			random = xDist(rng);
+			if (random > value)
+				board.getCell(x)->setAlive(false);
+			else if(override->checked)
+				board.getCell(x)->setAlive(true);
+		}
+	}
 }
-void EditExpander::fillButtonClick() const
+void EditExpander::fillButtonClick()
 {
-	board.setAllCells(true);
+	//Dont need to do anything
+	if (randomSlider->getValue() == 100)
+		return;
+
+	setUndoCells();
+
+	if (randomSlider->getValue() == 0)
+		board.setAllCells(true);
+	else
+	{
+		std::random_device rd;
+		std::mt19937 rng(rd());
+		std::uniform_int_distribution<int> xDist(0, 100);
+		int random = xDist(rng);
+		int value = randomSlider->getValue();
+
+		for (int x = 0; x < board.getCellCount(); x++)
+		{
+			random = xDist(rng);
+			if (random > value)
+				board.getCell(x)->setAlive(true);
+			else if(override->checked)
+				board.getCell(x)->setAlive(false);
+		}
+	}
+}
+void EditExpander::overrideButtonClick()
+{
+	updateButtonText();
 }
 void EditExpander::saveButtonClick() 
 {

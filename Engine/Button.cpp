@@ -69,3 +69,14 @@ void Button::setState(bool active)
 			text->setTextColor(Colors::Gray);
 	}
 }
+
+bool Button::setText(std::string text)
+{
+	TextPanel* panel = dynamic_cast<TextPanel*>(sprite);
+
+	if (panel == nullptr)
+		return false;
+
+	panel->setText(text);
+	return true;
+}

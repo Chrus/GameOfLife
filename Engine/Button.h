@@ -17,6 +17,7 @@ public:
 
 	//Functions
 	void setState(bool active);
+	bool setText(std::string text);
 
 protected:
 	//Variables

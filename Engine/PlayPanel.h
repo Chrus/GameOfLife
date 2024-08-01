@@ -68,6 +68,6 @@ private:
 
 	bool step = false;
 	bool play = false;
-	int updateTime = 5;
+	int updateTime = 0;
 	int currentTime = 0;
 };
