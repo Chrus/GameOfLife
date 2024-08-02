@@ -5,6 +5,7 @@
 
 class ShortcutsExpander;
 class BrushExpander;
+class SpeedExpander;
 
 class SideBar : public Container
 {
@@ -28,6 +29,7 @@ private:
 	Board& board;
 
 	PlayPanel* play;
+	SpeedExpander* speed;
 	BrushExpander* brush;
 	EditExpander* edit;
 	ShortcutsExpander* shortcuts;

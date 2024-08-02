@@ -173,6 +173,7 @@
     <ClInclude Include="Slider.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="SpeedExpander.h" />
     <ClInclude Include="SpritePanel.h" />
     <ClInclude Include="TextPanel.h" />
     <ClInclude Include="Tuple.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="SideBar.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpeedExpander.cpp" />
     <ClCompile Include="SpritePanel.cpp" />
     <ClCompile Include="TextPanel.cpp" />
     <ClCompile Include="Tuple.cpp" />

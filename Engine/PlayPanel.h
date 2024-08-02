@@ -1,6 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "CheckBox.h"
+#include "SpeedExpander.h"
 
 class PlayPanel : public Container
 {
@@ -12,6 +13,7 @@ public:
 	void setContents() override;
 
 	//Functions
+	void init(SpeedExpander* speedExpander) { speed = speedExpander; }
 	bool checkForIteration();
 	void playClick();
 	void stepClick();
@@ -65,9 +67,9 @@ private:
 	//Variables
 	PlayButton playButton;
 	StepButton stepButton;
+	SpeedExpander* speed;
 
 	bool step = false;
 	bool play = false;
-	int updateTime = 0;
 	int currentTime = 0;
 };

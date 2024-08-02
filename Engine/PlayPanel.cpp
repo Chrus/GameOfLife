@@ -1,4 +1,5 @@
 #include "PlayPanel.h"
+
 PlayPanel::PlayPanel(Rect rect, Container* parent)
 	:
 	Container(rect, parent),
@@ -29,9 +30,13 @@ bool PlayPanel::checkForIteration()
 
 	if (play)
 	{
+		//If speed has been updated since last update
+		if (currentTime > speed->getGameSpeed())
+			currentTime = speed->getGameSpeed();
+
 		if (--currentTime < 0)
 		{
-			currentTime = updateTime;
+			currentTime = speed->getGameSpeed();
 			return true;
 		}
 	}
@@ -42,7 +47,8 @@ bool PlayPanel::checkForIteration()
 void PlayPanel::playClick()
 {
 	play = !play;
-	//checkbox sets checked.  But we also do it
+
+	//checkbox sets checked.  But we also do it here
 	//because shortcuts calls this function too.
 	playButton.checked = play;
 }
