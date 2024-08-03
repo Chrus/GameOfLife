@@ -18,7 +18,7 @@ void BrushRadioGroup::setContents()
 
 	addButton(brush1); //square
 	//need to work on applyBrush() implementation
-	//addButton(brush2); //circle
+	addButton(brush2); //circle
 	//addButton(brush3); //triange
 	addButton(brush4); //vert
 	addButton(brush5); //hor

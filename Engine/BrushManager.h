@@ -46,7 +46,6 @@ public:
 	Brush* currentBrush = nullptr;
 
 private:
-
 	std::vector<Brush*> brushes;
 
 	float sizeRatio = 0.0f;
@@ -56,16 +55,24 @@ private:
 	class SquareBrush : public Brush
 	{
 	public:
+		SquareBrush()
+		{
+			maxSize = std::min(Graphics::ScreenHeight / Cell::DEFAULT_SIZE, Graphics::ScreenWidth / Cell::DEFAULT_SIZE) - 1;
+		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
 
 			std::set<int> ret;
+			
+			int max = std::max(1, size / 2);
+			if (size % 2 != 0 && size != 1) 
+				max++;
 
-			for (int x = 0 - (size / 2); x < std::max(1, size / 2); x++)
+			for (int x = 0 - (size / 2); x < max; x++)
 			{
-				for (int y = 0 - (size / 2); y < std::max(1, size / 2); y++)
+				for (int y = 0 - (size / 2); y < max; y++)
 				{
 					Tuple pos = { start.x + x, start.y + y };
 					pos = fixWrapping(pos, canvasSize);
@@ -84,20 +91,40 @@ private:
 	};
 	class CircleBrush : public Brush
 	{
+	public:
+		CircleBrush()
+		{
+			maxSize = std::min(Graphics::ScreenHeight / Cell::DEFAULT_SIZE, Graphics::ScreenWidth / Cell::DEFAULT_SIZE) - 1;
+		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
-			int radius = manager->getSize(maxSize) / 2;
 			std::set<int> ret;
+			float size = std::max(1, manager->getSize(maxSize));
 
-			for (int x = start.x - radius; x < start.x + radius; x++)
+			if (size == 1)
 			{
-				for (int y = start.y - radius; y < start.y + radius; y++)
+				ret.insert(tupToIndex({ start.x, start.y }, canvasSize));
+				return ret;
+			}
+
+			float center = size / 2;
+
+			for (int x = 0; x < size; x++)
+			{
+				for (int y = 0; y < size; y++)
 				{
-					if (std::pow(x - start.x, 2) + std::pow(y - start.y, 2)
-						< std::pow(radius, 2))
+					float centerX = x + 0.5f;
+					float centerY = y + 0.5f;
+
+					float t1 = std::pow(std::abs(center - centerX), 2);
+					float t2 = std::pow(std::abs(center - centerY), 2);
+					float distance = std::sqrt(t1 + t2);
+
+					if (distance <= size / 2)
 					{
-						Tuple pos = { x, y };
+						int adjust = size / 2;
+						Tuple pos = { start.x + x - adjust, start.y + y - adjust };
 						pos = fixWrapping(pos, canvasSize);
 						int index = tupToIndex(pos, canvasSize);
 
@@ -154,7 +181,7 @@ private:
 	public:
 		VerticalBrush()
 		{
-			maxSize = Graphics::ScreenHeight / Cell::DEFAULT_SIZE;
+			maxSize = Graphics::ScreenHeight / Cell::DEFAULT_SIZE - 1;
 		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
@@ -162,9 +189,13 @@ private:
 			int size = manager->getSize(maxSize);
 			std::set<int> ret;
 
-			for (int y = start.y - size / 2; y <= start.y + size / 2; y++)
+			int max = std::max(1, size / 2);
+			if (size % 2 != 0 && size != 1)
+				max++;
+
+			for (int y = 0 - (size / 2); y < max; y++)
 			{
-				Tuple pos = { start.x, y };
+				Tuple pos = { start.x, start.y + y};
 				pos = fixWrapping(pos, canvasSize);
 				int index = tupToIndex(pos, canvasSize);
 
@@ -197,7 +228,7 @@ private:
 	public:
 		HorizontalBrush()
 		{
-			maxSize = Graphics::ScreenWidth / Cell::DEFAULT_SIZE;
+			maxSize = Graphics::ScreenWidth / Cell::DEFAULT_SIZE - 1;
 		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
@@ -205,9 +236,13 @@ private:
 			int size = manager->getSize(maxSize);
 			std::set<int> ret;
 
-			for (int x = start.x - size / 2; x <= start.x + size / 2; x++)
+			int max = std::max(1, size / 2);
+			if (size % 2 != 0 && size != 1)
+				max++;
+
+			for (int x = 0 - (size / 2); x < max; x++)
 			{
-				Tuple pos = { x, start.y };
+				Tuple pos = { start.x + x, start.y };
 				pos = fixWrapping(pos, canvasSize);
 				int index = tupToIndex(pos, canvasSize);
 
