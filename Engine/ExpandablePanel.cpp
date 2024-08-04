@@ -35,6 +35,16 @@ bool ExpandablePanel::handleEvent(const Mouse::Event event, LRHeld held, InputMa
 {
 	ActionPanel::handleEvent(event, held, manager);
 
+	if (event.GetType() == Mouse::Event::Type::LPress
+		|| event.GetType() == Mouse::Event::Type::RPress)
+	{
+		bool inside = iRect.contains(Tuple(event.GetPos()))
+			|| expander.interactsWith(Tuple(event.GetPos()));
+
+		if(!inside)
+			return inside;
+	}
+
 	Tuple mousePos = Tuple(event.GetPos());
 	if (expander.interactsWith(mousePos))
 		return expander.handleEvent(event, held, manager);
@@ -42,19 +52,6 @@ bool ExpandablePanel::handleEvent(const Mouse::Event event, LRHeld held, InputMa
 	{
 		Container::handleEvent(event, held, manager);
 		return true;
-	}
-	return true;
-}
-
-bool ExpandablePanel::checkFocus(const Mouse::Event event, const LRHeld held) const
-{
-	if (event.GetType() == Mouse::Event::Type::LPress
-		|| event.GetType() == Mouse::Event::Type::RPress)
-	{
-		bool inside = iRect.contains(Tuple(event.GetPos()))
-			|| expander.interactsWith(Tuple(event.GetPos()));
-
-		return inside;
 	}
 	return true;
 }

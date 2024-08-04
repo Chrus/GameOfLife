@@ -12,7 +12,6 @@ public:
 	bool interactsWith(const Tuple point) const override;
 	//Inherited via InputHandler
 	bool handleEvent(const Mouse::Event event, LRHeld held, InputManager* manager) override;
-	bool checkFocus(Mouse::Event event, LRHeld held) const override;
 	void loseFocus() override;
 	//Inherited via Panel
 	void draw(Graphics& gfx) const override;

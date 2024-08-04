@@ -58,7 +58,7 @@ void SideBar::setContents()
 		Rect(iRect.x(), expanderHeight * 2 + 100, iRect.width(), expanderHeight),
 		Rect(iRect.right() + 1, expanderHeight * 2 + 100, 150, 200),
 		this,
-		std::string("S\nh\no\nr\nt\nc\nu\nt\ns"));
+		std::string("C\no\nn\nt\nr\no\nl\ns"));
 
 	contents.push_back(play);
 	contents.push_back(speed);
