@@ -6,6 +6,8 @@
 #include "SideBar.h"
 #include "BrushRadioGroup.h"
 
+class ShortcutManager;
+
 //TODO remove?
 #include "Cell.h"
 
@@ -22,7 +24,7 @@ public:
 	void updateDebugPanel(std::string text, bool display);
 
 	//Functions
-	void init(InputManager* input, BrushManager* brushes);
+	void init(InputManager* input, BrushManager* brushes, ShortcutManager* shortcuts);
 
 private:
 	Board board = Board(Rect(75, 0, Graphics::ScreenWidth - 76, Graphics::ScreenHeight - 1), this);

@@ -63,7 +63,7 @@ void BrushExpander::setContents()
 
 	sizeSlider = new Slider(
 		Rect(iRect.x() + 2, sizeText->getVisualRect().bottom(), iRect.width() - 4, 10), this);
-	sizeSlider->setValue(0);
+	sizeSlider->setValueByCord(0);
 
 	randomText = new TextPanel(
 		TextPanel::TEXT_SPRITE8X14,
@@ -72,7 +72,7 @@ void BrushExpander::setContents()
 
 	randomSlider = new Slider(
 		Rect(iRect.x() + 2, randomText->getVisualRect().bottom(), iRect.width() - 4, 10), this);
-	randomSlider->setValue(0);
+	randomSlider->setValueByCord(0);
 
 	fillCheckbox = new CheckBox(
 		Rect(iRect.x() + 10, randomSlider->getVisualRect().bottom() + 15, 20, 20),
@@ -94,4 +94,41 @@ void BrushExpander::setContents()
 	contents.push_back(randomSlider);
 	//contents.push_back(fillCheckbox);
 	//contents.push_back(fillText);
+}
+
+void BrushExpander::setBrushButton(int index)
+{
+	brushButtons->select(index);
+}
+
+void BrushExpander::togglePreview()
+{
+	previewCheckbox->checked = !previewCheckbox->checked;
+}
+
+void BrushExpander::incBrushSize()
+{
+	float max = manager->currentBrush->maxSize + 0.0f;
+	float size = manager->getSize(max);
+	size += 1;
+	sizeSlider->setValue(size, max);
+
+	manager->setSize(sizeSlider->getRatio());
+	int temp = std::max(1, manager->getSize(manager->currentBrush->maxSize));
+	sizeText->setText(std::string("Size: " + std::to_string(temp)));
+}
+
+void BrushExpander::decBrushSize()
+{
+	float max = manager->currentBrush->maxSize + 0.0f;
+	float size = manager->getSize(max);
+	size -= 1;
+	sizeSlider->setValue(size, max);
+
+	manager->setSize(sizeSlider->getRatio());
+	int temp = std::max(1, manager->getSize(manager->currentBrush->maxSize));
+	sizeText->setText(std::string("Size: " + std::to_string(temp)));
+
+
+
 }

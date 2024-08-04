@@ -33,3 +33,9 @@ void BrushRadioGroup::select(CheckBox* button)
 	BrushButton* b = dynamic_cast<BrushButton*>(button);
 	dynamic_cast<BrushExpander*>(parent)->setBrushSelection(b->index);
 }
+
+void BrushRadioGroup::select(int index)
+{
+	CheckBox* button = dynamic_cast<CheckBox*>(contents[index]);
+	select(button);
+}

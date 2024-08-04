@@ -9,17 +9,14 @@ InputManager::InputManager(Mouse& mouse, Keyboard& keyboard, MasterUIPanel& base
 
 void InputManager::update()
 {
-	//maybe need to move where shortcuts are checked/handled
-	shortcuts.checkKey(keyboard.ReadChar());
-
+	shortcuts->checkKey(keyboard.ReadChar());
+	
 	Mouse::Event e = mouse.Read();
 	while (e.IsValid())
 	{
-		//debug panel gets handled regardless of focus
 		if (e.GetType() == Mouse::Event::Type::WheelUp
 			|| e.GetType() == Mouse::Event::Type::WheelDown)
-			handleMouseWheel(e);
-		else
+			shortcuts->handleMouseWheel(e);
 		{
 			//checking to see if panel removes focus before the event is proccessed
 			handleFocus(e);
@@ -34,9 +31,10 @@ void InputManager::update()
 			}
 			else
 				basePanel.handleEvent(e, LRHeld(leftHeld, rightHeld), this);
-		}
 
-		e = mouse.Read();
+
+			e = mouse.Read();
+		}
 	}
 	leftHeld = mouse.LeftIsPressed();
 	rightHeld = mouse.RightIsPressed();
@@ -52,14 +50,9 @@ void InputManager::setFocus(ActionPanel* panel)
 	focusedPanel = panel;
 }
 
-void InputManager::setShortcutManager(Board* board, EditExpander* editExpander, PlayPanel* playPanel)
+void InputManager::setShortcutManager(ShortcutManager* shortcuts)
 {
-	shortcuts = ShortcutManager(board, editExpander, playPanel);
-}
-
-std::vector<std::string> InputManager::getShortcutsText() const
-{
-	return shortcuts.getKeys();
+	this->shortcuts = shortcuts;
 }
 
 void InputManager::handleFocus(const Mouse::Event e)
@@ -79,38 +72,40 @@ void InputManager::handleFocus(const Mouse::Event e)
 
 void InputManager::handleMouseWheel(Mouse::Event e)
 {
-	if (e.GetType() == Mouse::Event::Type::WheelUp)
-	{
-		if (basePanel.getVisualRect().contains(Tuple(e.GetPos())))
-		{
-			//if (focusedPanel == nullptr)
-			//	basePanel.updateDebugPanel("Null", true);
-			//else
-			//	basePanel.updateDebugPanel(focusedPanel->getDebugInfo().first, true);
-			debugInfo.clear();
-			basePanel.handleEvent(e, LRHeld(leftHeld,rightHeld), this);
+	//Old code for a debug panel that i plan to remove
 
-			assert(!debugInfo.empty());
+	//if (e.GetType() == Mouse::Event::Type::WheelUp)
+	//{
+	//	if (basePanel.getVisualRect().contains(Tuple(e.GetPos())))
+	//	{
+	//		//if (focusedPanel == nullptr)
+	//		//	basePanel.updateDebugPanel("Null", true);
+	//		//else
+	//		//	basePanel.updateDebugPanel(focusedPanel->getDebugInfo().first, true);
+	//		debugInfo.clear();
+	//		basePanel.handleEvent(e, LRHeld(leftHeld,rightHeld), this);
 
-			std::string text;
-			int count = 0;
+	//		assert(!debugInfo.empty());
 
-			for (auto e : debugInfo)
-			{
-				for (int x = 0; x < count; x++)
-					text += "-";
+	//		std::string text;
+	//		int count = 0;
 
-				text += e.first;
-				text += e.second + "\n";
-				count++;
-			}
+	//		for (auto e : debugInfo)
+	//		{
+	//			for (int x = 0; x < count; x++)
+	//				text += "-";
 
-			basePanel.updateDebugPanel(text, true);
-		}
-	}
-	else if (e.GetType() == Mouse::Event::Type::WheelDown)
-	{
-		debugInfo.clear();
-		basePanel.updateDebugPanel("", false);
-	}
+	//			text += e.first;
+	//			text += e.second + "\n";
+	//			count++;
+	//		}
+
+	//		basePanel.updateDebugPanel(text, true);
+	//	}
+	//}
+	//else if (e.GetType() == Mouse::Event::Type::WheelDown)
+	//{
+	//	debugInfo.clear();
+	//	basePanel.updateDebugPanel("", false);
+	//}
 }

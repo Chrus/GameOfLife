@@ -3,6 +3,7 @@
 #include "PlayPanel.h"
 #include "BrushExpander.h"
 #include "SpeedExpander.h"
+#include "ShortcutManager.h"
 
 SideBar::SideBar(Rect rect, Container* parent, Board& board)
 	:
@@ -20,10 +21,14 @@ DebugInfo SideBar::getDebugInfo() const
 	return DebugInfo("Sidebar", "");
 }
 
-void SideBar::init(std::vector<std::string> shortcutsText, BrushManager* manager)
+void SideBar::init(ShortcutManager* shortcutManager, BrushManager* brushManager)
 {
-	shortcuts->setShortcutsText(shortcutsText);
-	brush->init(manager);
+	shortcutManager->setBrushExpander(brush);
+	shortcutManager->setEditExpander(edit);
+	shortcutManager->setPlayPanel(play);
+	shortcutManager->setSpeedExpander(speed);
+	shortcuts->setShortcutsText(shortcutManager->getKeys());
+	brush->init(brushManager);
 }
 
 void SideBar::setContents()
@@ -56,7 +61,7 @@ void SideBar::setContents()
 
 	shortcuts = new ShortcutsExpander(
 		Rect(iRect.x(), expanderHeight * 2 + 100, iRect.width(), expanderHeight),
-		Rect(iRect.right() + 1, expanderHeight * 2 + 100, 150, 200),
+		Rect(iRect.right() + 1, expanderHeight * 2 + 100, 250, expanderHeight),
 		this,
 		std::string("C\no\nn\nt\nr\no\nl\ns"));
 

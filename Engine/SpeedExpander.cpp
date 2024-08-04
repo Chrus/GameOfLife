@@ -17,7 +17,7 @@ void SpeedExpander::setContents()
 	speedSlider = new Slider(
 		Rect(iRect.x() + 5, sliderText->getVisualRect().bottom(), iRect.width() - 10, 20),
 		this);
-	speedSlider->setValue(1000);
+	speedSlider->setValueByCord(1000);
 
 	contents.push_back(sliderText);
 	contents.push_back(speedSlider);

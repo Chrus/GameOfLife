@@ -26,6 +26,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
+	controls(),
 	inputManager(wnd.mouse,wnd.kbd,basePanel)
 {
 	Init();
@@ -50,7 +51,8 @@ void Game::UpdateModel()
 
 void Game::Init() 
 {
-	basePanel.init(&inputManager, &brushes);
+	inputManager.setShortcutManager(&controls);
+	basePanel.init(&inputManager, &brushes, &controls);
 	init = true;
 }
 

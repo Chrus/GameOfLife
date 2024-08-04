@@ -13,6 +13,7 @@ public:
 
 	//Inherited via RadioGroup
 	void select(CheckBox* button) override;
+	void select(int index);
 
 	//Functions
 	BrushExpander* getExpander() const { return dynamic_cast<BrushExpander*>(parent); }

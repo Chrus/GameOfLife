@@ -22,6 +22,10 @@ public:
 	//Functions
 	void init(BrushManager* brushManager) { manager = brushManager; }
 	void setBrushSelection(int selection) { manager->setBrush(selection); }
+	void setBrushButton(int index);
+	void togglePreview();
+	void incBrushSize();
+	void decBrushSize();
 
 	//Variables
 	BrushManager* manager;

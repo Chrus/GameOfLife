@@ -6,6 +6,7 @@
 class ShortcutsExpander;
 class BrushExpander;
 class SpeedExpander;
+class ShortcutManager;
 
 class SideBar : public Container
 {
@@ -17,7 +18,7 @@ public:
 	DebugInfo getDebugInfo() const override;
 
 	//Functions
-	void init(std::vector<std::string> shortcutsText, BrushManager* manager);
+	void init(ShortcutManager* shortcutManager, BrushManager* brushManager);
 	PlayPanel* getPlayPanel() { return play; }
 	EditExpander* getEditExpander() { return edit; }
 

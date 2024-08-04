@@ -80,7 +80,7 @@ void EditExpander::setContents()
 	randomSlider = new Slider(
 		Rect(iRect.x() + 5, randomText->getVisualRect().bottom(), iRect.width() - 10, 10),
 		this);
-	randomSlider->setValue(0);
+	randomSlider->setValueByCord(0);
 
 	override = new OverrideButton(
 		Rect(iRect.x() + 5, randomSlider->getVisualRect().bottom() + 10, 20, 20),

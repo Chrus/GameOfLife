@@ -1,5 +1,6 @@
 #include "MasterUIPanel.h"
 #include "InputManager.h"
+#include "ShortcutManager.h"
 
 MasterUIPanel::MasterUIPanel()
 	:
@@ -39,10 +40,11 @@ void MasterUIPanel::updateDebugPanel(std::string text, bool display)
 	}
 }
 
-void MasterUIPanel::init(InputManager* input, BrushManager* brushes)
+void MasterUIPanel::init(InputManager* input, BrushManager* brushes, ShortcutManager* shortcuts)
 {
-	input->setShortcutManager(&board, sideBar.getEditExpander(), sideBar.getPlayPanel());
-	sideBar.init(input->getShortcutsText(), brushes);
+	input->setShortcutManager(shortcuts);
+	sideBar.init(shortcuts, brushes);
 
 	board.init(sideBar.getPlayPanel(), brushes, sideBar.getEditExpander());
+	shortcuts->setBoard(board);
 }

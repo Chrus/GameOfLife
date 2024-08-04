@@ -39,17 +39,17 @@ bool Slider::interactsWith(const Tuple point) const
 bool Slider::handleEvent(const Mouse::Event event, const LRHeld held, InputManager* manager)
 {
 	if (selecting && event.GetType() == Mouse::Event::Type::Move)
-		setValue(event.GetPosX());
+		setValueByCord(event.GetPosX());
 	else if (event.GetType() == Mouse::Event::Type::LPress)
 	{
 		selecting = true;
-		setValue(event.GetPosX());
+		setValueByCord(event.GetPosX());
 		manager->setFocus(this);
 	}
 	else if (selecting && !event.LeftIsPressed())
 	{
 		selecting = false;
-		setValue(event.GetPosX());
+		setValueByCord(event.GetPosX());
 		manager->setFocus(parent);
 	}
 
@@ -77,7 +77,7 @@ float Slider::getRatio() const
 	return ((currentValue - left) / (right - left));
 }
 
-void Slider::setValue(const int xPosition)
+void Slider::setValueByCord(const int xPosition)
 {
 	//This will be the center of iRect after bounds checking
 	int newPosition = xPosition;
@@ -88,4 +88,18 @@ void Slider::setValue(const int xPosition)
 		newPosition = track.right();
 
 	iRect.position.x = newPosition - SLIDER_SIZE / 2;
+}
+
+void Slider::setValue(float value, float maxValue)
+{
+	if (value < 1 || value > maxValue)
+		return;
+
+	int pos = track.left() + (value / maxValue) * (track.right() - track.left());
+	//-2 instead of SLIDER_SIZE / 2; to fix loss of data bug dividing an int
+	//if slider size is changed this will need to be too.
+	//The best fix would be to template Rect class so it can hold floats.
+	//but thats a big change and im lazy rn
+	iRect.position.x = pos - 2; //SLIDER_SIZE / 2;
+
 }

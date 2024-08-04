@@ -20,10 +20,13 @@ public:
 	//Functions
 	int getValue() const;
 	float getRatio() const;
-	void setValue(const int xPosition);
+	void setValueByCord(const int xPosition);
+	void setValue(float value, float maxValue);
 
 private:
-	static constexpr int SLIDER_SIZE = 7;
+	//There will be a bug in setValue() if SLIDER_SIZE is changed
+	//see setValue() for more info
+	static constexpr int SLIDER_SIZE = 7; 
 	static constexpr int TRACK_THICKNESS = 2;
 	Rect track;
 	bool selecting = false;

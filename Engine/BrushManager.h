@@ -155,7 +155,7 @@ private:
 	public:
 		TriangleBrush()
 		{
-			maxSize = 15;
+			maxSize = std::min(Graphics::ScreenHeight / Cell::DEFAULT_SIZE, Graphics::ScreenWidth / Cell::DEFAULT_SIZE) - 1;
 		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override

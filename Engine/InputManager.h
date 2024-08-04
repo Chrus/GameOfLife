@@ -16,15 +16,14 @@ public:
 
 	//Functions
 	void setFocus(ActionPanel* panel);
-	void setShortcutManager(Board* board, EditExpander* editExpander, PlayPanel* playPanel);
-	std::vector<std::string> getShortcutsText() const;
+	void setShortcutManager(ShortcutManager* shortcuts);
 	
 private:
 	//Variables
 	Mouse& mouse;
 	Keyboard& keyboard;
 	MasterUIPanel& basePanel;
-	ShortcutManager shortcuts;
+	ShortcutManager* shortcuts;
 	ActionPanel* focusedPanel = nullptr;
 	std::vector<DebugInfo> debugInfo;
 

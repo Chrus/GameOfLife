@@ -26,6 +26,7 @@
 #include "MasterUIPanel.h"
 #include "InputManager.h"
 #include "BrushManager.h"
+#include "ShortcutManager.h"
 
 class Game
 {
@@ -47,6 +48,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	ShortcutManager controls;
 	InputManager inputManager;
 	BrushManager brushes;
 	MasterUIPanel basePanel;

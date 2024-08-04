@@ -205,6 +205,8 @@ Cell* Board::peekCell(const Tuple mousePosition) const
 
 void Board::setAllCells(bool alive)
 {
+	edit->setUndoCells();
+
 	for (auto* x : contents)
 		dynamic_cast<Cell*>(x)->setAlive(alive);
 }
