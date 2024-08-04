@@ -63,7 +63,6 @@ private:
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
 			int size = manager->getSize(maxSize);
-
 			std::set<int> ret;
 			
 			int max = std::max(1, size / 2);
@@ -153,27 +152,68 @@ private:
 	};
 	class TriangleBrush : public Brush
 	{
+	public:
+		TriangleBrush()
+		{
+			maxSize = 15;
+		}
 		// Inherited via Brush
 		std::set<int> previewBrush(const Tuple start, const Tuple canvasSize, const BrushManager* manager) override
 		{
-			int size = manager->getSize(maxSize);
+			int size = std::max(1, manager->getSize(maxSize));
 			std::set<int> ret;
+			float pi = 3.14159265358979323846;
+			float angle = 180;
+			angle *= (pi / 180.0f);
 
-			//testing
-			ret.insert(tupToIndex(Tuple(start.x, start.y - 1), canvasSize));
+			Tuple v0 = { start.x,start.y };
+			Tuple v1 = { static_cast<int>(start.x + size * std::cos(angle)),
+				static_cast<int>(start.y + size * std::sin(angle)) };
+			Tuple v2 = { static_cast<int>(start.x + size * std::cos(angle + pi / 3)),
+				static_cast<int>(start.y + size * std::sin(angle + pi / 3)) };
+
+			int minX = std::min({ v0.x, v1.x, v2.x });
+			int maxX = std::max({ v0.x, v1.x, v2.x });
+			int minY = std::min({ v0.y, v1.y, v2.y });
+			int maxY = std::max({ v0.y, v1.y, v2.y });
+
+			for (int x = minX; x < maxX; x++)
+			{
+				for (int y = minY; y < maxY; y++)
+				{
+					Tuple pos = { x,y };
+					if (isPointInTriangle(pos, v0, v1, v2))
+					{
+						pos = pos + Tuple{ size / 2,size / 2 };
+						pos = fixWrapping(pos, canvasSize);
+						int index = tupToIndex(pos, canvasSize);
+						ret.insert(index);
+					}
+				}
+			}
 
 			return ret;
 		}
 		void drawThumbnail(Graphics& gfx, const Rect area) const override
 		{
-			Tuple start = { area.center().x,area.top() + area.height() / 3 };
+			Tuple start = { area.center().x,area.top() + 20 };
 
 			int x = 1;
-			for (int y = start.y; y < start.y + 10; y++)
+			for (int y = start.y; y < start.y + 30; y +=2)
 			{
 				gfx.drawRect(Rect(start.x - x, y, x * 2, 1), Colors::Black);
 				x++;
 			}
+		}
+
+		bool isPointInTriangle(const Tuple& pt, const Tuple& v0, const Tuple& v1, const Tuple& v2) 
+		{
+			// Barycentric coordinates method
+			float denom = (v1.y - v2.y) * (v0.x - v2.x) + (v2.x - v1.x) * (v0.y - v2.y);
+			float a = ((v1.y - v2.y) * (pt.x - v2.x) + (v2.x - v1.x) * (pt.y - v2.y)) / denom;
+			float b = ((v2.y - v0.y) * (pt.x - v2.x) + (v0.x - v2.x) * (pt.y - v2.y)) / denom;
+			float c = 1.0f - a - b;
+			return a >= 0 && b >= 0 && c >= 0;
 		}
 	};
 	class VerticalBrush : public Brush

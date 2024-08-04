@@ -17,9 +17,8 @@ void BrushRadioGroup::setContents()
 	BrushButton* brush5 = new BrushButton(Rect(), *this, 4);
 
 	addButton(brush1); //square
-	//need to work on applyBrush() implementation
 	addButton(brush2); //circle
-	//addButton(brush3); //triange
+	addButton(brush3); //triange
 	addButton(brush4); //vert
 	addButton(brush5); //hor
 

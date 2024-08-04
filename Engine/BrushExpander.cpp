@@ -33,7 +33,7 @@ void BrushExpander::update()
 void BrushExpander::setContents()
 {
 	brushButtons = new BrushRadioGroup(
-		Rect(iRect.x(), iRect.y(), iRect.width(), 150),
+		Rect(iRect.x(), iRect.y(), iRect.width(), 215),
 		this, 2);
 	brushButtons->drawBorder = false;
 	brushButtons->color = Colors::Cyan;
