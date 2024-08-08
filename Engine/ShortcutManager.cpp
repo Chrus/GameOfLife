@@ -3,9 +3,12 @@
 
 ShortcutManager::ShortcutManager()
 {
+	keys.push_back(std::string("L Click: Set Cell to Alive"));
+	keys.push_back(std::string("R Click: Set Cell to Dead"));
 	keys.push_back(std::string("Space: Play/Stop"));
 	keys.push_back(std::string("Enter: Step"));
 	keys.push_back(std::string("1-5: Select Brush")); 
+	keys.push_back(std::string("MouseWheel: Change Brush Size"));
 	keys.push_back(std::string("Tab: Toggle Brush Preview"));
 	keys.push_back(std::string("C: Clear"));
 	keys.push_back(std::string("R: Reset Board"));
